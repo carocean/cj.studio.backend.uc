@@ -1,0 +1,5 @@
+#org.springsource.ide.eclipse.gradle.core.preferences.GradleProjectPreferences
+#Thu Jan 10 23:18:28 CST 2019
+build.family.org.gradle.tooling.model.eclipse.HierarchicalEclipseProject=;cj.studio.backend.uc.debug;cj.studio.backend.uc.plugin;cj.studio.backend.uc.program;cj.studio.backend.uc.stub;
+org.springsource.ide.eclipse.gradle.linkedresources=
+org.springsource.ide.eclipse.gradle.rootprojectloc=
