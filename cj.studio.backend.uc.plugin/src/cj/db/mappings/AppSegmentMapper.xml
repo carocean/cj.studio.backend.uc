@@ -268,4 +268,8 @@
       sort = #{sort,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  
+  <select id="getSegments" resultType="cj.studio.backend.uc.bo.Segment">
+		select * from appseg asg,segment st where asg.appCode=#{appCode} and asg.segCode=st.code
+	</select>
 </mapper>

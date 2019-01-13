@@ -2,6 +2,8 @@ package cj.studio.backend.uc.plugin.dao;
 
 import cj.studio.backend.uc.bo.AppSegment;
 import cj.studio.backend.uc.bo.AppSegmentExample;
+import cj.studio.backend.uc.bo.Segment;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -72,4 +74,7 @@ public interface AppSegmentMapper {
 	 * @mbg.generated  Sat Jan 12 13:47:21 CST 2019
 	 */
 	int updateByPrimaryKey(AppSegment record);
+
+	List<Segment> getSegments(@Param(value="appCode")String appCode);
+
 }

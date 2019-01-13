@@ -1,9 +1,11 @@
 package cj.studio.backend.uc.plugin.dao;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import cj.studio.backend.uc.bo.Application;
 import cj.studio.backend.uc.bo.ApplicationExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface ApplicationMapper {
 
@@ -72,4 +74,7 @@ public interface ApplicationMapper {
 	 * @mbg.generated  Sat Jan 12 13:47:21 CST 2019
 	 */
 	int updateByPrimaryKey(Application record);
+
+	List<Application> getPage(@Param(value="currPage")int currPage, @Param(value="pageSize")int pageSize);
+
 }

@@ -5,7 +5,6 @@
 
 ## API
 
-
 ******************************************************
        usercenter
          标识：3AD05D29-80AE-440B-AC52-C9D9150F9797
@@ -18,6 +17,25 @@
 http://localhost:9090/uc/segment.service
     cj.studio.backend.uc.stub.ISegmentStub
     用法:信息段存根
+
+    getPage
+        用法:获取一页信息段
+        返回值类型:java.util.ArrayList,说明:返回一页段
+        方法别名:
+        命令:post
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ISegmentStub
+                Rest-Command getPage
+        参数:
+                arg0
+                    类型:int
+                    方式:InContent currPage
+                    用法:当前页位置
+                arg1
+                    类型:int
+                    方式:InContent pageSize
+                    用法:分页大小
 
     getAttributesOfSegment
         用法:获取段属性
@@ -134,29 +152,43 @@ http://localhost:9090/uc/segment.service
                     方式:InContent attrCode
                     用法:属性编码
 
-    getPage
-        用法:获取一页信息段
-        返回值类型:java.util.ArrayList,说明:返回一页段
-        方法别名:
-        命令:post
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.ISegmentStub
-                Rest-Command getPage
-        参数:
-                arg0
-                    类型:int
-                    方式:InContent currPage
-                    用法:当前页位置
-                arg1
-                    类型:int
-                    方式:InContent pageSize
-                    用法:分页大小
-
 
 http://localhost:9090/uc/user.service
     cj.studio.backend.uc.stub.IUserStub
     用法:用户存根
+
+    getPage
+        用法:获取一页用户
+        返回值类型:java.util.ArrayList,说明:返回一页用户
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IUserStub
+                Rest-Command getPage
+        参数:
+                arg0
+                    类型:int
+                    方式：InParameter currPage
+                    用法:当前分页位置
+                arg1
+                    类型:int
+                    方式：InParameter pageSize
+                    用法:分页大小
+
+    saveUser
+        用法:保存用户
+        方法别名:
+        命令:post
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IUserStub
+                Rest-Command saveUser
+        参数:
+                arg0
+                    类型:cj.studio.backend.uc.bo.User
+                    方式:InContent user
+                    用法:用户对象
 
     getUser
         用法:按编码查询用户
@@ -172,20 +204,6 @@ http://localhost:9090/uc/user.service
                     类型:java.lang.String
                     方式：InParameter UserCode
                     用法:用法编码
-
-    saveUser
-        用法:保存用户
-        方法别名:
-        命令:post
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IUserStub
-                Rest-Command saveUser
-        参数:
-                arg0
-                    类型:cj.studio.backend.uc.bo.User
-                    方式:InContent user
-                    用法:用户对象
 
     getUserCount
         用法:用户数
@@ -212,23 +230,143 @@ http://localhost:9090/uc/user.service
                     方式：InParameter UserCode
                     用法:用法编码
 
+
+http://localhost:9090/uc/application.service
+    cj.studio.backend.uc.stub.IApplicationStub
+    用法:应用存根
+
     getPage
-        用法:获取一页用户
-        返回值类型:java.util.ArrayList,说明:返回一页用户
+        用法:获取一页
+        返回值类型:java.util.ArrayList,说明:返回
         方法别名:
-        命令:get
+        命令:post
         协议:http/1.1
         Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IUserStub
+                Rest-StubFace cj.studio.backend.uc.stub.IApplicationStub
                 Rest-Command getPage
         参数:
                 arg0
                     类型:int
-                    方式：InParameter currPage
-                    用法:当前分页位置
+                    方式:InContent currPage
+                    用法:当前页
                 arg1
                     类型:int
-                    方式：InParameter pageSize
-                    用法:分页大小
+                    方式:InContent pageSize
+                    用法:页大小
+
+    getApp
+        用法:获取app
+        返回值类型:cj.studio.backend.uc.bo.Application,说明:返回应用
+        方法别名:
+        命令:post
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IApplicationStub
+                Rest-Command getApp
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式:InContent appCode
+                    用法:应用编码
+
+    addApp
+        用法:添加app
+        方法别名:
+        命令:post
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IApplicationStub
+                Rest-Command addApp
+        参数:
+                arg0
+                    类型:cj.studio.backend.uc.bo.Application
+                    方式:InContent app
+                    用法:应用实例，json
+
+    removeApp
+        用法:移除app
+        方法别名:
+        命令:post
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IApplicationStub
+                Rest-Command removeApp
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式:InContent appCode
+                    用法:应用编码
+
+    getAppCount
+        用法:获取应用数
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IApplicationStub
+                Rest-Command getAppCount
+        参数:
+
+    getSegmentsOfApp
+        用法:获取应用的信息段
+        返回值类型:java.util.ArrayList,说明:返回
+        方法别名:
+        命令:post
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IApplicationStub
+                Rest-Command getSegmentsOfApp
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式:InContent appCode
+                    用法:应用编码
+
+    addSegmentOfApp
+        用法:为应用添加扩展信息段
+        方法别名:
+        命令:post
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IApplicationStub
+                Rest-Command addSegmentOfApp
+        参数:
+                arg0
+                    类型:cj.studio.backend.uc.bo.AppSegment
+                    方式:InContent seg
+                    用法:信息段
+
+    removeSegmentOfApp
+        用法:移除应用指定关联的信息段
+        方法别名:
+        命令:post
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IApplicationStub
+                Rest-Command removeSegmentOfApp
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式:InContent appCode
+                    用法:应用编码
+                arg1
+                    类型:java.lang.String
+                    方式:InContent segCode
+                    用法:信息段编码
+
+    emptySegmentsOfApp
+        用法:清空该应用的信息段
+        方法别名:
+        命令:post
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IApplicationStub
+                Rest-Command emptySegmentsOfApp
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式:InContent appCode
+                    用法:应用编码
+
 
 
