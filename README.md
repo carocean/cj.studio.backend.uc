@@ -14,6 +14,216 @@
          版权：Copyright 2011
          描述：cj工作室出品，lns平台制造
 ******************************************************
+http://localhost:9090/uc/organization.service
+    cj.studio.backend.uc.stub.IOrganizationStub
+    用法:机构存根
+
+    getPage
+        用法:获取一页机构
+        返回值类型:java.util.ArrayList,说明:返回机构集合
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IOrganizationStub
+                Rest-Command getPage
+        参数:
+                arg0
+                    类型:int
+                    方式：InParameter currPage
+                    用法:当前页码
+                arg1
+                    类型:int
+                    方式：InParameter pageSize
+                    用法:页大小
+
+    addOrganization
+        用法:添加机构
+        方法别名:
+        命令:post
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IOrganizationStub
+                Rest-Command addOrganization
+        参数:
+                arg0
+                    类型:cj.studio.backend.uc.bo.Organization
+                    方式:InContent org
+                    用法:机构json
+
+    removeOrganization
+        用法:移除机构
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IOrganizationStub
+                Rest-Command removeOrganization
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter orgCode
+                    用法:机构代码
+
+    getOrganizationCount
+        用法:获取机构数
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IOrganizationStub
+                Rest-Command getOrganizationCount
+        参数:
+
+    addSegmentOfOrganization
+        用法:添加机构信息段
+        方法别名:
+        命令:post
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IOrganizationStub
+                Rest-Command addSegmentOfOrganization
+        参数:
+                arg0
+                    类型:cj.studio.backend.uc.bo.OrgSegment
+                    方式:InContent seg
+                    用法:机构信息段json
+
+    getSegmentsOfOrganization
+        用法:获取机构信息段
+        返回值类型:java.util.ArrayList,说明:返回机构段集合
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IOrganizationStub
+                Rest-Command getSegmentsOfOrganization
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter orgCode
+                    用法:机构代码
+
+    removeSegmentOfOrganization
+        用法:移除机构信息段
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IOrganizationStub
+                Rest-Command removeSegmentOfOrganization
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter orgCode
+                    用法:机构代码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter segCode
+                    用法:段代码
+
+    emptySegmentsOfOrganization
+        用法:清空机构下的所有信息段
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IOrganizationStub
+                Rest-Command emptySegmentsOfOrganization
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter orgCode
+                    用法:机构代码
+
+    addOrganizationAttribute
+        用法:添加机构属性
+        方法别名:
+        命令:post
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IOrganizationStub
+                Rest-Command addOrganizationAttribute
+        参数:
+                arg0
+                    类型:cj.studio.backend.uc.bo.OrgAttribute
+                    方式:InContent attr
+                    用法:机构属性json
+
+    removeOrganizationAttribute
+        用法:移除机构属性
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IOrganizationStub
+                Rest-Command removeOrganizationAttribute
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter orgCode
+                    用法:机构代码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter segCode
+                    用法:段代码
+                arg2
+                    类型:java.lang.String
+                    方式：InParameter attrCode
+                    用法:属性代码
+
+    emptyOrganizationAttributes
+        用法:清空机构信息段下的所有属性
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IOrganizationStub
+                Rest-Command emptyOrganizationAttributes
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter orgCode
+                    用法:机构代码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter segCode
+                    用法:段代码
+
+    getOrganizationAttributes
+        用法:获取机构属性
+        返回值类型:java.util.ArrayList,说明:返回属性集合
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IOrganizationStub
+                Rest-Command getOrganizationAttributes
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter orgCode
+                    用法:机构代码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter segCode
+                    用法:段代码
+
+    getOrganization
+        用法:获取机构
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IOrganizationStub
+                Rest-Command getOrganization
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter orgCode
+                    用法:机构代码
+
+
 http://localhost:9090/uc/segment.service
     cj.studio.backend.uc.stub.ISegmentStub
     用法:信息段存根
@@ -36,21 +246,6 @@ http://localhost:9090/uc/segment.service
                     类型:int
                     方式:InContent pageSize
                     用法:分页大小
-
-    getAttributesOfSegment
-        用法:获取段属性
-        返回值类型:java.util.ArrayList,说明:属性集合
-        方法别名:
-        命令:get
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.ISegmentStub
-                Rest-Command getAttributesOfSegment
-        参数:
-                arg0
-                    类型:java.lang.String
-                    方式：InParameter segCode
-                    用法:信息段编码
 
     addSegment
         用法:添加信息段
@@ -133,6 +328,21 @@ http://localhost:9090/uc/segment.service
                     类型:cj.studio.backend.uc.bo.Attribute
                     方式:InContent attr
                     用法:属性实体，Json格式
+
+    getAttributesOfSegment
+        用法:获取段属性
+        返回值类型:java.util.ArrayList,说明:属性集合
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ISegmentStub
+                Rest-Command getAttributesOfSegment
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter segCode
+                    用法:信息段编码
 
     removeAttribute
         用法:移除一个属性
@@ -229,6 +439,217 @@ http://localhost:9090/uc/user.service
                     类型:java.lang.String
                     方式：InParameter UserCode
                     用法:用法编码
+
+
+http://localhost:9090/uc/account.service
+    cj.studio.backend.uc.stub.IAccountStub
+    用法:账户存根
+
+    getPage
+        用法:获取一页账户
+        返回值类型:java.util.ArrayList,说明:返回一页账户
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IAccountStub
+                Rest-Command getPage
+        参数:
+                arg0
+                    类型:int
+                    方式：InParameter currPage
+                    用法:当前页号
+                arg1
+                    类型:int
+                    方式：InParameter pageSize
+                    用法:页大小
+
+    addAccount
+        用法:添加账户
+        方法别名:
+        命令:post
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IAccountStub
+                Rest-Command addAccount
+        参数:
+                arg0
+                    类型:cj.studio.backend.uc.bo.Account
+                    方式:InContent account
+                    用法:账户
+
+    removeAccount
+        用法:移除账户
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IAccountStub
+                Rest-Command removeAccount
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter accountCode
+                    用法:账户
+
+    getAccount
+        用法:获取账户
+        返回值类型:cj.studio.backend.uc.bo.Account,说明:返回账户，如果不存在则返回null
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IAccountStub
+                Rest-Command getAccount
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter accountCode
+                    用法:账户
+
+    getAccountCount
+        用法:返回账户数
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IAccountStub
+                Rest-Command getAccountCount
+        参数:
+
+    getSegmentsOfAccount
+        用法:获取账户的信息段
+        返回值类型:java.util.ArrayList,说明:返回Json
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IAccountStub
+                Rest-Command getSegmentsOfAccount
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter accountCode
+                    用法:账户
+
+    addSegmentOfAccount
+        用法:添加账户的信息段
+        方法别名:
+        命令:post
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IAccountStub
+                Rest-Command addSegmentOfAccount
+        参数:
+                arg0
+                    类型:cj.studio.backend.uc.bo.AccountSegment
+                    方式:InContent seg
+                    用法:账户信息段
+
+    removeSegmentOfAccount
+        用法:移除账户的信息段
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IAccountStub
+                Rest-Command removeSegmentOfAccount
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter accountCode
+                    用法:账户
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter segCode
+                    用法:段号
+
+    emptySegmentsOfAccount
+        用法:清空账户的信息段
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IAccountStub
+                Rest-Command emptySegmentsOfAccount
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter accountCode
+                    用法:账户
+
+    addAccountAttribute
+        用法:添加账户的属性
+        方法别名:
+        命令:post
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IAccountStub
+                Rest-Command addAccountAttribute
+        参数:
+                arg0
+                    类型:cj.studio.backend.uc.bo.AccountAttribute
+                    方式:InContent attr
+                    用法:账户属性
+
+    removeAccountAttribute
+        用法:移除账户的属性
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IAccountStub
+                Rest-Command removeAccountAttribute
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter accountCode
+                    用法:账户
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter segCode
+                    用法:段号
+                arg2
+                    类型:java.lang.String
+                    方式：InParameter attrCode
+                    用法:属性
+
+    emptyAccountAttributes
+        用法:清空账户指定段下的所有属性
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IAccountStub
+                Rest-Command emptyAccountAttributes
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter accountCode
+                    用法:账户
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter segCode
+                    用法:段号
+
+    getAccountAttributes
+        用法:获取账户指定段下的所有属性
+        返回值类型:java.util.ArrayList,说明:返回Json
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IAccountStub
+                Rest-Command getAccountAttributes
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter accountCode
+                    用法:账户
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter segCode
+                    用法:段号
 
 
 http://localhost:9090/uc/application.service

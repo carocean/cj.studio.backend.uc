@@ -36,7 +36,7 @@ public class ApplicationService implements IApplicationService {
 		}
 		app.setCreatetime(System.currentTimeMillis());
 		app.setId(null);
-		applicationMapper.insert(app);
+		applicationMapper.insertSelective(app);
 	}
 
 	@CjTransaction

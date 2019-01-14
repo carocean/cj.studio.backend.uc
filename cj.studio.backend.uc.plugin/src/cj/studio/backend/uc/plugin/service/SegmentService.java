@@ -30,7 +30,7 @@ public class SegmentService implements ISegmentService {
 		if (seg.getCreatetime() == null) {
 			seg.setCreatetime(System.currentTimeMillis());
 		}
-		segmentMapper.insert(seg);
+		segmentMapper.insertSelective(seg);
 	}
 
 	@CjTransaction

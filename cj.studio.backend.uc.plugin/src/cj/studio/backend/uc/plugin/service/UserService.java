@@ -36,7 +36,7 @@ public class UserService implements IUserService {
 	@CjTransaction
 	@Override
 	public void saveUser(User user) {
-		userMapper.insert(user);
+		userMapper.insertSelective(user);
 	}
 
 	@CjTransaction
