@@ -2,11 +2,14 @@ package cj.studio.backend.uc.plugin.service;
 
 import java.util.List;
 
+import cj.studio.backend.uc.bo.AppAttribute;
+import cj.studio.backend.uc.bo.AppAttributeExample;
 import cj.studio.backend.uc.bo.AppSegment;
 import cj.studio.backend.uc.bo.AppSegmentExample;
 import cj.studio.backend.uc.bo.Application;
 import cj.studio.backend.uc.bo.ApplicationExample;
 import cj.studio.backend.uc.bo.Segment;
+import cj.studio.backend.uc.plugin.dao.AppAttributeMapper;
 import cj.studio.backend.uc.plugin.dao.AppSegmentMapper;
 import cj.studio.backend.uc.plugin.dao.ApplicationMapper;
 import cj.studio.backend.uc.service.IApplicationService;
@@ -25,6 +28,8 @@ public class ApplicationService implements IApplicationService {
 	ApplicationMapper applicationMapper;
 	@CjServiceRef(refByName = "mybatis.cj.studio.backend.uc.plugin.dao.AppSegmentMapper")
 	AppSegmentMapper appSegmentMapper;
+	@CjServiceRef(refByName = "mybatis.cj.studio.backend.uc.plugin.dao.AppAttributeMapper")
+	AppAttributeMapper appAttributeMapper;
 	@CjServiceRef(refByName = "segmentService")
 	ISegmentService segmentService;
 
@@ -99,6 +104,46 @@ public class ApplicationService implements IApplicationService {
 		AppSegmentExample example = new AppSegmentExample();
 		example.createCriteria().andAppcodeEqualTo(appCode);
 		this.appSegmentMapper.deleteByExample(example);
+	}
+
+	@CjTransaction
+	@Override
+	public void addAppAttribute(AppAttribute attr) {
+		attr.setId(null);
+		if (StringUtil.isEmpty(attr.getAttrcode())) {
+			throw new EcmException("属性编码为空");
+		}
+		if (StringUtil.isEmpty(attr.getAppcode())) {
+			throw new EcmException("应用编码为空");
+		}
+		if (StringUtil.isEmpty(attr.getSegcode())) {
+			throw new EcmException("信息段编码为空");
+		}
+		this.appAttributeMapper.insert(attr);
+	}
+
+	@CjTransaction
+	@Override
+	public void removeAppAttribute(String appCode, String segCode, String attrCode) {
+		AppAttributeExample example = new AppAttributeExample();
+		example.createCriteria().andAppcodeEqualTo(appCode).andSegcodeEqualTo(segCode).andAttrcodeEqualTo(attrCode);
+		this.appAttributeMapper.deleteByExample(example);
+	}
+
+	@CjTransaction
+	@Override
+	public void emptyAppAttributes(String appCode, String segCode) {
+		AppAttributeExample example = new AppAttributeExample();
+		example.createCriteria().andAppcodeEqualTo(appCode).andSegcodeEqualTo(segCode);
+		this.appAttributeMapper.deleteByExample(example);
+	}
+
+	@CjTransaction
+	@Override
+	public List<AppAttribute> getAppAttributes(String appCode, String segCode) {
+		AppAttributeExample example = new AppAttributeExample();;
+		example.createCriteria().andAppcodeEqualTo(appCode).andSegcodeEqualTo(segCode);
+		return this.appAttributeMapper.selectByExample(example);
 	}
 
 }

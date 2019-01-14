@@ -6,6 +6,7 @@ import cj.studio.backend.uc.bo.OrgAttribute;
 import cj.studio.backend.uc.bo.OrgSegment;
 import cj.studio.backend.uc.bo.Organization;
 import cj.studio.backend.uc.bo.Segment;
+import cj.studio.backend.uc.bo.User;
 import cj.studio.backend.uc.service.IOrganizationService;
 import cj.studio.ecm.annotation.CjService;
 import cj.studio.ecm.annotation.CjServiceRef;
@@ -79,6 +80,31 @@ public class OrganizationStub extends GatewayAppSiteRestStub implements IOrganiz
 	@Override
 	public List<OrgAttribute> getOrganizationAttributes(String orgCode, String segCode) {
 		return organizationService.getOrganizationAttributes(orgCode, segCode);
+	}
+
+	@Override
+	public void addOrgMember(String appCode, String userCode, String orgCode) {
+		organizationService.addOrgMember(appCode, userCode, orgCode);
+	}
+
+	@Override
+	public void removeOrgMember(String appCode, String userCode, String orgCode) {
+		organizationService.removeOrgMember(appCode, userCode, orgCode);
+	}
+
+	@Override
+	public void emptyOrgMembers(String appCode, String orgCode) {
+		organizationService.emptyOrgMembers(appCode, orgCode);
+	}
+
+	@Override
+	public List<User> getOrgMembers(String appCode, String orgCode) {
+		return organizationService.getOrgMembers(appCode, orgCode);
+	}
+
+	@Override
+	public List<Organization> getOrganizationsOfUser(String appCode, String userCode) {
+		return organizationService.getOrganizationsOfUser(appCode, userCode);
 	}
 
 }

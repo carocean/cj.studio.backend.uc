@@ -2,6 +2,7 @@ package cj.studio.backend.uc.stub;
 
 import java.util.List;
 
+import cj.studio.backend.uc.bo.AppAttribute;
 import cj.studio.backend.uc.bo.AppSegment;
 import cj.studio.backend.uc.bo.Application;
 import cj.studio.backend.uc.bo.Segment;
@@ -58,6 +59,26 @@ public class ApplicationStub extends GatewayAppSiteRestStub implements IApplicat
 	@Override
 	public void emptySegmentsOfApp(String appCode) {
 		applicationService.emptySegmentsOfApp(appCode);
+	}
+
+	@Override
+	public void addAppAttribute(AppAttribute attr) {
+		applicationService.addAppAttribute(attr);
+	}
+
+	@Override
+	public void removeAppAttribute(String appCode, String segCode, String attrCode) {
+		applicationService.removeAppAttribute(appCode, segCode, attrCode);
+	}
+
+	@Override
+	public void emptyAppAttributes(String appCode, String segCode) {
+		applicationService.emptyAppAttributes(appCode, segCode);
+	}
+
+	@Override
+	public List<AppAttribute> getAppAttributes(String appCode, String segCode) {
+		return applicationService.getAppAttributes(appCode, segCode);
 	}
 
 }

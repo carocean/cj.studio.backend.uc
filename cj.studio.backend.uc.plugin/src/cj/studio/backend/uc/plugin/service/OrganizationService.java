@@ -4,12 +4,16 @@ import java.util.List;
 
 import cj.studio.backend.uc.bo.OrgAttribute;
 import cj.studio.backend.uc.bo.OrgAttributeExample;
+import cj.studio.backend.uc.bo.OrgMember;
+import cj.studio.backend.uc.bo.OrgMemberExample;
 import cj.studio.backend.uc.bo.OrgSegment;
 import cj.studio.backend.uc.bo.OrgSegmentExample;
 import cj.studio.backend.uc.bo.Organization;
 import cj.studio.backend.uc.bo.OrganizationExample;
 import cj.studio.backend.uc.bo.Segment;
+import cj.studio.backend.uc.bo.User;
 import cj.studio.backend.uc.plugin.dao.OrgAttributeMapper;
+import cj.studio.backend.uc.plugin.dao.OrgMemberMapper;
 import cj.studio.backend.uc.plugin.dao.OrgSegmentMapper;
 import cj.studio.backend.uc.plugin.dao.OrganizationMapper;
 import cj.studio.backend.uc.service.IOrganizationService;
@@ -30,6 +34,8 @@ public class OrganizationService implements IOrganizationService {
 	OrgSegmentMapper orgSegmentMapper;
 	@CjServiceRef(refByName = "mybatis.cj.studio.backend.uc.plugin.dao.OrgAttributeMapper")
 	OrgAttributeMapper orgAttributeMapper;
+	@CjServiceRef(refByName = "mybatis.cj.studio.backend.uc.plugin.dao.OrgMemberMapper")
+	OrgMemberMapper orgMemberMapper;
 	@CjServiceRef(refByName = "segmentService")
 	ISegmentService segmentService;
 
@@ -120,14 +126,15 @@ public class OrganizationService implements IOrganizationService {
 		}
 		this.orgAttributeMapper.insert(attr);
 	}
+
 	@CjTransaction
 	@Override
 	public void removeOrganizationAttribute(String orgCode, String segCode, String attrCode) {
 		OrgAttributeExample example = new OrgAttributeExample();
-		example.createCriteria().andOrgcodeEqualTo(orgCode).andSegcodeEqualTo(segCode)
-				.andAttrcodeEqualTo(attrCode);
+		example.createCriteria().andOrgcodeEqualTo(orgCode).andSegcodeEqualTo(segCode).andAttrcodeEqualTo(attrCode);
 		this.orgAttributeMapper.deleteByExample(example);
 	}
+
 	@CjTransaction
 	@Override
 	public void emptyOrganizationAttributes(String orgCode, String segCode) {
@@ -135,12 +142,57 @@ public class OrganizationService implements IOrganizationService {
 		example.createCriteria().andOrgcodeEqualTo(orgCode).andSegcodeEqualTo(segCode);
 		this.orgAttributeMapper.deleteByExample(example);
 	}
+
 	@CjTransaction
 	@Override
 	public List<OrgAttribute> getOrganizationAttributes(String orgCode, String segCode) {
 		OrgAttributeExample example = new OrgAttributeExample();
 		example.createCriteria().andOrgcodeEqualTo(orgCode).andSegcodeEqualTo(segCode);
 		return this.orgAttributeMapper.selectByExample(example);
+	}
+
+	@CjTransaction
+	@Override
+	public void addOrgMember(String appCode, String userCode, String orgCode) {
+		if (StringUtil.isEmpty(userCode)) {
+			throw new EcmException("用户编码为空");
+		}
+		if (StringUtil.isEmpty(orgCode)) {
+			throw new EcmException("机构编码为空");
+		}
+		OrgMember om = new OrgMember();
+		om.setAppcode(appCode);
+		om.setOrgcode(orgCode);
+		om.setUsercode(userCode);
+		orgMemberMapper.insertSelective(om);
+	}
+
+	@CjTransaction
+	@Override
+	public void removeOrgMember(String appCode, String userCode, String orgCode) {
+		OrgMemberExample example = new OrgMemberExample();
+		example.createCriteria().andAppcodeEqualTo(appCode).andUsercodeEqualTo(userCode).andOrgcodeEqualTo(orgCode);
+		orgMemberMapper.deleteByExample(example);
+	}
+
+	@CjTransaction
+	@Override
+	public void emptyOrgMembers(String appCode, String orgCode) {
+		OrgMemberExample example = new OrgMemberExample();
+		example.createCriteria().andAppcodeEqualTo(appCode).andOrgcodeEqualTo(orgCode);
+		orgMemberMapper.deleteByExample(example);
+	}
+
+	@CjTransaction
+	@Override
+	public List<User> getOrgMembers(String appCode, String orgCode) {
+		return orgMemberMapper.getMembers(appCode,orgCode);
+	}
+
+	@CjTransaction
+	@Override
+	public List<Organization> getOrganizationsOfUser(String appCode, String userCode) {
+		return orgMemberMapper.getOrganizations(appCode,userCode);
 	}
 
 }
