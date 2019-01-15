@@ -80,5 +80,8 @@ public class AccountStub extends GatewayAppSiteRestStub implements IAccountStub 
 	public List<AccountAttribute> getAccountAttributes(String accountCode, String segCode) {
 		return this.accountService.getAccountAttributes(accountCode, segCode);
 	}
-
+	@Override
+	public Account getAccountByAttrValue(String segCode, String attrCode, String value) {
+		return accountService.getAccountByAttrValue(segCode, attrCode, value);
+	}
 }

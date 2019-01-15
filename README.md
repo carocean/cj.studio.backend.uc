@@ -2,8 +2,12 @@
 # uc
 
 ## 用户中心
+[下载存根](https://github.com/carocean/cj.studio.backend.uc/blob/master/outputs/cj.studio.backend.uc.stub-1.0.jar)
+- 将存根引入网关的前置项目即可直接使用。如果不想使用网关前置，也可以通过http client等第三方工具按以下api的要求调用。
+- 推荐使用postman进行api测试
 
 ## API
+
 
 ******************************************************
        usercenter
@@ -467,36 +471,6 @@ http://localhost:9090/uc/role.service
     cj.studio.backend.uc.stub.IRoleStub
     用法:角色存根
 
-    getUsersOnRole
-        用法:获取一页角色
-        返回值类型:java.util.ArrayList,说明:返回角色，Json格式
-        方法别名:
-        命令:get
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IRoleStub
-                Rest-Command getUsersOnRole
-        参数:
-                arg0
-                    类型:java.lang.String
-                    方式：InParameter roleCode
-                    用法:角色代码
-
-    getRolesOnUser
-        用法:获取用户的所有角色
-        返回值类型:java.util.ArrayList,说明:角色集合
-        方法别名:
-        命令:get
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IRoleStub
-                Rest-Command getRolesOnUser
-        参数:
-                arg0
-                    类型:java.lang.String
-                    方式：InParameter userCode
-                    用法:用户代码
-
     getPage
         用法:获取一页角色
         返回值类型:java.util.ArrayList,说明:返回角色，Json格式
@@ -530,6 +504,59 @@ http://localhost:9090/uc/role.service
                     类型:java.lang.String
                     方式：InParameter roleCode
                     用法:角色代码
+
+    getRolesOnOrgMember
+        用法:获取机构成员的所有角色
+        返回值类型:java.util.ArrayList,说明:角色集合
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IRoleStub
+                Rest-Command getRolesOnOrgMember
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter userCode
+                    用法:用户代码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter orgCode
+                    用法:机构代码
+                arg2
+                    类型:java.lang.String
+                    方式：InParameter appCode
+                    用法:应用代码
+
+    getUsersOnRole
+        用法:获取一页角色
+        返回值类型:java.util.ArrayList,说明:返回角色，Json格式
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IRoleStub
+                Rest-Command getUsersOnRole
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter roleCode
+                    用法:角色代码
+
+    getRolesOnUser
+        用法:获取用户的所有角色
+        返回值类型:java.util.ArrayList,说明:角色集合
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IRoleStub
+                Rest-Command getRolesOnUser
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter userCode
+                    用法:用户代码
 
     removeRole
         用法:移除角色
@@ -700,48 +727,10 @@ http://localhost:9090/uc/role.service
                     方式：InParameter roleCode
                     用法:角色代码
 
-    getRolesOnOrgMember
-        用法:获取机构成员的所有角色
-        返回值类型:java.util.ArrayList,说明:角色集合
-        方法别名:
-        命令:get
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IRoleStub
-                Rest-Command getRolesOnOrgMember
-        参数:
-                arg0
-                    类型:java.lang.String
-                    方式：InParameter userCode
-                    用法:用户代码
-                arg1
-                    类型:java.lang.String
-                    方式：InParameter orgCode
-                    用法:机构代码
-                arg2
-                    类型:java.lang.String
-                    方式：InParameter appCode
-                    用法:应用代码
-
 
 http://localhost:9090/uc/user.service
     cj.studio.backend.uc.stub.IUserStub
     用法:用户存根
-
-    getUser
-        用法:按编码查询用户
-        返回值类型:cj.studio.backend.uc.bo.User,说明:返回用户
-        方法别名:
-        命令:get
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IUserStub
-                Rest-Command getUser
-        参数:
-                arg0
-                    类型:java.lang.String
-                    方式：InParameter UserCode
-                    用法:用法编码
 
     getPage
         用法:获取一页用户
@@ -762,17 +751,6 @@ http://localhost:9090/uc/user.service
                     方式：InParameter pageSize
                     用法:分页大小
 
-    getUserCount
-        用法:用户数
-        返回值类型:java.lang.Long,说明:返回用户数
-        方法别名:
-        命令:get
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IUserStub
-                Rest-Command getUserCount
-        参数:
-
     saveUser
         用法:保存用户
         方法别名:
@@ -786,6 +764,32 @@ http://localhost:9090/uc/user.service
                     类型:cj.studio.backend.uc.bo.User
                     方式:InContent user
                     用法:用户对象
+
+    getUser
+        用法:按编码查询用户
+        返回值类型:cj.studio.backend.uc.bo.User,说明:返回用户
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IUserStub
+                Rest-Command getUser
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter UserCode
+                    用法:用户编码
+
+    getUserCount
+        用法:用户数
+        返回值类型:java.lang.Long,说明:返回用户数
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IUserStub
+                Rest-Command getUserCount
+        参数:
 
     removeUser
         用法:删除用户
@@ -872,6 +876,29 @@ http://localhost:9090/uc/user.service
                     类型:java.lang.String
                     方式：InParameter segCode
                     用法:段编码
+
+    getUserByAttrValue
+        用法:按信息段及其属性值查询用户
+        返回值类型:cj.studio.backend.uc.bo.User,说明:返回用户，如果不存在则返回null
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IUserStub
+                Rest-Command getUserByAttrValue
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter segCode
+                    用法:信息段编码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter attrCode
+                    用法:属性编码
+                arg2
+                    类型:java.lang.String
+                    方式：InParameter value
+                    用法:属性值
 
 
 http://localhost:9090/uc/account.service
@@ -1084,6 +1111,29 @@ http://localhost:9090/uc/account.service
                     方式：InParameter segCode
                     用法:段号
 
+    getAccountByAttrValue
+        用法:按信息段及其属性值查询账户
+        返回值类型:cj.studio.backend.uc.bo.Account,说明:返回用户，如果不存在则返回null
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IAccountStub
+                Rest-Command getAccountByAttrValue
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter segCode
+                    用法:信息段编码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter attrCode
+                    用法:属性编码
+                arg2
+                    类型:java.lang.String
+                    方式：InParameter value
+                    用法:属性值
+
 
 http://localhost:9090/uc/application.service
     cj.studio.backend.uc.stub.IApplicationStub
@@ -1294,7 +1344,5 @@ http://localhost:9090/uc/application.service
                     类型:java.lang.String
                     方式：InParameter segCode
                     用法:段代码
-
-
 
 

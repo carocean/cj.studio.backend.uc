@@ -133,4 +133,10 @@ public class UserService implements IUserService {
 		return this.userAttributeMapper.selectByExample(example);
 	}
 
+	@CjTransaction
+	@Override
+	public User getUserByAttrValue(String segCode, String attrCode, String value) {
+		return this.userAttributeMapper.getUserByAttrValue(segCode,attrCode,value);
+	}
+
 }

@@ -34,4 +34,5 @@ public interface IAccountService {
 
 	List<AccountAttribute> getAccountAttributes(String accountCode, String segCode);
 
+	Account getAccountByAttrValue(String segCode, String attrCode, String value);
 }

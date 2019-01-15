@@ -15,7 +15,7 @@ import cj.studio.gateway.stub.annotation.CjStubService;
 public interface IUserStub {
 	@CjStubMethod(usage = "按编码查询用户")
 	@CjStubReturn(type = User.class, usage = "返回用户")
-	User getUser(@CjStubInParameter(key = "UserCode", usage = "用法编码") String userCode);
+	User getUser(@CjStubInParameter(key = "UserCode", usage = "用户编码") String userCode);
 
 	@CjStubMethod(command = "post", usage = "保存用户")
 	void saveUser(@CjStubInContentKey(key = "user", usage = "用户对象") User user);
@@ -48,4 +48,9 @@ public interface IUserStub {
 	List<UserAttribute> getUserAttributes(@CjStubInParameter(key = "userCode", usage = "用户编码") String userCode,
 			@CjStubInParameter(key = "segCode", usage = "段编码") String segCode);
 
+	@CjStubMethod(usage = "按信息段及其属性值查询用户")
+	@CjStubReturn(type = User.class, usage = "返回用户，如果不存在则返回null")
+	User getUserByAttrValue(@CjStubInParameter(key = "segCode", usage = "信息段编码") String segCode,
+			@CjStubInParameter(key = "attrCode", usage = "属性编码") String attrCode,
+			@CjStubInParameter(key = "value", usage = "属性值") String value);
 }

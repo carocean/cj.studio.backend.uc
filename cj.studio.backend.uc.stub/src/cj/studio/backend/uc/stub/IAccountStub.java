@@ -64,4 +64,10 @@ public interface IAccountStub {
 	List<AccountAttribute> getAccountAttributes(
 			@CjStubInParameter(key = "accountCode", usage = "账户") String accountCode,
 			@CjStubInParameter(key = "segCode", usage = "段号") String segCode);
+
+	@CjStubMethod(usage = "按信息段及其属性值查询账户")
+	@CjStubReturn(type = Account.class, usage = "返回用户，如果不存在则返回null")
+	Account getAccountByAttrValue(@CjStubInParameter(key = "segCode", usage = "信息段编码") String segCode,
+			@CjStubInParameter(key = "attrCode", usage = "属性编码") String attrCode,
+			@CjStubInParameter(key = "value", usage = "属性值") String value);
 }

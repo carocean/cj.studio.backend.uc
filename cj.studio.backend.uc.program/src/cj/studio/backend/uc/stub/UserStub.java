@@ -11,8 +11,9 @@ import cj.studio.gateway.stub.GatewayAppSiteRestStub;
 
 @CjService(name = "/user.service")
 public class UserStub extends GatewayAppSiteRestStub implements IUserStub {
-	@CjServiceRef(refByName="ucplugin.userService")
+	@CjServiceRef(refByName = "ucplugin.userService")
 	IUserService userService;
+
 	@Override
 	public User getUser(String code) {
 		return userService.getUser(code);
@@ -56,6 +57,11 @@ public class UserStub extends GatewayAppSiteRestStub implements IUserStub {
 	@Override
 	public List<UserAttribute> getUserAttributes(String userCode, String segCode) {
 		return userService.getUserAttributes(userCode, segCode);
+	}
+
+	@Override
+	public User getUserByAttrValue(String segCode, String attrCode, String value) {
+		return userService.getUserByAttrValue(segCode, attrCode, value);
 	}
 
 }

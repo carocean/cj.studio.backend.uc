@@ -149,5 +149,9 @@ public class AccountService implements IAccountService {
 		example.createCriteria().andAccountcodeEqualTo(accountCode).andSegcodeEqualTo(segCode);
 		return this.accountAttributeMapper.selectByExample(example);
 	}
-
+	@CjTransaction
+	@Override
+	public Account getAccountByAttrValue(String segCode, String attrCode, String value) {
+		return this.accountAttributeMapper.getAccountByAttrValue( segCode,  attrCode,  value) ;
+	}
 }

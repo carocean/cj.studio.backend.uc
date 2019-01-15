@@ -283,4 +283,7 @@
       value = #{value,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="getAccountByAttrValue" resultType="cj.studio.backend.uc.bo.User">
+		select * from accountattr aa,account a where aa.attrcode=#{attrCode} and aa.segcode=#{segCode} and aa.value=#{value} and a.code=aa.accountcode
+	</select>
 </mapper>

@@ -35,4 +35,5 @@ public interface IUserService {
 
 	List<UserAttribute> getUserAttributes(String userCode, String segCode);
 
+	User getUserByAttrValue(String segCode,String attrCode,String value);
 }
