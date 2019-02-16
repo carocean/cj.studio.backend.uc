@@ -18,6 +18,7 @@ sourceSets {
  } 
 
 dependencies {
+	compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
 	compile project(':cj.studio.backend.uc.stub');
 	compile fileTree('../global/runtime')
 	compile fileTree('../global/cjtools')

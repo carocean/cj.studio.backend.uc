@@ -29,12 +29,12 @@ public interface IOrganizationStub {
 	long getOrganizationCount();
 
 	@CjStubMethod(usage = "获取一页机构")
-	@CjStubReturn(type = ArrayList.class, usage = "返回机构集合")
+	@CjStubReturn(type = ArrayList.class,elementType=Organization.class, usage = "返回机构集合")
 	List<Organization> getPage(@CjStubInParameter(key = "currPage", usage = "当前页码") int currPage,
 			@CjStubInParameter(key = "pageSize", usage = "页大小") int pageSize);
 
 	@CjStubMethod(usage = "获取机构信息段")
-	@CjStubReturn(type = ArrayList.class, usage = "返回机构段集合")
+	@CjStubReturn(type = ArrayList.class,elementType=Segment.class, usage = "返回机构段集合")
 	List<Segment> getSegmentsOfOrganization(@CjStubInParameter(key = "orgCode", usage = "机构代码") String orgCode);
 
 	@CjStubMethod(command = "post", usage = "添加机构信息段")
@@ -60,7 +60,7 @@ public interface IOrganizationStub {
 			@CjStubInParameter(key = "segCode", usage = "段代码") String segCode);
 
 	@CjStubMethod(usage = "获取机构属性")
-	@CjStubReturn(type = ArrayList.class, usage = "返回属性集合")
+	@CjStubReturn(type = ArrayList.class,elementType=OrgAttribute.class, usage = "返回属性集合")
 	List<OrgAttribute> getOrganizationAttributes(@CjStubInParameter(key = "orgCode", usage = "机构代码") String orgCode,
 			@CjStubInParameter(key = "segCode", usage = "段代码") String segCode);
 
@@ -79,12 +79,12 @@ public interface IOrganizationStub {
 			@CjStubInParameter(key = "orgCode", usage = "机构代码") String orgCode);
 
 	@CjStubMethod(usage = "获取机构成员")
-	@CjStubReturn(type = ArrayList.class, usage = "返回成员列表")
+	@CjStubReturn(type = ArrayList.class,elementType=User.class, usage = "返回成员列表")
 	List<User> getOrgMembers(@CjStubInParameter(key = "appCode", usage = "应用代码") String appCode,
 			@CjStubInParameter(key = "orgCode", usage = "机构代码") String orgCode);
 
 	@CjStubMethod(usage = "获取机构成员")
-	@CjStubReturn(type = ArrayList.class, usage = "返回机构列表")
+	@CjStubReturn(type = ArrayList.class,elementType=Organization.class, usage = "返回机构列表")
 	List<Organization> getOrganizationsOfUser(@CjStubInParameter(key = "appCode", usage = "应用代码") String appCode,
 			@CjStubInParameter(key = "userCode", usage = "用户代码") String userCode);
 }

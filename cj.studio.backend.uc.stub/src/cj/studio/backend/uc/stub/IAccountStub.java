@@ -29,12 +29,12 @@ public interface IAccountStub {
 	long getAccountCount();
 
 	@CjStubMethod(usage = "获取一页账户")
-	@CjStubReturn(type = ArrayList.class, usage = "返回一页账户")
+	@CjStubReturn(type = ArrayList.class,elementType=Account.class, usage = "返回一页账户")
 	List<Account> getPage(@CjStubInParameter(key = "currPage", usage = "当前页号") int currPage,
 			@CjStubInParameter(key = "pageSize", usage = "页大小") int pageSize);
 
 	@CjStubMethod(usage = "获取账户的信息段")
-	@CjStubReturn(type = ArrayList.class, usage = "返回Json")
+	@CjStubReturn(type = ArrayList.class,elementType=Segment.class, usage = "返回Json")
 	List<Segment> getSegmentsOfAccount(@CjStubInParameter(key = "accountCode", usage = "账户") String accountCode);
 
 	@CjStubMethod(usage = "添加账户的信息段", command = "post")
@@ -60,7 +60,7 @@ public interface IAccountStub {
 			@CjStubInParameter(key = "segCode", usage = "段号") String segCode);
 
 	@CjStubMethod(usage = "获取账户指定段下的所有属性")
-	@CjStubReturn(type = ArrayList.class, usage = "返回Json")
+	@CjStubReturn(type = ArrayList.class,elementType=AccountAttribute.class, usage = "返回Json")
 	List<AccountAttribute> getAccountAttributes(
 			@CjStubInParameter(key = "accountCode", usage = "账户") String accountCode,
 			@CjStubInParameter(key = "segCode", usage = "段号") String segCode);

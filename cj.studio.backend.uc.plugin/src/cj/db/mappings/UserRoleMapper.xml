@@ -256,7 +256,13 @@
   <select id="getUsersOnRole" resultType="cj.studio.backend.uc.bo.User">
 		select u.* from userrole ur,user u where ur.rolecode=#{roleCode} and u.usercode=ur.usercode
   </select>
+  <select id="getUsersOnRoleByPage" resultType="cj.studio.backend.uc.bo.User">
+		select u.* from userrole ur,user u  where ur.rolecode=#{roleCode} and u.usercode=ur.usercode limit #{currPage} , #{pageSize}
+  </select>
   <select id="getRolesOnUser" resultType="cj.studio.backend.uc.bo.Role">
 		select r.* from userrole ur,role r where ur.usercode=#{userCode} and r.code=ur.rolecode
+	</select>
+	<select id="getRolesOnUserByPage" resultType="cj.studio.backend.uc.bo.Role">
+		select r.* from userrole ur,role r where ur.usercode=#{userCode} and r.code=ur.rolecode limit #{currPage} , #{pageSize} 
 	</select>
 </mapper>

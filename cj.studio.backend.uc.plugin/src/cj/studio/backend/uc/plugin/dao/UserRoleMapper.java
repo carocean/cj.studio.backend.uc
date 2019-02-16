@@ -78,4 +78,7 @@ public interface UserRoleMapper {
 	List<User> getUsersOnRole(@Param(value="roleCode")String roleCode);
 
 	List<Role> getRolesOnUser(@Param(value="userCode")String userCode);
+	List<Role> getRolesOnUserByPage(@Param(value="userCode")String userCode,@Param(value="currPage")int currPage,@Param(value="pageSize")int pageSize);
+
+	List<User> getUsersOnRoleByPage(@Param(value="roleCode")String roleCode, @Param(value="currPage")int currPage,@Param(value="pageSize")int pageSize);
 }

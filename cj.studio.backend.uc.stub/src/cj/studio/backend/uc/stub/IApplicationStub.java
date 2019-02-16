@@ -29,12 +29,12 @@ public interface IApplicationStub {
 	long getAppCount();
 
 	@CjStubMethod(command = "post", usage = "获取一页")
-	@CjStubReturn(type = ArrayList.class, usage = "返回")
+	@CjStubReturn(type = ArrayList.class,elementType=Application.class,  usage = "返回")
 	List<Application> getPage(@CjStubInContentKey(key = "currPage", usage = "当前页") int currPage,
 			@CjStubInContentKey(key = "pageSize", usage = "页大小") int pageSize);
 
 	@CjStubMethod(command = "post", usage = "获取应用的信息段")
-	@CjStubReturn(type = ArrayList.class, usage = "返回")
+	@CjStubReturn(type = ArrayList.class,elementType=Segment.class, usage = "返回")
 	List<Segment> getSegmentsOfApp(@CjStubInContentKey(key = "appCode", usage = "应用编码") String appCode);
 
 	@CjStubMethod(command = "post", usage = "为应用添加扩展信息段")
@@ -60,7 +60,7 @@ public interface IApplicationStub {
 			@CjStubInParameter(key = "segCode", usage = "段代码") String segCode);
 
 	@CjStubMethod(usage = "清空应用下的属性")
-	@CjStubReturn(type = ArrayList.class, usage = "应用的属性")
+	@CjStubReturn(type = ArrayList.class,elementType=AppAttribute.class, usage = "应用的属性")
 	List<AppAttribute> getAppAttributes(@CjStubInParameter(key = "appCode", usage = "应用代码") String appCode,
 			@CjStubInParameter(key = "segCode", usage = "段代码") String segCode);
 }

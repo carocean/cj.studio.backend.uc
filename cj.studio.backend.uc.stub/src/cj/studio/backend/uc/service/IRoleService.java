@@ -18,6 +18,8 @@ public interface IRoleService {
 
 	List<User> getUsersOnRole(String roleCode);
 
+	List<User> getUsersOnRoleByPage(String roleCode, int currPage, int pageSize);
+
 	void addUserOnRole(String userCode, String roleCode);
 
 	void removeUserOnRole(String userCode, String roleCode);
@@ -32,7 +34,9 @@ public interface IRoleService {
 
 	void emptyOrgMembersOnRole(String orgCode, String roleCode);
 
-	List<Role> getRolesOnUser(String userCode);
+	List<Role> getRolesOnUser(String userCøode);
 
 	List<Role> getRolesOnOrgMember(String userCode, String orgCode, String appCode);
+
+	List<Role> getRolesOnUserByPage(String userCode, int currPage, int pageSize);
 }

@@ -35,5 +35,8 @@ public interface IUserService {
 
 	List<UserAttribute> getUserAttributes(String userCode, String segCode);
 
-	User getUserByAttrValue(String segCode,String attrCode,String value);
+	List<User> getUsersByAttrValue(String segCode,String attrCode,String value);
+	UserAttribute getUserAttribute(String userCode,String segCode,String attrCode,String value);
+
+	List<UserAttribute> getUserAttributes(String userCode, String segCode, String attrCode);
 }

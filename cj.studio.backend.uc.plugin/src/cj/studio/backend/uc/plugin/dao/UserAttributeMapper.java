@@ -96,6 +96,7 @@ public interface UserAttributeMapper {
 	 */
 	int updateByPrimaryKey(UserAttribute record);
 
-	User getUserByAttrValue(@Param(value = "segCode") String segCode, @Param(value = "attrCode") String attrCode,
+
+	List<User> getUsersByAttrValue(@Param(value = "segCode") String segCode, @Param(value = "attrCode") String attrCode,
 			@Param(value = "value") String value);
 }

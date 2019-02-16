@@ -60,8 +60,8 @@ public class UserStub extends GatewayAppSiteRestStub implements IUserStub {
 	}
 
 	@Override
-	public User getUserByAttrValue(String segCode, String attrCode, String value) {
-		return userService.getUserByAttrValue(segCode, attrCode, value);
+	public List<User> getUsersByAttrValue(String segCode, String attrCode, String value) {
+		return userService.getUsersByAttrValue(segCode, attrCode, value);
 	}
 
 }

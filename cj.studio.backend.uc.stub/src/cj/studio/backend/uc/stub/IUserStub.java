@@ -28,7 +28,7 @@ public interface IUserStub {
 	long getUserCount();
 
 	@CjStubMethod(usage = "获取一页用户")
-	@CjStubReturn(type = ArrayList.class, usage = "返回一页用户")
+	@CjStubReturn(type = ArrayList.class,elementType=User.class, usage = "返回一页用户")
 	List<User> getPage(@CjStubInParameter(key = "currPage", usage = "当前分页位置") int currPage,
 			@CjStubInParameter(key = "pageSize", usage = "分页大小") int pageSize);
 
@@ -45,12 +45,13 @@ public interface IUserStub {
 			@CjStubInParameter(key = "segCode", usage = "段编码") String segCode);
 
 	@CjStubMethod(usage = "获取用户属性")
+	@CjStubReturn(type=ArrayList.class,elementType=UserAttribute.class,usage="用户属性")
 	List<UserAttribute> getUserAttributes(@CjStubInParameter(key = "userCode", usage = "用户编码") String userCode,
 			@CjStubInParameter(key = "segCode", usage = "段编码") String segCode);
 
 	@CjStubMethod(usage = "按信息段及其属性值查询用户")
-	@CjStubReturn(type = User.class, usage = "返回用户，如果不存在则返回null")
-	User getUserByAttrValue(@CjStubInParameter(key = "segCode", usage = "信息段编码") String segCode,
+	@CjStubReturn(type = ArrayList.class,elementType=User.class, usage = "返回用户集合")
+	List<User> getUsersByAttrValue(@CjStubInParameter(key = "segCode", usage = "信息段编码") String segCode,
 			@CjStubInParameter(key = "attrCode", usage = "属性编码") String attrCode,
 			@CjStubInParameter(key = "value", usage = "属性值") String value);
 }

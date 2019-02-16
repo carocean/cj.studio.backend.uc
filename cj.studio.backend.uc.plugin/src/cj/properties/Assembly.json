@@ -17,7 +17,20 @@
 			}
 		],		
 		activators : [
-			
+			{
+			name:'初始化系统信息段',
+			class:'cj.studio.backend.uc.plugin.PasswordSegmentActivator',
+			parameters:{
+					segmentCode:'secretStore',
+					segmentName:'密钥库',
+					segmentVersion:'1.0'
+				}
+			},{
+			name:'初始化系统认证策略',
+			class:'cj.studio.backend.uc.plugin.AuthenSegmentActivator',
+			parameters:{
+				}
+			}
 		]
 	},
 	assemblyInfo : {

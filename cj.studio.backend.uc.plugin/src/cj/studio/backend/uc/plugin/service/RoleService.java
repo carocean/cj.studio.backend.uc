@@ -80,7 +80,11 @@ public class RoleService implements IRoleService {
 	public List<User> getUsersOnRole(String roleCode) {
 		return userRoleMapper.getUsersOnRole(roleCode);
 	}
-
+	@CjTransaction
+	@Override
+	public List<User> getUsersOnRoleByPage(String roleCode, int currPage, int pageSize) {
+		 return userRoleMapper.getUsersOnRoleByPage(roleCode,currPage,pageSize);
+	}
 	@CjTransaction
 	@Override
 	public void addUserOnRole(String userCode, String roleCode) {
@@ -143,7 +147,11 @@ public class RoleService implements IRoleService {
 	public List<Role> getRolesOnUser(String userCode) {
 		return userRoleMapper.getRolesOnUser(userCode);
 	}
-
+	@CjTransaction
+	@Override
+	public List<Role> getRolesOnUserByPage(String userCode,int currPage,int pageSize) {
+		return userRoleMapper.getRolesOnUserByPage(userCode, currPage, pageSize);
+	}
 	@CjTransaction
 	@Override
 	public List<Role> getRolesOnOrgMember(String userCode, String orgCode, String appCode) {

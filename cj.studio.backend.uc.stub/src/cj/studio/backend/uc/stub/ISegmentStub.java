@@ -28,12 +28,12 @@ public interface ISegmentStub {
 	long getSegmentCount();
 
 	@CjStubMethod(usage = "获取一页信息段", command = "post")
-	@CjStubReturn(type = ArrayList.class, usage = "返回一页段")
+	@CjStubReturn(type = ArrayList.class,elementType=Segment.class, usage = "返回一页段")
 	List<Segment> getPage(@CjStubInContentKey(key = "currPage", usage = "当前页位置") int currPage,
 			@CjStubInContentKey(key = "pageSize", usage = "分页大小") int pageSize);
 
 	@CjStubMethod(usage = "获取段属性")
-	@CjStubReturn(type = ArrayList.class, usage = "属性集合")
+	@CjStubReturn(type = ArrayList.class,elementType=Attribute.class, usage = "属性集合")
 	List<Attribute> getAttributesOfSegment(@CjStubInParameter(key = "segCode", usage = "信息段编码") String segCode);
 
 	@CjStubMethod(usage = "置空段的所有属性")

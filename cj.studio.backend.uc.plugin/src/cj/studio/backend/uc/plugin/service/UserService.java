@@ -135,8 +135,23 @@ public class UserService implements IUserService {
 
 	@CjTransaction
 	@Override
-	public User getUserByAttrValue(String segCode, String attrCode, String value) {
-		return this.userAttributeMapper.getUserByAttrValue(segCode,attrCode,value);
+	public List<User> getUsersByAttrValue(String segCode, String attrCode, String value) {
+		return this.userAttributeMapper.getUsersByAttrValue(segCode,attrCode,value);
 	}
-
+	@CjTransaction
+	@Override
+	public UserAttribute getUserAttribute(String userCode, String segCode, String attrCode, String value) {
+		UserAttributeExample example = new UserAttributeExample();
+		example.createCriteria().andUsercodeEqualTo(userCode).andSegcodeEqualTo(segCode).andAttrcodeEqualTo(attrCode).andValueEqualTo(value);
+		List<UserAttribute> list= this.userAttributeMapper.selectByExample(example);
+		if(list.isEmpty())return null;
+		return list.get(0);
+	}
+	@CjTransaction
+	@Override
+	public List<UserAttribute> getUserAttributes(String userCode, String segCode, String attrCode) {
+		UserAttributeExample example = new UserAttributeExample();
+		example.createCriteria().andUsercodeEqualTo(userCode).andSegcodeEqualTo(segCode).andAttrcodeEqualTo(attrCode);
+		return this.userAttributeMapper.selectByExample(example);
+	}
 }
