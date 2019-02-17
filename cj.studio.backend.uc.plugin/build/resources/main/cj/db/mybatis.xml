@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="url"
+					value="jdbc:mysql://localhost:3306/netos.uc?useSSL=false" />
+				<property name="username" value="cj" />
+				<property name="password" value="mysql123" />
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="cj/db/mappings/AccountAttributeMapper.xml" />
+		<mapper resource="cj/db/mappings/AccountMapper.xml" />
+		<mapper resource="cj/db/mappings/AccountSegmentMapper.xml" />
+		<mapper resource="cj/db/mappings/AppAttributeMapper.xml" />
+		<mapper resource="cj/db/mappings/ApplicationMapper.xml" />
+		<mapper resource="cj/db/mappings/AppSegmentMapper.xml" />
+		<mapper resource="cj/db/mappings/AttributeMapper.xml" />
+		<mapper resource="cj/db/mappings/OrganizationMapper.xml" />
+		<mapper resource="cj/db/mappings/OrgAttributeMapper.xml" />
+		<mapper resource="cj/db/mappings/OrgMemberMapper.xml" />
+		<mapper resource="cj/db/mappings/OrgMemberRoleMapper.xml" />
+		<mapper resource="cj/db/mappings/OrgSegmentMapper.xml" />
+		<mapper resource="cj/db/mappings/RoleMapper.xml" />
+		<mapper resource="cj/db/mappings/SegmentMapper.xml" />
+		<mapper resource="cj/db/mappings/UserAttributeMapper.xml" />
+		<mapper resource="cj/db/mappings/UserMapper.xml" />
+		<mapper resource="cj/db/mappings/UserRoleMapper.xml" />
+		<mapper resource="cj/db/mappings/UserSegmentMapper.xml" />
+	</mappers>
+</configuration>
