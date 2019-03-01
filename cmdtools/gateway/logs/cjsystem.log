@@ -1055,3 +1055,11 @@ The last packet successfully received from the server was 57,333,959 millisecond
 2019年03月01日 15:44:09  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
 2019年03月01日 15:44:09  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
 2019年03月01日 15:44:09  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年03月01日 18:12:18  信息 : -------------网关启动完毕-------------------
+2019年03月01日 18:12:56  信息 : 已装载共享库/Users/caroceanjofers/studio/github/cj.studio.backend.uc/cmdtools/gateway/lib/share
+2019年03月01日 18:12:58  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年03月01日 18:12:58  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年03月01日 18:12:58  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年03月01日 18:12:58  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年03月01日 20:41:01  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年03月01日 20:41:01  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
