@@ -1639,3 +1639,103 @@ The last packet successfully received from the server was 57,333,959 millisecond
 2019年03月03日 22:57:53  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
 2019年03月03日 22:57:53  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
 2019年03月03日 22:58:11  错误: cj.studio.gateway.server.handler.HttpChannelHandler - 资源文件不存在:/requestFrame.service/index.html
+2019年03月03日 23:20:39  信息 : -------------网关启动完毕-------------------
+2019年03月03日 23:21:07  信息 : 已装载共享库/Users/caroceanjofers/studio/github/cj.studio.backend.uc/cmdtools/gateway/lib/share
+2019年03月03日 23:21:08  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年03月03日 23:21:08  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年03月03日 23:21:08  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年03月03日 23:21:13  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年03月03日 23:21:15  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年03月03日 23:21:19  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年03月03日 23:21:23  错误: cj.studio.gateway.server.handler.HttpChannelHandler - 在存根接口中未找到方法：null
+2019年03月03日 23:22:43  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年03月03日 23:22:43  错误: cj.studio.gateway.server.handler.HttpChannelHandler -  异常：503 org.apache.ibatis.binding.BindingException: Invalid bound statement (not found): cj.studio.backend.uc.plugin.dao.UserAttributeMapper.getUsersByAttrValue
+		at cj.studio.gateway.stub.GatewayAppSiteRestStub$1.done(GatewayAppSiteRestStub.java:131)
+		at cj.studio.gateway.socket.io.HttpInputChannel.done(HttpInputChannel.java:58)
+		at cj.studio.gateway.server.handler.HttpChannelHandler.handleHttpContent(HttpChannelHandler.java:133)
+		at cj.studio.gateway.server.handler.HttpChannelHandler.messageReceived(HttpChannelHandler.java:116)
+		at io.netty.channel.SimpleChannelInboundHandler.channelRead(SimpleChannelInboundHandler.java:103)
+		at io.netty.channel.ChannelHandlerInvokerUtil.invokeChannelReadNow(ChannelHandlerInvokerUtil.java:74)
+		at io.netty.channel.DefaultChannelHandlerInvoker.invokeChannelRead(DefaultChannelHandlerInvoker.java:138)
+		at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:320)
+		at io.netty.handler.codec.MessageToMessageDecoder.channelRead(MessageToMessageDecoder.java:103)
+		at io.netty.handler.codec.MessageToMessageCodec.channelRead(MessageToMessageCodec.java:111)
+		at io.netty.channel.ChannelHandlerInvokerUtil.invokeChannelReadNow(ChannelHandlerInvokerUtil.java:74)
+		at io.netty.channel.DefaultChannelHandlerInvoker.invokeChannelRead(DefaultChannelHandlerInvoker.java:138)
+		at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:320)
+		at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:154)
+		at io.netty.channel.ChannelHandlerInvokerUtil.invokeChannelReadNow(ChannelHandlerInvokerUtil.java:74)
+		at io.netty.channel.DefaultChannelHandlerInvoker.invokeChannelRead(DefaultChannelHandlerInvoker.java:138)
+		at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:320)
+		at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:846)
+		at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:127)
+		at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:485)
+		at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:452)
+		at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:346)
+		at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:794)
+		at java.lang.Thread.run(Thread.java:748)
+	Cause by:
+		at org.apache.ibatis.binding.MapperMethod$SqlCommand.<init>(MapperMethod.java:214)
+		at org.apache.ibatis.binding.MapperMethod.<init>(MapperMethod.java:48)
+		at org.apache.ibatis.binding.MapperProxy.cachedMapperMethod(MapperProxy.java:59)
+		at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:52)
+		at com.sun.proxy.$Proxy22.getUsersByAttrValue(null:-1)
+		at sun.reflect.NativeMethodAccessorImpl.invoke0(NativeMethodAccessorImpl.java:-2)
+		at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+		at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+		at java.lang.reflect.Method.invoke(Method.java:498)
+		at cj.studio.orm.mybatis.MappingCallback.invoke(MappingCallback.java:24)
+		at cj.studio.backend.uc.plugin.dao.UserAttributeMapper$$EnhancerByCGLIB$$a93e399.getUsersByAttrValue(<generated>:-1)
+		at cj.studio.backend.uc.plugin.service.UserService.getUsersByAttrValue(UserService.java:139)
+		at sun.reflect.NativeMethodAccessorImpl.invoke0(NativeMethodAccessorImpl.java:-2)
+		at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+		at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+		at java.lang.reflect.Method.invoke(Method.java:498)
+		at cj.studio.ecm.bridge.Joinpoint$InvokeAspect.cut(Joinpoint.java:264)
+		at cj.studio.ecm.bridge.Joinpoint$Cutpoint.cut(Joinpoint.java:207)
+		at cj.studio.orm.mybatis.aspect.DBTransaction.cut(DBTransaction.java:24)
+		at cj.studio.ecm.bridge.Joinpoint$Cutpoint.cut(Joinpoint.java:207)
+		at cj.studio.ecm.bridge.Joinpoint.cut(Joinpoint.java:50)
+		at cj.studio.ecm.bridge.EnhanceInterceptor.intercept(EnhanceInterceptor.java:69)
+		at cj.studio.backend.uc.service.IUserService$$EnhancerByCGLIB$$aefdf7b2.getUsersByAttrValue(<generated>:-1)
+		at cj.studio.backend.uc.stub.UserStub.getUsersByAttrValue(UserStub.java:64)
+		at sun.reflect.NativeMethodAccessorImpl.invoke0(NativeMethodAccessorImpl.java:-2)
+		at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+		at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+		at java.lang.reflect.Method.invoke(Method.java:498)
+		at cj.studio.gateway.stub.GatewayAppSiteRestStub$1.done(GatewayAppSiteRestStub.java:111)
+		at cj.studio.gateway.socket.io.HttpInputChannel.done(HttpInputChannel.java:58)
+		at cj.studio.gateway.server.handler.HttpChannelHandler.handleHttpContent(HttpChannelHandler.java:133)
+		at cj.studio.gateway.server.handler.HttpChannelHandler.messageReceived(HttpChannelHandler.java:116)
+		at io.netty.channel.SimpleChannelInboundHandler.channelRead(SimpleChannelInboundHandler.java:103)
+		at io.netty.channel.ChannelHandlerInvokerUtil.invokeChannelReadNow(ChannelHandlerInvokerUtil.java:74)
+		at io.netty.channel.DefaultChannelHandlerInvoker.invokeChannelRead(DefaultChannelHandlerInvoker.java:138)
+		at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:320)
+		at io.netty.handler.codec.MessageToMessageDecoder.channelRead(MessageToMessageDecoder.java:103)
+		at io.netty.handler.codec.MessageToMessageCodec.channelRead(MessageToMessageCodec.java:111)
+		at io.netty.channel.ChannelHandlerInvokerUtil.invokeChannelReadNow(ChannelHandlerInvokerUtil.java:74)
+		at io.netty.channel.DefaultChannelHandlerInvoker.invokeChannelRead(DefaultChannelHandlerInvoker.java:138)
+		at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:320)
+		at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:154)
+		at io.netty.channel.ChannelHandlerInvokerUtil.invokeChannelReadNow(ChannelHandlerInvokerUtil.java:74)
+		at io.netty.channel.DefaultChannelHandlerInvoker.invokeChannelRead(DefaultChannelHandlerInvoker.java:138)
+		at io.netty.channel.DefaultChannelHandlerContext.fireChannelRead(DefaultChannelHandlerContext.java:320)
+		at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:846)
+		at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:127)
+		at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:485)
+		at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:452)
+		at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:346)
+		at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:794)
+		at java.lang.Thread.run(Thread.java:748)
+2019年03月03日 23:23:36  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年03月03日 23:23:40  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年03月03日 23:23:42  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年03月03日 23:23:48  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年03月03日 23:23:55  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年03月03日 23:23:59  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年03月03日 23:24:04  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年03月03日 23:28:07  信息 : -------------网关启动完毕-------------------
+2019年03月03日 23:28:29  信息 : 已装载共享库/Users/caroceanjofers/studio/github/cj.studio.backend.uc/cmdtools/gateway/lib/share
+2019年03月03日 23:28:30  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年03月03日 23:28:30  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年03月03日 23:28:31  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.

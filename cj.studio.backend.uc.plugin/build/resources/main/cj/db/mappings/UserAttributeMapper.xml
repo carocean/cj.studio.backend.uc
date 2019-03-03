@@ -283,7 +283,7 @@
       value = #{value,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <select id="getUserByAttrValue" resultType="cj.studio.backend.uc.bo.User">
+  <select id="getUsersByAttrValue" resultType="cj.studio.backend.uc.bo.User">
 		select u.* from userattr ua,user u where ua.attrcode=#{attrCode} and ua.segcode=#{segCode} and ua.value=#{value} and u.usercode=ua.usercode
 	</select>
 </mapper>
