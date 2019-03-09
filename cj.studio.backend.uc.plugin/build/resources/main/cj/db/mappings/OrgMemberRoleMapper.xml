@@ -274,7 +274,7 @@
 	<select id="getMembersOnRole"
 		resultType="cj.studio.backend.uc.bo.User">
 		select u.* from orgmemrole omr,user u where
-		ur.rolecode=#{roleCode} and ur.orgcode=#{orgCode} and
+		omr.rolecode=#{roleCode} and omr.orgcode=#{orgCode} and
 		u.usercode=omr.usercode
 	</select>
 	<select id="getRolesOnOrgMember"
