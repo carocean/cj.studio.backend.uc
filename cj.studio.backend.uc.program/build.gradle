@@ -28,6 +28,7 @@ task releaseToHost(type: Copy) {
  from 'build/libs/'
 into '../cmdtools/gateway/assemblies/uc'
  include '**/*.jar'
+ exclude '**/*-javadoc.jar','**/*-sources.jar'
  }
  
  task release(type:Copy){
