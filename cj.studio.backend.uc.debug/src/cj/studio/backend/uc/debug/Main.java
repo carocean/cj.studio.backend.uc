@@ -21,7 +21,7 @@ public class Main {
 
 	private static String fileName;
 	public static void main(String[] args) throws ParseException, IOException {
-		fileName = "cj.studio.gateway.console-1.0";
+		fileName = "cj.studio.gateway.console";
 		Options options = new Options();
 //		Option h = new Option("h", "host",false, "要绑定的ip地址（一台服务器上可能有多网卡，默认采用localhost)，格式：-h ip:port，port可以省去");
 //		options.addOption(h);

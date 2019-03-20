@@ -29,7 +29,7 @@ public class AuthenticatorFactory implements IAuthenticatorFactory,IServiceSette
 		auths.put(name, (IAuthenticator)service);
 	}
 	@Override
-	public String authenticate(String authName, String principals, String token, Map<String, String> props)
+	public String authenticate(String authName,String principals, String token, Map<String, String> props)
 			throws AuthenticationException {
 		IAuthenticator auth=auths.get(authName);
 		if(auth==null) {
