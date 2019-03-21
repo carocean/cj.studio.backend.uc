@@ -57,7 +57,7 @@ subprojects {
 	    archives javadocJar  
 	    archives sourcesJar  
    	}
-   
+   	
 	uploadArchives {
 		repositories{
 			mavenDeployer {

@@ -18,17 +18,26 @@ sourceSets {
  } 
 
 dependencies {
+	compile group: 'cj.studio.backend.uacc', name: 'cj.studio.backend.uacc.stub', version: ref_cj_studio_backend_uacc_stub_version
 	compile project(':cj.studio.backend.uc.stub');
 	compile fileTree('../global/runtime')
 	compile fileTree('src/cj/references')
-	
 }
-task releaseToHost(type: Copy) {
- dependsOn "build",":cj.studio.backend.uc.stub:release"
- from 'build/libs/'
-into '../cmdtools/gateway/assemblies/uc'
- include '**/*.jar'
- exclude '**/*-javadoc.jar','**/*-sources.jar'
+task copyReferences(type: Copy) {
+    into 'src/cj/references'
+    from(configurations.all) {
+        include 'cj.studio.backend.uacc.stub-*.jar'
+       // delete fileTree("src/cj/references").matching {
+       // 	include "cj.studio.backend.uacc.stub-*.jar"
+    	//}
+    }
+}
+task releaseToHost(dependsOn:copyReferences,type: Copy) {
+	dependsOn "build",":cj.studio.backend.uc.stub:release"
+	from 'build/libs/'
+	into '../cmdtools/gateway/assemblies/uc'
+	include '**/*.jar'
+	exclude '**/*-javadoc.jar','**/*-sources.jar'
  }
  
  task release(type:Copy){
