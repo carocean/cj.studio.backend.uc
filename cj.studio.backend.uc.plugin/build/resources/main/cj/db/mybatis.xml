@@ -12,6 +12,10 @@
 					value="jdbc:mysql://localhost:3306/netos.uc?useUnicode=true&amp;characterEncoding=UTF-8&amp;useSSL=false&amp;autoReconnect=true" />
 				<property name="username" value="cj" />
 				<property name="password" value="mysql123" />
+				<property name="poolPingEnabled" value="true" />
+				<property name="poolPingQuery"
+					value="select now() from kpi.lastupdatedlog limit 1" />
+				<property name="poolPingConnectionsNotUsedFor" value="3600000" />
 			</dataSource>
 		</environment>
 	</environments>
