@@ -9,11 +9,15 @@ import cj.studio.backend.uc.bo.AccountExample;
 import cj.studio.backend.uc.bo.AccountSegment;
 import cj.studio.backend.uc.bo.AccountSegmentExample;
 import cj.studio.backend.uc.bo.Segment;
+import cj.studio.backend.uc.bo.Tenant;
+import cj.studio.backend.uc.bo.User;
 import cj.studio.backend.uc.plugin.dao.AccountAttributeMapper;
 import cj.studio.backend.uc.plugin.dao.AccountMapper;
 import cj.studio.backend.uc.plugin.dao.AccountSegmentMapper;
 import cj.studio.backend.uc.service.IAccountService;
 import cj.studio.backend.uc.service.ISegmentService;
+import cj.studio.backend.uc.service.ITenantService;
+import cj.studio.backend.uc.service.IUserService;
 import cj.studio.ecm.EcmException;
 import cj.studio.ecm.annotation.CjBridge;
 import cj.studio.ecm.annotation.CjService;
@@ -32,7 +36,10 @@ public class AccountService implements IAccountService {
 	AccountAttributeMapper accountAttributeMapper;
 	@CjServiceRef(refByName = "segmentService")
 	ISegmentService segmentService;
-
+	@CjServiceRef
+	ITenantService tenantService;
+	@CjServiceRef
+	IUserService userService;
 	@CjTransaction
 	@Override
 	public void addAccount(Account account) {
@@ -40,25 +47,33 @@ public class AccountService implements IAccountService {
 		if (StringUtil.isEmpty(account.getCode())) {
 			throw new EcmException("账户编码为空");
 		}
-		if (StringUtil.isEmpty(account.getAppcode())) {
+		if (StringUtil.isEmpty(account.getTenantcode())) {
 			throw new EcmException("应用编码为空");
+		}
+		Tenant tenant=tenantService.getTenant(account.getTenantcode());
+		if(tenant==null) {
+			throw new EcmException(String.format("无此租户：%s",account.getTenantcode()));
+		}
+		User user=userService.getUser(account.getUsercode());
+		if(user==null) {
+			throw new EcmException(String.format("无此用户：%s",account.getUsercode()));
 		}
 		accountMapper.insertSelective(account);
 	}
 
 	@CjTransaction
 	@Override
-	public void removeAccount(String accountCode) {
+	public void removeAccount(String tenantCode,String accountCode) {
 		AccountExample example = new AccountExample();
-		example.createCriteria().andCodeEqualTo(accountCode);
+		example.createCriteria().andTenantcodeEqualTo(tenantCode).andCodeEqualTo(accountCode);
 		this.accountMapper.deleteByExample(example);
 	}
 
 	@CjTransaction
 	@Override
-	public Account getAccount(String accountCode) {
+	public Account getAccount(String tenantCode,String accountCode) {
 		AccountExample example = new AccountExample();
-		example.createCriteria().andCodeEqualTo(accountCode);
+		example.createCriteria().andTenantcodeEqualTo(tenantCode).andCodeEqualTo(accountCode);
 		List<Account> list = accountMapper.selectByExample(example);
 		if (list.isEmpty())
 			return null;
@@ -80,8 +95,8 @@ public class AccountService implements IAccountService {
 
 	@CjTransaction
 	@Override
-	public List<Segment> getSegmentsOfAccount(String accountCode) {
-		return this.accountSegmentMapper.getSegments(accountCode);
+	public List<Segment> getSegmentsOfAccount(String tenantCode,String accountCode) {
+		return this.accountSegmentMapper.getSegments(tenantCode,accountCode);
 	}
 
 	@CjTransaction
@@ -94,17 +109,17 @@ public class AccountService implements IAccountService {
 
 	@CjTransaction
 	@Override
-	public void removeSegmentOfAccount(String accountCode, String segCode) {
+	public void removeSegmentOfAccount(String tenantCode,String accountCode, String segCode) {
 		AccountSegmentExample example = new AccountSegmentExample();
-		example.createCriteria().andAccountcodeEqualTo(accountCode).andSegcodeEqualTo(segCode);
+		example.createCriteria().andTenantcodeEqualTo(tenantCode).andAccountcodeEqualTo(accountCode).andSegcodeEqualTo(segCode);
 		this.accountSegmentMapper.deleteByExample(example);
 	}
 
 	@CjTransaction
 	@Override
-	public void emptySegmentsOfAccount(String accountCode) {
+	public void emptySegmentsOfAccount(String tenantCode,String accountCode) {
 		AccountSegmentExample example = new AccountSegmentExample();
-		example.createCriteria().andAccountcodeEqualTo(accountCode);
+		example.createCriteria().andTenantcodeEqualTo(tenantCode).andAccountcodeEqualTo(accountCode);
 		this.accountSegmentMapper.deleteByExample(example);
 	}
 
@@ -126,9 +141,9 @@ public class AccountService implements IAccountService {
 
 	@CjTransaction
 	@Override
-	public void removeAccountAttribute(String accountCode, String segCode, String attrCode) {
+	public void removeAccountAttribute(String tenantCode,String accountCode, String segCode, String attrCode) {
 		AccountAttributeExample example = new AccountAttributeExample();
-		example.createCriteria().andAccountcodeEqualTo(accountCode).andSegcodeEqualTo(segCode)
+		example.createCriteria().andTenantcodeEqualTo(tenantCode).andAccountcodeEqualTo(accountCode).andSegcodeEqualTo(segCode)
 				.andAttrcodeEqualTo(attrCode);
 		this.accountAttributeMapper.deleteByExample(example);
 
@@ -136,17 +151,17 @@ public class AccountService implements IAccountService {
 
 	@CjTransaction
 	@Override
-	public void emptyAccountAttributes(String accountCode, String segCode) {
+	public void emptyAccountAttributes(String tenantCode,String accountCode, String segCode) {
 		AccountAttributeExample example = new AccountAttributeExample();
-		example.createCriteria().andAccountcodeEqualTo(accountCode).andSegcodeEqualTo(segCode);
+		example.createCriteria().andTenantcodeEqualTo(tenantCode).andAccountcodeEqualTo(accountCode).andSegcodeEqualTo(segCode);
 		this.accountAttributeMapper.deleteByExample(example);
 	}
 
 	@CjTransaction
 	@Override
-	public List<AccountAttribute> getAccountAttributes(String accountCode, String segCode) {
+	public List<AccountAttribute> getAccountAttributes(String tenantCode,String accountCode, String segCode) {
 		AccountAttributeExample example = new AccountAttributeExample();
-		example.createCriteria().andAccountcodeEqualTo(accountCode).andSegcodeEqualTo(segCode);
+		example.createCriteria().andTenantcodeEqualTo(tenantCode).andAccountcodeEqualTo(accountCode).andSegcodeEqualTo(segCode);
 		return this.accountAttributeMapper.selectByExample(example);
 	}
 	@CjTransaction

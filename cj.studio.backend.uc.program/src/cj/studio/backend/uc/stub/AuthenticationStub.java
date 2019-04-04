@@ -23,10 +23,10 @@ public class AuthenticationStub extends GatewayAppSiteRestStub implements IAuthe
 	}
 
 	@Override
-	public String authenticate(String authName, String principals, String password, Map<String, String> props) {
+	public String authenticate(String authName,String tenant, String principals, String password, long ttlMillis) {
 		Map<String, String> result = new HashMap<>();
 		try {
-			String ret = facotry.authenticate(authName, principals, password, props);
+			String ret = facotry.authenticate(authName,tenant, principals, password, ttlMillis);
 			result.put("status", "200");
 			result.put("message", "OK");
 			result.put("result", ret);

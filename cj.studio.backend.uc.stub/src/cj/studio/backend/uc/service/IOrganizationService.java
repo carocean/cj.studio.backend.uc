@@ -11,37 +11,37 @@ import cj.studio.backend.uc.bo.User;
 public interface IOrganizationService {
 	void addOrganization(Organization org);
 
-	void removeOrganization(String orgCode);
+	void removeOrganization(String tenantCode,String orgCode);
 
-	Organization getOrganization(String orgCode);
+	Organization getOrganization(String tenantCode,String orgCode);
 
 	long getOrganizationCount();
 
 	List<Organization> getPage(int currPage, int pageSize);
 
-	List<Segment> getSegmentsOfOrganization(String orgCode);
+	List<Segment> getSegmentsOfOrganization(String tenantCode,String orgCode);
 
 	void addSegmentOfOrganization(OrgSegment seg);
 
-	void removeSegmentOfOrganization(String orgCode, String segCode);
+	void removeSegmentOfOrganization(String tenantCode,String orgCode, String segCode);
 
-	void emptySegmentsOfOrganization(String orgCode);
+	void emptySegmentsOfOrganization(String tenantCode,String orgCode);
 
 	void addOrganizationAttribute(OrgAttribute attr);
 
-	void removeOrganizationAttribute(String orgCode, String segCode, String attrCode);
+	void removeOrganizationAttribute(String tenantCode,String orgCode, String segCode, String attrCode);
 
-	void emptyOrganizationAttributes(String orgCode, String segCode);
+	void emptyOrganizationAttributes(String tenantCode,String orgCode, String segCode);
 
-	List<OrgAttribute> getOrganizationAttributes(String orgCode, String segCode);
+	List<OrgAttribute> getOrganizationAttributes(String tenantCode,String orgCode, String segCode);
 
-	void addOrgMember(String appCode, String userCode, String orgCode);
+	void addOrgMember(String tenantCode, String userCode, String orgCode);
 
-	void removeOrgMember(String appCode, String userCode, String orgCode);
+	void removeOrgMember(String tenantCode, String userCode, String orgCode);
 
-	void emptyOrgMembers(String appCode, String orgCode);
+	void emptyOrgMembers(String tenantCode, String orgCode);
 
-	List<User> getOrgMembers(String appCode, String orgCode);
+	List<User> getOrgMembers(String tenantCode, String orgCode);
 
-	List<Organization> getOrganizationsOfUser(String appCode, String userCode);
+	List<Organization> getOrganizationsOfUser(String tenantCode, String userCode);
 }

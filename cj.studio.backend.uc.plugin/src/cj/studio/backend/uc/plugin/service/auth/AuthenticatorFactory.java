@@ -29,13 +29,13 @@ public class AuthenticatorFactory implements IAuthenticatorFactory,IServiceSette
 		auths.put(name, (IAuthenticator)service);
 	}
 	@Override
-	public String authenticate(String authName,String principals, String token, Map<String, String> props)
+	public String authenticate(String authName,String tenant,String principals, String token,  long ttlMillis)
 			throws AuthenticationException {
 		IAuthenticator auth=auths.get(authName);
 		if(auth==null) {
 			throw new AuthenticationException("认证器不存在："+authName);
 		}
-		return auth.authenticate(principals, token, props);
+		return auth.authenticate(tenant,principals, token, ttlMillis);
 	}
 
 }

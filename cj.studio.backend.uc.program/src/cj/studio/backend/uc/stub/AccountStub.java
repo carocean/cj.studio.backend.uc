@@ -22,13 +22,13 @@ public class AccountStub extends GatewayAppSiteRestStub implements IAccountStub 
 	}
 
 	@Override
-	public void removeAccount(String accountCode) {
-		this.accountService.removeAccount(accountCode);
+	public void removeAccount(String tenantCode,String accountCode) {
+		this.accountService.removeAccount(tenantCode,accountCode);
 	}
 
 	@Override
-	public Account getAccount(String accountCode) {
-		return this.accountService.getAccount(accountCode);
+	public Account getAccount(String tenantCode,String accountCode) {
+		return this.accountService.getAccount(tenantCode,accountCode);
 	}
 
 	@Override
@@ -42,8 +42,8 @@ public class AccountStub extends GatewayAppSiteRestStub implements IAccountStub 
 	}
 
 	@Override
-	public List<Segment> getSegmentsOfAccount(String accountCode) {
-		return accountService.getSegmentsOfAccount(accountCode);
+	public List<Segment> getSegmentsOfAccount(String tenantCode,String accountCode) {
+		return accountService.getSegmentsOfAccount(tenantCode,accountCode);
 	}
 
 	@Override
@@ -52,13 +52,13 @@ public class AccountStub extends GatewayAppSiteRestStub implements IAccountStub 
 	}
 
 	@Override
-	public void removeSegmentOfAccount(String accountCode, String segCode) {
-		this.accountService.removeSegmentOfAccount(accountCode, segCode);
+	public void removeSegmentOfAccount(String tenantCode,String accountCode, String segCode) {
+		this.accountService.removeSegmentOfAccount(tenantCode,accountCode, segCode);
 	}
 
 	@Override
-	public void emptySegmentsOfAccount(String accountCode) {
-		this.accountService.emptySegmentsOfAccount(accountCode);
+	public void emptySegmentsOfAccount(String tenantCode,String accountCode) {
+		this.accountService.emptySegmentsOfAccount(tenantCode,accountCode);
 	}
 
 	@Override
@@ -67,18 +67,18 @@ public class AccountStub extends GatewayAppSiteRestStub implements IAccountStub 
 	}
 
 	@Override
-	public void removeAccountAttribute(String accountCode, String segCode, String attrCode) {
-		this.accountService.removeAccountAttribute(accountCode, segCode, attrCode);
+	public void removeAccountAttribute(String tenantCode,String accountCode, String segCode, String attrCode) {
+		this.accountService.removeAccountAttribute(tenantCode,accountCode, segCode, attrCode);
 	}
 
 	@Override
-	public void emptyAccountAttributes(String accountCode, String segCode) {
-		this.accountService.emptyAccountAttributes(accountCode, segCode);
+	public void emptyAccountAttributes(String tenantCode,String accountCode, String segCode) {
+		this.accountService.emptyAccountAttributes(tenantCode,accountCode, segCode);
 	}
 
 	@Override
-	public List<AccountAttribute> getAccountAttributes(String accountCode, String segCode) {
-		return this.accountService.getAccountAttributes(accountCode, segCode);
+	public List<AccountAttribute> getAccountAttributes(String tenantCode,String accountCode, String segCode) {
+		return this.accountService.getAccountAttributes(tenantCode,accountCode, segCode);
 	}
 	@Override
 	public Account getAccountByAttrValue(String segCode, String attrCode, String value) {

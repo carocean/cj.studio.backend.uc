@@ -1,6 +1,5 @@
 package cj.studio.backend.uc.service;
 
-import java.util.Map;
 /**
  * 实现各种身份认证策略
  * @author caroceanjofers
@@ -8,5 +7,5 @@ import java.util.Map;
  */
 public interface IAuthenticator {
 	AuthenticatorInfo getInfo();
-	String authenticate(String principal, String password, Map<String, String> props) throws AuthenticationException;
+	String authenticate(String tenant,String principal, String password,  long ttlMillis) throws AuthenticationException;
 }

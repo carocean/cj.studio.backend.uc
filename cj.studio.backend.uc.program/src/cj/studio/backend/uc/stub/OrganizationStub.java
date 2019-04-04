@@ -23,13 +23,13 @@ public class OrganizationStub extends GatewayAppSiteRestStub implements IOrganiz
 	}
 
 	@Override
-	public void removeOrganization(String orgCode) {
-		organizationService.removeOrganization(orgCode);
+	public void removeOrganization(String tenantCode,String orgCode) {
+		organizationService.removeOrganization(tenantCode,orgCode);
 	}
 
 	@Override
-	public Organization getOrganization(String orgCode) {
-		return organizationService.getOrganization(orgCode);
+	public Organization getOrganization(String tenantCode,String orgCode) {
+		return organizationService.getOrganization(tenantCode,orgCode);
 	}
 
 	@Override
@@ -43,8 +43,8 @@ public class OrganizationStub extends GatewayAppSiteRestStub implements IOrganiz
 	}
 
 	@Override
-	public List<Segment> getSegmentsOfOrganization(String orgCode) {
-		return organizationService.getSegmentsOfOrganization(orgCode);
+	public List<Segment> getSegmentsOfOrganization(String tenantCode,String orgCode) {
+		return organizationService.getSegmentsOfOrganization(tenantCode,orgCode);
 	}
 
 	@Override
@@ -53,13 +53,13 @@ public class OrganizationStub extends GatewayAppSiteRestStub implements IOrganiz
 	}
 
 	@Override
-	public void removeSegmentOfOrganization(String orgCode, String segCode) {
-		organizationService.removeSegmentOfOrganization(orgCode, segCode);
+	public void removeSegmentOfOrganization(String tenantCode,String orgCode, String segCode) {
+		organizationService.removeSegmentOfOrganization(tenantCode,orgCode, segCode);
 	}
 
 	@Override
-	public void emptySegmentsOfOrganization(String orgCode) {
-		organizationService.emptySegmentsOfOrganization(orgCode);
+	public void emptySegmentsOfOrganization(String tenantCode,String orgCode) {
+		organizationService.emptySegmentsOfOrganization(tenantCode,orgCode);
 	}
 
 	@Override
@@ -68,43 +68,43 @@ public class OrganizationStub extends GatewayAppSiteRestStub implements IOrganiz
 	}
 
 	@Override
-	public void removeOrganizationAttribute(String orgCode, String segCode, String attrCode) {
-		organizationService.removeOrganizationAttribute(orgCode, segCode, attrCode);
+	public void removeOrganizationAttribute(String tenantCode,String orgCode, String segCode, String attrCode) {
+		organizationService.removeOrganizationAttribute(tenantCode,orgCode, segCode, attrCode);
 	}
 
 	@Override
-	public void emptyOrganizationAttributes(String orgCode, String segCode) {
-		organizationService.emptyOrganizationAttributes(orgCode, segCode);
+	public void emptyOrganizationAttributes(String tenantCode,String orgCode, String segCode) {
+		organizationService.emptyOrganizationAttributes(tenantCode,orgCode, segCode);
 	}
 
 	@Override
-	public List<OrgAttribute> getOrganizationAttributes(String orgCode, String segCode) {
-		return organizationService.getOrganizationAttributes(orgCode, segCode);
+	public List<OrgAttribute> getOrganizationAttributes(String tenantCode,String orgCode, String segCode) {
+		return organizationService.getOrganizationAttributes(tenantCode,orgCode, segCode);
 	}
 
 	@Override
-	public void addOrgMember(String appCode, String userCode, String orgCode) {
-		organizationService.addOrgMember(appCode, userCode, orgCode);
+	public void addOrgMember(String tenantCode, String userCode, String orgCode) {
+		organizationService.addOrgMember(tenantCode, userCode, orgCode);
 	}
 
 	@Override
-	public void removeOrgMember(String appCode, String userCode, String orgCode) {
-		organizationService.removeOrgMember(appCode, userCode, orgCode);
+	public void removeOrgMember(String tenantCode, String userCode, String orgCode) {
+		organizationService.removeOrgMember(tenantCode, userCode, orgCode);
 	}
 
 	@Override
-	public void emptyOrgMembers(String appCode, String orgCode) {
-		organizationService.emptyOrgMembers(appCode, orgCode);
+	public void emptyOrgMembers(String tenantCode, String orgCode) {
+		organizationService.emptyOrgMembers(tenantCode, orgCode);
 	}
 
 	@Override
-	public List<User> getOrgMembers(String appCode, String orgCode) {
-		return organizationService.getOrgMembers(appCode, orgCode);
+	public List<User> getOrgMembers(String tenantCode, String orgCode) {
+		return organizationService.getOrgMembers(tenantCode, orgCode);
 	}
 
 	@Override
-	public List<Organization> getOrganizationsOfUser(String appCode, String userCode) {
-		return organizationService.getOrganizationsOfUser(appCode, userCode);
+	public List<Organization> getOrganizationsOfUser(String tenantCode, String userCode) {
+		return organizationService.getOrganizationsOfUser(tenantCode, userCode);
 	}
 
 }

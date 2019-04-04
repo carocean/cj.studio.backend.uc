@@ -20,71 +20,80 @@ public interface IOrganizationStub {
 	void addOrganization(@CjStubInContentKey(key = "org", usage = "机构json") Organization org);
 
 	@CjStubMethod(usage = "移除机构")
-	void removeOrganization(@CjStubInParameter(key = "orgCode", usage = "机构代码") String orgCode);
+	void removeOrganization(@CjStubInParameter(key = "tenantCode", usage = "租户代码") String tenantCode,
+			@CjStubInParameter(key = "orgCode", usage = "机构代码") String orgCode);
 
 	@CjStubMethod(usage = "获取机构")
-	Organization getOrganization(@CjStubInParameter(key = "orgCode", usage = "机构代码") String orgCode);
+	Organization getOrganization(@CjStubInParameter(key = "tenantCode", usage = "租户代码") String tenantCode,
+			@CjStubInParameter(key = "orgCode", usage = "机构代码") String orgCode);
 
 	@CjStubMethod(usage = "获取机构数")
 	long getOrganizationCount();
 
 	@CjStubMethod(usage = "获取一页机构")
-	@CjStubReturn(type = ArrayList.class,elementType=Organization.class, usage = "返回机构集合")
+	@CjStubReturn(type = ArrayList.class, elementType = Organization.class, usage = "返回机构集合")
 	List<Organization> getPage(@CjStubInParameter(key = "currPage", usage = "当前页码") int currPage,
 			@CjStubInParameter(key = "pageSize", usage = "页大小") int pageSize);
 
 	@CjStubMethod(usage = "获取机构信息段")
-	@CjStubReturn(type = ArrayList.class,elementType=Segment.class, usage = "返回机构段集合")
-	List<Segment> getSegmentsOfOrganization(@CjStubInParameter(key = "orgCode", usage = "机构代码") String orgCode);
+	@CjStubReturn(type = ArrayList.class, elementType = Segment.class, usage = "返回机构段集合")
+	List<Segment> getSegmentsOfOrganization(@CjStubInParameter(key = "tenantCode", usage = "租户代码") String tenantCode,
+			@CjStubInParameter(key = "orgCode", usage = "机构代码") String orgCode);
 
 	@CjStubMethod(command = "post", usage = "添加机构信息段")
 	void addSegmentOfOrganization(@CjStubInContentKey(key = "seg", usage = "机构信息段json") OrgSegment seg);
 
 	@CjStubMethod(usage = "移除机构信息段")
-	void removeSegmentOfOrganization(@CjStubInParameter(key = "orgCode", usage = "机构代码") String orgCode,
+	void removeSegmentOfOrganization(@CjStubInParameter(key = "tenantCode", usage = "租户代码") String tenantCode,
+			@CjStubInParameter(key = "orgCode", usage = "机构代码") String orgCode,
 			@CjStubInParameter(key = "segCode", usage = "段代码") String segCode);
 
 	@CjStubMethod(usage = "清空机构下的所有信息段")
-	void emptySegmentsOfOrganization(@CjStubInParameter(key = "orgCode", usage = "机构代码") String orgCode);
+	void emptySegmentsOfOrganization(@CjStubInParameter(key = "tenantCode", usage = "租户代码") String tenantCode,
+			@CjStubInParameter(key = "orgCode", usage = "机构代码") String orgCode);
 
 	@CjStubMethod(command = "post", usage = "添加机构属性")
 	void addOrganizationAttribute(@CjStubInContentKey(key = "attr", usage = "机构属性json") OrgAttribute attr);
 
 	@CjStubMethod(usage = "移除机构属性")
-	void removeOrganizationAttribute(@CjStubInParameter(key = "orgCode", usage = "机构代码") String orgCode,
+	void removeOrganizationAttribute(@CjStubInParameter(key = "tenantCode", usage = "租户代码") String tenantCode,
+			@CjStubInParameter(key = "orgCode", usage = "机构代码") String orgCode,
 			@CjStubInParameter(key = "segCode", usage = "段代码") String segCode,
 			@CjStubInParameter(key = "attrCode", usage = "属性代码") String attrCode);
 
 	@CjStubMethod(usage = "清空机构信息段下的所有属性")
-	void emptyOrganizationAttributes(@CjStubInParameter(key = "orgCode", usage = "机构代码") String orgCode,
+	void emptyOrganizationAttributes(@CjStubInParameter(key = "tenantCode", usage = "租户代码") String tenantCode,
+			@CjStubInParameter(key = "orgCode", usage = "机构代码") String orgCode,
 			@CjStubInParameter(key = "segCode", usage = "段代码") String segCode);
 
 	@CjStubMethod(usage = "获取机构属性")
-	@CjStubReturn(type = ArrayList.class,elementType=OrgAttribute.class, usage = "返回属性集合")
-	List<OrgAttribute> getOrganizationAttributes(@CjStubInParameter(key = "orgCode", usage = "机构代码") String orgCode,
+	@CjStubReturn(type = ArrayList.class, elementType = OrgAttribute.class, usage = "返回属性集合")
+	List<OrgAttribute> getOrganizationAttributes(
+			@CjStubInParameter(key = "tenantCode", usage = "租户代码") String tenantCode,
+			@CjStubInParameter(key = "orgCode", usage = "机构代码") String orgCode,
 			@CjStubInParameter(key = "segCode", usage = "段代码") String segCode);
 
 	@CjStubMethod(usage = "添加机构成员")
-	void addOrgMember(@CjStubInParameter(key = "appCode", usage = "应用代码") String appCode,
+	void addOrgMember(@CjStubInParameter(key = "tenantCode", usage = "租户代码") String tenantCode,
 			@CjStubInParameter(key = "userCode", usage = "用户代码") String userCode,
 			@CjStubInParameter(key = "orgCode", usage = "机构代码") String orgCode);
 
 	@CjStubMethod(usage = "移除机构成员")
-	void removeOrgMember(@CjStubInParameter(key = "appCode", usage = "应用代码") String appCode,
+	void removeOrgMember(@CjStubInParameter(key = "tenantCode", usage = "租户代码") String tenantCode,
 			@CjStubInParameter(key = "userCode", usage = "用户代码") String userCode,
 			@CjStubInParameter(key = "orgCode", usage = "机构代码") String orgCode);
 
 	@CjStubMethod(usage = "清空机构成员")
-	void emptyOrgMembers(@CjStubInParameter(key = "appCode", usage = "应用代码") String appCode,
+	void emptyOrgMembers(@CjStubInParameter(key = "tenantCode", usage = "租户代码") String tenantCode,
 			@CjStubInParameter(key = "orgCode", usage = "机构代码") String orgCode);
 
 	@CjStubMethod(usage = "获取机构成员")
-	@CjStubReturn(type = ArrayList.class,elementType=User.class, usage = "返回成员列表")
-	List<User> getOrgMembers(@CjStubInParameter(key = "appCode", usage = "应用代码") String appCode,
+	@CjStubReturn(type = ArrayList.class, elementType = User.class, usage = "返回成员列表")
+	List<User> getOrgMembers(@CjStubInParameter(key = "tenantCode", usage = "租户代码") String tenantCode,
 			@CjStubInParameter(key = "orgCode", usage = "机构代码") String orgCode);
 
 	@CjStubMethod(usage = "获取机构成员")
-	@CjStubReturn(type = ArrayList.class,elementType=Organization.class, usage = "返回机构列表")
-	List<Organization> getOrganizationsOfUser(@CjStubInParameter(key = "appCode", usage = "应用代码") String appCode,
+	@CjStubReturn(type = ArrayList.class, elementType = Organization.class, usage = "返回机构列表")
+	List<Organization> getOrganizationsOfUser(@CjStubInParameter(key = "tenantCode", usage = "租户代码") String tenantCode,
 			@CjStubInParameter(key = "userCode", usage = "用户代码") String userCode);
 }

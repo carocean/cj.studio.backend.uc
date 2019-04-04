@@ -23,9 +23,9 @@
 		<mapper resource="cj/db/mappings/AccountAttributeMapper.xml" />
 		<mapper resource="cj/db/mappings/AccountMapper.xml" />
 		<mapper resource="cj/db/mappings/AccountSegmentMapper.xml" />
-		<mapper resource="cj/db/mappings/AppAttributeMapper.xml" />
-		<mapper resource="cj/db/mappings/ApplicationMapper.xml" />
-		<mapper resource="cj/db/mappings/AppSegmentMapper.xml" />
+		<mapper resource="cj/db/mappings/TenantAttributeMapper.xml" />
+		<mapper resource="cj/db/mappings/TenantMapper.xml" />
+		<mapper resource="cj/db/mappings/TenantSegmentMapper.xml" />
 		<mapper resource="cj/db/mappings/AttributeMapper.xml" />
 		<mapper resource="cj/db/mappings/OrganizationMapper.xml" />
 		<mapper resource="cj/db/mappings/OrgAttributeMapper.xml" />

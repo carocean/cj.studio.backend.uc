@@ -25,8 +25,7 @@ public class JwtUtil {
 	 * @param user      登录成功的user对象
 	 * @return
 	 */
-	public static String createJWT(long ttlMillis, String key, String userCode, String pwd,
-			Map<String, Object> claims) {
+	public static String createJWT(String key, String subject, long ttlMillis, Map<String, Object> claims) {
 		// 指定签名的时候使用的签名算法，也就是header那部分，jjwt已经将这部分内容封装好了。
 		SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
 
@@ -38,14 +37,11 @@ public class JwtUtil {
 		if (claims == null) {
 			claims = new HashMap<String, Object>();
 		}
-		claims.put("user", userCode);
-		claims.put("password", pwd);
 
 		// 生成签名的时候使用的秘钥secret,这个方法本地封装了的，一般可以从本地配置文件中读取，切记这个秘钥不能外露哦。它就是你服务端的私钥，在任何场景都不应该流露出去。一旦客户端得知这个secret,
 		// 那就意味着客户端是可以自我签发jwt了。
 
 		// 生成签发人
-		String subject = userCode;
 
 		// 下面就是在为payload添加各种标准声明和私有声明了
 		// 这里其实就是new一个JwtBuilder，设置jwt的body
@@ -73,7 +69,7 @@ public class JwtUtil {
 	 * Token的解密
 	 * 
 	 * @param token 加密后的token
-	 * @param user  用户的对象
+	 * @param key  
 	 * @return
 	 */
 	public static Claims parseJWT(String token, String key) {
@@ -86,30 +82,6 @@ public class JwtUtil {
 				// 设置需要解析的jwt
 				.parseClaimsJws(token).getBody();
 		return claims;
-	}
-
-	/**
-	 * 校验token 在这里可以使用官方的校验，我这里校验的是token中携带的密码于数据库一致的话就校验通过
-	 * 
-	 * @param token
-	 * @param user
-	 * @return
-	 */
-	public static Boolean isVerify(String token, String key, String pwd) {
-		// 签名秘钥，和生成的签名的秘钥一模一样
-
-		// 得到DefaultJwtParser
-		Claims claims = Jwts.parser()
-				// 设置签名的秘钥
-				.setSigningKey(key)
-				// 设置需要解析的jwt
-				.parseClaimsJws(token).getBody();
-
-		if (claims.get("password").equals(pwd)) {
-			return true;
-		}
-
-		return false;
 	}
 
 }

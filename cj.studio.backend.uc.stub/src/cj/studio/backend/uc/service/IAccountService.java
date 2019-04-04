@@ -10,29 +10,29 @@ import cj.studio.backend.uc.bo.Segment;
 public interface IAccountService {
 	void addAccount(Account account);
 
-	void removeAccount(String accountCode);
+	void removeAccount(String tenantCode,String accountCode);
 
-	Account getAccount(String accountCode);
+	Account getAccount(String tenantCode,String accountCode);
 
 	long getAccountCount();
 
 	List<Account> getPage(int currPage, int pageSize);
 
-	List<Segment> getSegmentsOfAccount(String accountCode);
+	List<Segment> getSegmentsOfAccount(String tenantCode,String accountCode);
 
 	void addSegmentOfAccount(AccountSegment seg);
 
-	void removeSegmentOfAccount(String accountCode, String segCode);
+	void removeSegmentOfAccount(String tenantCode,String accountCode, String segCode);
 
-	void emptySegmentsOfAccount(String accountCode);
+	void emptySegmentsOfAccount(String tenantCode,String accountCode);
 
 	void addAccountAttribute(AccountAttribute attr);
 
-	void removeAccountAttribute(String accountCode, String segCode, String attrCode);
+	void removeAccountAttribute(String tenantCode,String accountCode, String segCode, String attrCode);
 
-	void emptyAccountAttributes(String accountCode, String segCode);
+	void emptyAccountAttributes(String tenantCode,String accountCode, String segCode);
 
-	List<AccountAttribute> getAccountAttributes(String accountCode, String segCode);
+	List<AccountAttribute> getAccountAttributes(String tenantCode,String accountCode, String segCode);
 
 	Account getAccountByAttrValue(String segCode, String attrCode, String value);
 }

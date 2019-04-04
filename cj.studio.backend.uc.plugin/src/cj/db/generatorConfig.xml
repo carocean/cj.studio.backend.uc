@@ -35,7 +35,7 @@
 		</table>
 		<table schema="netos.uc" domainObjectName="Account" tableName="account">
 		</table>
-		<table schema="netos.uc" domainObjectName="Application" tableName="application">
+		<table schema="netos.uc" domainObjectName="Tenant" tableName="tenant">
 		</table>
 		<table schema="netos.uc" domainObjectName="Organization" tableName="organization">
 		</table>
@@ -45,7 +45,7 @@
 		</table>
 		<table schema="netos.uc" domainObjectName="Attribute" tableName="attribute">
 		</table>
-		<table schema="netos.uc" domainObjectName="AppAttribute" tableName="appattr">
+		<table schema="netos.uc" domainObjectName="TenantAttribute" tableName="tenantattr">
 		</table>
 		<table schema="netos.uc" domainObjectName="AccountAttribute" tableName="accountattr">
 		</table>
@@ -65,7 +65,7 @@
 		</table>
 		<table schema="netos.uc" domainObjectName="UserSegment" tableName="userseg">
 		</table>
-		<table schema="netos.uc" domainObjectName="AppSegment" tableName="appseg">
+		<table schema="netos.uc" domainObjectName="TenantSegment" tableName="tenantseg">
 		</table>
 	</context>
 </generatorConfiguration>

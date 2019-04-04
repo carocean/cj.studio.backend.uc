@@ -71,11 +71,11 @@ public class ProtectedObjectStub extends GatewayAppSiteRestStub implements IProt
 		}
 
 		ProtectedObject app = new ProtectedObject();
-		CjStubService as = IApplicationStub.class.getDeclaredAnnotation(CjStubService.class);
+		CjStubService as = ITenantStub.class.getDeclaredAnnotation(CjStubService.class);
 		app.setCode(as.bindService());
 		app.setName(as.usage());
 		ucServices.add(app);
-		for (Method m : IApplicationStub.class.getDeclaredMethods()) {
+		for (Method m : ITenantStub.class.getDeclaredMethods()) {
 			CjStubMethod sm = m.getAnnotation(CjStubMethod.class);
 			if (sm == null)
 				continue;

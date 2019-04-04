@@ -51,17 +51,17 @@ public class OrganizationService implements IOrganizationService {
 
 	@CjTransaction
 	@Override
-	public void removeOrganization(String orgCode) {
+	public void removeOrganization(String tenantCode,String orgCode) {
 		OrganizationExample example = new OrganizationExample();
-		example.createCriteria().andCodeEqualTo(orgCode);
+		example.createCriteria().andTenantcodeEqualTo(tenantCode).andCodeEqualTo(orgCode);
 		this.organizationMapper.deleteByExample(example);
 	}
 
 	@CjTransaction
 	@Override
-	public Organization getOrganization(String orgCode) {
+	public Organization getOrganization(String tenantCode,String orgCode) {
 		OrganizationExample example = new OrganizationExample();
-		example.createCriteria().andCodeEqualTo(orgCode);
+		example.createCriteria().andTenantcodeEqualTo(tenantCode).andCodeEqualTo(orgCode);
 		List<Organization> list = organizationMapper.selectByExample(example);
 		if (list.isEmpty())
 			return null;
@@ -83,8 +83,8 @@ public class OrganizationService implements IOrganizationService {
 
 	@CjTransaction
 	@Override
-	public List<Segment> getSegmentsOfOrganization(String orgCode) {
-		return this.orgSegmentMapper.getSegments(orgCode);
+	public List<Segment> getSegmentsOfOrganization(String tenantCode,String orgCode) {
+		return this.orgSegmentMapper.getSegments(tenantCode,orgCode);
 	}
 
 	@CjTransaction
@@ -97,17 +97,17 @@ public class OrganizationService implements IOrganizationService {
 
 	@CjTransaction
 	@Override
-	public void removeSegmentOfOrganization(String orgCode, String segCode) {
+	public void removeSegmentOfOrganization(String tenantCode,String orgCode, String segCode) {
 		OrgSegmentExample example = new OrgSegmentExample();
-		example.createCriteria().andOrgcodeEqualTo(orgCode).andSegcodeEqualTo(segCode);
+		example.createCriteria().andTenantcodeEqualTo(tenantCode).andOrgcodeEqualTo(orgCode).andSegcodeEqualTo(segCode);
 		this.orgSegmentMapper.deleteByExample(example);
 	}
 
 	@CjTransaction
 	@Override
-	public void emptySegmentsOfOrganization(String orgCode) {
+	public void emptySegmentsOfOrganization(String tenantCode,String orgCode) {
 		OrgSegmentExample example = new OrgSegmentExample();
-		example.createCriteria().andOrgcodeEqualTo(orgCode);
+		example.createCriteria().andTenantcodeEqualTo(tenantCode).andOrgcodeEqualTo(orgCode);
 		this.orgSegmentMapper.deleteByExample(example);
 	}
 
@@ -129,31 +129,31 @@ public class OrganizationService implements IOrganizationService {
 
 	@CjTransaction
 	@Override
-	public void removeOrganizationAttribute(String orgCode, String segCode, String attrCode) {
+	public void removeOrganizationAttribute(String tenantCode,String orgCode, String segCode, String attrCode) {
 		OrgAttributeExample example = new OrgAttributeExample();
-		example.createCriteria().andOrgcodeEqualTo(orgCode).andSegcodeEqualTo(segCode).andAttrcodeEqualTo(attrCode);
+		example.createCriteria().andTenantcodeEqualTo(tenantCode).andOrgcodeEqualTo(orgCode).andSegcodeEqualTo(segCode).andAttrcodeEqualTo(attrCode);
 		this.orgAttributeMapper.deleteByExample(example);
 	}
 
 	@CjTransaction
 	@Override
-	public void emptyOrganizationAttributes(String orgCode, String segCode) {
+	public void emptyOrganizationAttributes(String tenantCode,String orgCode, String segCode) {
 		OrgAttributeExample example = new OrgAttributeExample();
-		example.createCriteria().andOrgcodeEqualTo(orgCode).andSegcodeEqualTo(segCode);
+		example.createCriteria().andTenantcodeEqualTo(tenantCode).andOrgcodeEqualTo(orgCode).andSegcodeEqualTo(segCode);
 		this.orgAttributeMapper.deleteByExample(example);
 	}
 
 	@CjTransaction
 	@Override
-	public List<OrgAttribute> getOrganizationAttributes(String orgCode, String segCode) {
+	public List<OrgAttribute> getOrganizationAttributes(String tenantCode,String orgCode, String segCode) {
 		OrgAttributeExample example = new OrgAttributeExample();
-		example.createCriteria().andOrgcodeEqualTo(orgCode).andSegcodeEqualTo(segCode);
+		example.createCriteria().andTenantcodeEqualTo(tenantCode).andOrgcodeEqualTo(orgCode).andSegcodeEqualTo(segCode);
 		return this.orgAttributeMapper.selectByExample(example);
 	}
 
 	@CjTransaction
 	@Override
-	public void addOrgMember(String appCode, String userCode, String orgCode) {
+	public void addOrgMember(String tenantCode, String userCode, String orgCode) {
 		if (StringUtil.isEmpty(userCode)) {
 			throw new EcmException("用户编码为空");
 		}
@@ -161,7 +161,7 @@ public class OrganizationService implements IOrganizationService {
 			throw new EcmException("机构编码为空");
 		}
 		OrgMember om = new OrgMember();
-		om.setAppcode(appCode);
+		om.setTenantcode(tenantCode);
 		om.setOrgcode(orgCode);
 		om.setUsercode(userCode);
 		orgMemberMapper.insertSelective(om);
@@ -169,30 +169,30 @@ public class OrganizationService implements IOrganizationService {
 
 	@CjTransaction
 	@Override
-	public void removeOrgMember(String appCode, String userCode, String orgCode) {
+	public void removeOrgMember(String tenantCode, String userCode, String orgCode) {
 		OrgMemberExample example = new OrgMemberExample();
-		example.createCriteria().andAppcodeEqualTo(appCode).andUsercodeEqualTo(userCode).andOrgcodeEqualTo(orgCode);
+		example.createCriteria().andTenantcodeEqualTo(tenantCode).andUsercodeEqualTo(userCode).andOrgcodeEqualTo(orgCode);
 		orgMemberMapper.deleteByExample(example);
 	}
 
 	@CjTransaction
 	@Override
-	public void emptyOrgMembers(String appCode, String orgCode) {
+	public void emptyOrgMembers(String tenantCode, String orgCode) {
 		OrgMemberExample example = new OrgMemberExample();
-		example.createCriteria().andAppcodeEqualTo(appCode).andOrgcodeEqualTo(orgCode);
+		example.createCriteria().andTenantcodeEqualTo(tenantCode).andOrgcodeEqualTo(orgCode);
 		orgMemberMapper.deleteByExample(example);
 	}
 
 	@CjTransaction
 	@Override
-	public List<User> getOrgMembers(String appCode, String orgCode) {
-		return orgMemberMapper.getMembers(appCode,orgCode);
+	public List<User> getOrgMembers(String tenantCode, String orgCode) {
+		return orgMemberMapper.getMembers(tenantCode,orgCode);
 	}
 
 	@CjTransaction
 	@Override
-	public List<Organization> getOrganizationsOfUser(String appCode, String userCode) {
-		return orgMemberMapper.getOrganizations(appCode,userCode);
+	public List<Organization> getOrganizationsOfUser(String tenantCode, String userCode) {
+		return orgMemberMapper.getOrganizations(tenantCode,userCode);
 	}
 
 }
