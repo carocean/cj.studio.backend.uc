@@ -12,7 +12,6 @@ import cj.studio.ecm.annotation.CjService;
 import cj.studio.ecm.annotation.CjServiceRef;
 import cj.studio.gateway.stub.GatewayAppSiteRestStub;
 import cj.ultimate.gson2.com.google.gson.Gson;
-import cj.ultimate.gson2.com.google.gson.reflect.TypeToken;
 
 @CjService(name = "/tenantToken.service")
 public class TenantTokenStub extends GatewayAppSiteRestStub implements ITenantTokenStub {
@@ -25,17 +24,22 @@ public class TenantTokenStub extends GatewayAppSiteRestStub implements ITenantTo
 
 	@Override
 	public String genToken(String tenant, String user, String pwd, long ttlMillis) throws AuthenticationException {
-		Tenant exists = tenantService.getTenant(tenant);
-		if (exists == null) {
-			throw new AuthenticationException("404 不存在租户：" + tenant);
+		Map<String, String> result = new HashMap<>();
+		try {
+			Tenant exists = tenantService.getTenant(tenant);
+			if (exists == null) {
+				throw new AuthenticationException("404 不存在租户：" + tenant);
+			}
+			facotry.authenticate("auth.password", tenant, user, pwd, ttlMillis);
+			String ret = tenantTokenService.genToken(tenant, user, ttlMillis);
+			result.put("status", "200");
+			result.put("message", "OK");
+			result.put("result", ret);
+		} catch (Exception e) {
+			result.put("status", "500");
+			result.put("message", e.getMessage());
 		}
-		String json = facotry.authenticate("auth.password", tenant, user, pwd, ttlMillis);
-		Map<String, String> map = new Gson().fromJson(json, new TypeToken<HashMap<String, String>>() {
-		}.getType());
-		if (!"200".equals(map.get("status"))) {
-			throw new AuthenticationException(map.get("status") + " " + map.get("message"));
-		}
-		return tenantTokenService.genToken(tenant, user, ttlMillis);
+		return new Gson().toJson(result);
 	}
 
 }
