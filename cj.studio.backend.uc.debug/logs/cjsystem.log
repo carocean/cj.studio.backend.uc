@@ -36572,3 +36572,37 @@
 2019年04月05日 01:12:40  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
 2019年04月05日 01:12:40  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
 2019年04月05日 01:12:40  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年04月05日 01:14:23  信息: cj.studio.gateway.mic.MicConnector - 注册mic成功。host tcp://localhost:7080?heartbeat=5000&initialWireSize=1&workThreadCount=2&acceptErrorPath=/website/error/,location /infrastructurePlatform/backend/
+2019年04月05日 01:14:23  信息 : -------------网关启动完毕-------------------
+2019年04月05日 01:14:23  信息 : 已装载共享库/Users/caroceanjofers/studio/cj.studio.backend.uc/cmdtools/gateway/lib/share
+2019年04月05日 01:14:24  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年04月05日 01:14:24  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年04月05日 01:14:25  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年04月05日 01:14:25  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年04月05日 01:14:44  信息: cj.studio.gateway.mic.MicConnector - 正在重连mic...
+2019年04月05日 01:14:44  错误: cj.studio.gateway.mic.MicConnector - 注册mic失败，原因：505 java.net.ConnectException: Connection refused: localhost/127.0.0.1:7080
+2019年04月05日 01:14:59  信息: cj.studio.gateway.mic.MicConnector - 正在重连mic...
+2019年04月05日 01:14:59  错误: cj.studio.gateway.mic.MicConnector - 注册mic失败，原因：505 java.net.ConnectException: Connection refused: localhost/127.0.0.1:7080
+2019年04月05日 01:15:06  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年04月05日 01:15:06  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年04月05日 01:15:09  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年04月05日 01:15:14  信息: cj.studio.gateway.mic.MicConnector - 正在重连mic...
+2019年04月05日 01:15:14  信息: cj.studio.gateway.mic.MicConnector - 注册mic成功。host tcp://localhost:7080?heartbeat=5000&initialWireSize=1&workThreadCount=2&acceptErrorPath=/website/error/,location /infrastructurePlatform/backend/
+2019年04月05日 01:15:14  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年04月05日 01:15:16  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年04月05日 01:15:16  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年04月05日 01:15:16  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年04月05日 01:15:16  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年04月05日 01:15:20  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年04月05日 01:15:20  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年04月05日 01:15:20  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年04月05日 01:15:20  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年04月05日 01:15:22  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年04月05日 01:15:22  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年04月05日 01:15:24  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年04月05日 01:15:24  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年04月05日 01:15:24  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年04月05日 01:15:26  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年04月05日 01:15:26  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年04月05日 01:15:27  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
+2019年04月05日 01:15:27  调试: cj.studio.orm.mybatis.SafeSqlSessionFactory - SqlSession closed.
