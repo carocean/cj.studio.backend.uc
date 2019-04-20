@@ -33,7 +33,7 @@ public class AuthenticatorFactory implements IAuthenticatorFactory,IServiceSette
 			throws AuthenticationException {
 		IAuthenticator auth=auths.get(authName);
 		if(auth==null) {
-			throw new AuthenticationException("认证器不存在："+authName);
+			throw new AuthenticationException("404","认证器不存在："+authName);
 		}
 		return auth.authenticate(tenant,principals, token, ttlMillis);
 	}

@@ -1,31 +1,28 @@
 package cj.studio.backend.uc.service;
 
-public class AuthenticationException extends Exception {
+import cj.studio.ecm.net.CircuitException;
 
-	public AuthenticationException() {
-		super();
+public class AuthenticationException extends CircuitException {
+
+	public AuthenticationException(String status, boolean isSystemException, String e) {
+		super(status, isSystemException, e);
 		// TODO Auto-generated constructor stub
 	}
 
-	public AuthenticationException(String message, Throwable cause, boolean enableSuppression,
-			boolean writableStackTrace) {
-		super(message, cause, enableSuppression, writableStackTrace);
+	public AuthenticationException(String status, boolean isSystemException, Throwable e) {
+		super(status, isSystemException, e);
 		// TODO Auto-generated constructor stub
 	}
 
-	public AuthenticationException(String message, Throwable cause) {
-		super(message, cause);
+	public AuthenticationException(String status, String e) {
+		super(status, e);
 		// TODO Auto-generated constructor stub
 	}
 
-	public AuthenticationException(String message) {
-		super(message);
+	public AuthenticationException(String status, Throwable e) {
+		super(status, e);
 		// TODO Auto-generated constructor stub
 	}
 
-	public AuthenticationException(Throwable cause) {
-		super(cause);
-		// TODO Auto-generated constructor stub
-	}
 
 }

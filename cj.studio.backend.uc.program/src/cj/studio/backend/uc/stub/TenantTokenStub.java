@@ -10,6 +10,7 @@ import cj.studio.backend.uc.service.ITenantService;
 import cj.studio.backend.uc.service.ITenantTokenService;
 import cj.studio.ecm.annotation.CjService;
 import cj.studio.ecm.annotation.CjServiceRef;
+import cj.studio.ecm.net.CircuitException;
 import cj.studio.gateway.stub.GatewayAppSiteRestStub;
 import cj.ultimate.gson2.com.google.gson.Gson;
 
@@ -28,7 +29,7 @@ public class TenantTokenStub extends GatewayAppSiteRestStub implements ITenantTo
 		try {
 			Tenant exists = tenantService.getTenant(tenant);
 			if (exists == null) {
-				throw new AuthenticationException("404 不存在租户：" + tenant);
+				throw new AuthenticationException("404", "不存在租户：" + tenant);
 			}
 			facotry.authenticate("auth.password", tenant, user, pwd, ttlMillis);
 			String ret = tenantTokenService.genToken(tenant, user, ttlMillis);
@@ -36,8 +37,14 @@ public class TenantTokenStub extends GatewayAppSiteRestStub implements ITenantTo
 			result.put("message", "OK");
 			result.put("result", ret);
 		} catch (Exception e) {
-			result.put("status", "500");
-			result.put("message", e.getMessage());
+			CircuitException ce = CircuitException.search(e);
+			if (ce != null) {
+				result.put("status", ce.getStatus());
+				result.put("message", ce.getMessage());
+			} else {
+				result.put("status", "500");
+				result.put("message", e.getMessage());
+			}
 		}
 		return new Gson().toJson(result);
 	}

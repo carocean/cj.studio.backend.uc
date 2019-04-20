@@ -20,6 +20,7 @@ import cj.studio.ecm.IServiceSite;
 import cj.studio.ecm.annotation.CjService;
 import cj.studio.ecm.annotation.CjServiceInvertInjection;
 import cj.studio.ecm.annotation.CjServiceRef;
+import cj.studio.ecm.net.CircuitException;
 import cj.ultimate.util.StringUtil;
 import io.jsonwebtoken.Claims;
 
@@ -62,7 +63,7 @@ public class JwtAuthenticator implements IAuthenticator, IServiceAfter {
 		String tenantCode = claimsTenant.getSubject();
 		Tenant t = tenantService.getTenant(tenantCode);
 		if (t == null) {
-			throw new AuthenticationException(String.format("验证失败。租户不存在：%s ", tenantCode));
+			throw new AuthenticationException("404", String.format("验证失败。租户不存在：%s ", tenantCode));
 		}
 		try {
 			String user = "";
@@ -74,13 +75,22 @@ public class JwtAuthenticator implements IAuthenticator, IServiceAfter {
 			}
 			passwordService.checkPassword(user, password);
 			if (ttlMillis <= 0) {
-				throw new AuthenticationException("ttlMillis小于零");
+				throw new AuthenticationException("500", "ttlMillis小于零");
 			}
 			Map<String, Object> claims = new HashMap<String, Object>();
 			claims.put("user", user);
 			return JwtUtil.createJWT(key, tenantCode, ttlMillis, claims);
 		} catch (CheckPasswordException e) {
-			throw new AuthenticationException(e.getMessage());
+			CircuitException ce = CircuitException.search(e);
+			if (ce != null) {
+				if (ce instanceof AuthenticationException) {
+					throw (AuthenticationException) ce;
+				} else {
+					throw new AuthenticationException(ce.getStatus(), ce.getMessage());
+				}
+			} else {
+				throw new AuthenticationException("500", e.getMessage());
+			}
 		}
 	}
 
