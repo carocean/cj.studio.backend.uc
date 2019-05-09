@@ -17,19 +17,389 @@
          版权：Copyright 2011
          描述：cj工作室出品，lns平台制造
 ******************************************************
-http://localhost:9090/uc/authentication.service
-    cj.studio.backend.uc.stub.IAuthenticationStub
-    用法:身份认证服务
+http://localhost:9090/uc/tenant.service
+    cj.studio.backend.uc.stub.ITenantStub
+    用法:租户存根
 
-    enumAuthenticatorNames
-        用法:列出支持的认证器名
+    getTenant
+        用法:获取tenant
+        返回值类型:cj.studio.backend.uc.bo.Tenant,说明:返回租户
         方法别名:
         命令:get
         协议:http/1.1
         Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IAuthenticationStub
-                Rest-Command enumAuthenticatorNames
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantStub
+                Rest-Command getTenant
         参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户编码
+
+    getAccount
+        用法:获取指定租户下的一个账户
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantStub
+                Rest-Command getAccount
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户编码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter accountCode
+                    用法:账户编码
+
+    addAccount
+        用法:申请租户账户。正常申请顺序：先注册统一用户，而后使用该用户再申请租户账户
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantStub
+                Rest-Command addAccount
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户编码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter accountCode
+                    用法:账户编码
+                arg2
+                    类型:java.lang.String
+                    方式：InParameter accountName
+                    用法:账户名
+                arg3
+                    类型:java.lang.String
+                    方式：InParameter userCode
+                    用法:用户编码，如果为已知用户创建指定租户下的账户则赋值，如果未知则为空系统自动生成账户所对应的用户
+                arg4
+                    类型:java.lang.String
+                    方式：InParameter face
+                    用法:头像路径
+
+    removeAccount
+        用法:移除指定租户的账户
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantStub
+                Rest-Command removeAccount
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户编码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter accountCode
+                    用法:账户编码
+
+    getAccountCount
+        用法:获取租户下账户数
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantStub
+                Rest-Command getAccountCount
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户编码
+
+    addTenant
+        用法:添加tenant
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantStub
+                Rest-Command addTenant
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户编码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter tenantName
+                    用法:租户名
+                arg2
+                    类型:java.lang.String
+                    方式：InParameter ownerCode
+                    用法:租户所有者标识
+                arg3
+                    类型:java.lang.String
+                    方式：InParameter ownerType
+                    用法:租户所有者类型，只有两种：personal（个人租户）,company(企业租户)
+
+    removeTenant
+        用法:移除tenant
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantStub
+                Rest-Command removeTenant
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户编码
+
+    getSegmentsOfTenant
+        用法:获取租户的信息段
+        返回值类型:java.util.ArrayList,说明:返回
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantStub
+                Rest-Command getSegmentsOfTenant
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户编码
+
+    addSegmentOfTenant
+        用法:为租户添加扩展信息段
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantStub
+                Rest-Command addSegmentOfTenant
+        参数:
+                arg0
+                    类型:cj.studio.backend.uc.bo.TenantSegment
+                    方式：InParameter seg
+                    用法:信息段
+
+    removeSegmentOfTenant
+        用法:移除租户指定关联的信息段
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantStub
+                Rest-Command removeSegmentOfTenant
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户编码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter segCode
+                    用法:信息段编码
+
+    emptySegmentsOfTenant
+        用法:清空该租户的信息段
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantStub
+                Rest-Command emptySegmentsOfTenant
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户编码
+
+    addTenantAttribute
+        用法:添加用户属性
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantStub
+                Rest-Command addTenantAttribute
+        参数:
+                arg0
+                    类型:cj.studio.backend.uc.bo.TenantAttribute
+                    方式：InParameter attr
+                    用法:租户属性
+
+    removeTenantAttribute
+        用法:移除租户下指定的属性
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantStub
+                Rest-Command removeTenantAttribute
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户代码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter segCode
+                    用法:段代码
+                arg2
+                    类型:java.lang.String
+                    方式：InParameter attrCode
+                    用法:属性代码
+
+    emptyTenantAttributes
+        用法:清空租户下的属性
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantStub
+                Rest-Command emptyTenantAttributes
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户代码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter segCode
+                    用法:段代码
+
+    getTenantAttributes
+        用法:清空租户下的属性
+        返回值类型:java.util.ArrayList,说明:租户的属性
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantStub
+                Rest-Command getTenantAttributes
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户代码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter segCode
+                    用法:段代码
+
+    getTenantAttribute
+        用法:获取租户下指定的属性值
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantStub
+                Rest-Command getTenantAttribute
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户代码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter segCode
+                    用法:段代码
+                arg2
+                    类型:java.lang.String
+                    方式：InParameter attrCode
+                    用法:属性代码
+
+    setCompanyOnTenant
+        用法:为指定租户设置企业
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantStub
+                Rest-Command setCompanyOnTenant
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter companyCode
+                    用法:公司编码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户编码
+
+    unsetCompanyOnTenant
+        用法:清除租户关联的企业
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantStub
+                Rest-Command unsetCompanyOnTenant
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户编码
+
+    getTenantCount
+        用法:获取租户数
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantStub
+                Rest-Command getTenantCount
+        参数:
+
+    pageTenant
+        用法:获取一页
+        返回值类型:java.util.ArrayList,说明:返回
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantStub
+                Rest-Command pageTenant
+        参数:
+                arg0
+                    类型:int
+                    方式：InParameter currPage
+                    用法:当前页
+                arg1
+                    类型:int
+                    方式：InParameter pageSize
+                    用法:页大小
+
+    pageAccount
+        用法:获取租户下一页账户
+        返回值类型:java.lang.Void,说明:账户集合
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantStub
+                Rest-Command pageAccount
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户编码
+                arg1
+                    类型:int
+                    方式：InParameter currPage
+                    用法:当前页
+                arg2
+                    类型:int
+                    方式：InParameter pageSize
+                    用法:页大小
+
+
+http://localhost:9090/uc/authentication.service
+    cj.studio.backend.uc.stub.IAuthenticationStub
+    用法:身份认证服务
 
     getAuthenticatorInfo
         用法:获取认证器信息
@@ -45,10 +415,20 @@ http://localhost:9090/uc/authentication.service
                     方式：InParameter authName
                     用法:认证器名
 
+    enumAuthenticatorNames
+        用法:列出支持的认证器名
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IAuthenticationStub
+                Rest-Command enumAuthenticatorNames
+        参数:
+
     authenticate
         用法:认证指定主体的身份
         方法别名:
-        命令:post
+        命令:get
         协议:http/1.1
         Rest Header:
                 Rest-StubFace cj.studio.backend.uc.stub.IAuthenticationStub
@@ -60,122 +440,277 @@ http://localhost:9090/uc/authentication.service
                     用法:认证器名
                 arg1
                     类型:java.lang.String
+                    方式：InParameter tenant
+                    用法:租户或租户令牌
+                arg2
+                    类型:java.lang.String
                     方式：InParameter principals
                     用法:要认证的主体，可以是用户名，也可是令牌(如果是令牌：结合password以认证令牌是密码持有者的）
-                arg2
+                arg3
                     类型:java.lang.String
                     方式：InParameter password
                     用法:密码
-                arg3
-                    类型:java.util.Map
-                    方式:InContent props
-                    用法:属性，可以为空
+                arg4
+                    类型:long
+                    方式：InParameter ttlMillis
+                    用法:令牌过期时间
 
 
-http://localhost:9090/uc/role.service
-    cj.studio.backend.uc.stub.IRoleStub
-    用法:角色存根
+http://localhost:9090/uc/tenant/organization.service
+    cj.studio.backend.uc.stub.ITenantOrganizationStub
+    用法:机构存根
 
-    getUsersOnRole
-        用法:获取一页角色
-        返回值类型:java.util.ArrayList,说明:返回角色，Json格式
+    addOrganization
+        用法:添加机构
         方法别名:
         命令:get
         协议:http/1.1
         Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IRoleStub
-                Rest-Command getUsersOnRole
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantOrganizationStub
+                Rest-Command addOrganization
         参数:
                 arg0
                     类型:java.lang.String
-                    方式：InParameter roleCode
-                    用法:角色代码
-
-    getRolesOnUser
-        用法:获取用户的所有角色
-        返回值类型:java.util.ArrayList,说明:角色集合
-        方法别名:
-        命令:get
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IRoleStub
-                Rest-Command getRolesOnUser
-        参数:
-                arg0
-                    类型:java.lang.String
-                    方式：InParameter userCode
-                    用法:用户代码
-
-    getRolesOnOrgMember
-        用法:获取机构成员的所有角色
-        返回值类型:java.util.ArrayList,说明:角色集合
-        方法别名:
-        命令:get
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IRoleStub
-                Rest-Command getRolesOnOrgMember
-        参数:
-                arg0
-                    类型:java.lang.String
-                    方式：InParameter userCode
-                    用法:用户代码
+                    方式：InParameter tenantCode
+                    用法:租户代码
                 arg1
                     类型:java.lang.String
                     方式：InParameter orgCode
                     用法:机构代码
                 arg2
                     类型:java.lang.String
-                    方式：InParameter appCode
-                    用法:应用代码
+                    方式：InParameter orgName
+                    用法:机构名
+                arg3
+                    类型:java.lang.String
+                    方式：InParameter pid
+                    用法:父机构代码
+                arg4
+                    类型:java.lang.String
+                    方式：InParameter comment
+                    用法:说明
 
-    getPage
-        用法:获取一页角色
-        返回值类型:java.util.ArrayList,说明:返回角色，Json格式
-        方法别名:
-        命令:post
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IRoleStub
-                Rest-Command getPage
-        参数:
-                arg0
-                    类型:int
-                    方式:InContent currPage
-                    用法:当前页码
-                arg1
-                    类型:int
-                    方式:InContent pageSize
-                    用法:页大小
-
-    getRole
-        用法:获取角色
-        返回值类型:cj.studio.backend.uc.bo.Role,说明:返回角色
+    removeOrganization
+        用法:移除机构
         方法别名:
         命令:get
         协议:http/1.1
         Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IRoleStub
-                Rest-Command getRole
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantOrganizationStub
+                Rest-Command removeOrganization
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户代码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter orgCode
+                    用法:机构代码
+
+    getOrganizationCount
+        用法:获取机构总数
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantOrganizationStub
+                Rest-Command getOrganizationCount
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户代码
+
+    listChilds
+        用法:获取子机构
+        返回值类型:java.util.ArrayList,说明:返回机构集合
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantOrganizationStub
+                Rest-Command listChilds
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户代码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter pid
+                    用法:父机构代码
+
+    getAccountsOnOrg
+        用法:获取机构下的账户
+        返回值类型:java.util.ArrayList,说明:一页数
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantOrganizationStub
+                Rest-Command getAccountsOnOrg
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户代码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter orgCode
+                    用法:机构代码
+
+    pageAccountsOnOrg
+        用法:获取指定机构下的一页账户数据
+        返回值类型:java.util.ArrayList,说明:一页数
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantOrganizationStub
+                Rest-Command pageAccountsOnOrg
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户代码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter orgCode
+                    用法:机构代码
+                arg2
+                    类型:int
+                    方式：InParameter currPage
+                    用法:当前页码
+                arg3
+                    类型:int
+                    方式：InParameter pageSize
+                    用法:页大小
+
+    addAccountOnOrg
+        用法:为指定机构清加账户
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantOrganizationStub
+                Rest-Command addAccountOnOrg
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户代码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter accountCode
+                    用法:账户代码
+                arg2
+                    类型:java.lang.String
+                    方式：InParameter orgCode
+                    用法:机构代码
+
+    removeAccountOnOrg
+        用法:移除指定机构下的一个账户
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantOrganizationStub
+                Rest-Command removeAccountOnOrg
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户代码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter accountCode
+                    用法:账户代码
+                arg2
+                    类型:java.lang.String
+                    方式：InParameter orgCode
+                    用法:机构代码
+
+    emptyAccountsOnOrg
+        用法:清空机构下的账户
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantOrganizationStub
+                Rest-Command emptyAccountsOnOrg
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户代码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter orgCode
+                    用法:机构代码
+
+    childCount
+        用法:返回子机构数
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantOrganizationStub
+                Rest-Command childCount
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户代码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter pid
+                    用法:父机构代码
+
+    getOrganization
+        用法:获取机构
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantOrganizationStub
+                Rest-Command getOrganization
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户代码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter orgCode
+                    用法:机构代码
+
+
+http://localhost:9090/uc/role.service
+    cj.studio.backend.uc.stub.IGlobalRoleStub
+    用法:角色存根
+
+    addRole
+        用法:添加角色
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IGlobalRoleStub
+                Rest-Command addRole
         参数:
                 arg0
                     类型:java.lang.String
                     方式：InParameter roleCode
                     用法:角色代码
-
-    addRole
-        用法:添加角色
-        方法别名:
-        命令:post
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IRoleStub
-                Rest-Command addRole
-        参数:
-                arg0
-                    类型:cj.studio.backend.uc.bo.Role
-                    方式:InContent role
-                    用法:角色
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter roleName
+                    用法:角色名
+                arg2
+                    类型:java.lang.String
+                    方式：InParameter comment
+                    用法:角色描述
 
     removeRole
         用法:移除角色
@@ -183,8 +718,23 @@ http://localhost:9090/uc/role.service
         命令:get
         协议:http/1.1
         Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IRoleStub
+                Rest-StubFace cj.studio.backend.uc.stub.IGlobalRoleStub
                 Rest-Command removeRole
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter roleCode
+                    用法:角色代码
+
+    getRole
+        用法:获取角色
+        返回值类型:cj.studio.backend.uc.bo.GlobalRole,说明:返回角色
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IGlobalRoleStub
+                Rest-Command getRole
         参数:
                 arg0
                     类型:java.lang.String
@@ -197,9 +747,24 @@ http://localhost:9090/uc/role.service
         命令:get
         协议:http/1.1
         Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IRoleStub
+                Rest-StubFace cj.studio.backend.uc.stub.IGlobalRoleStub
                 Rest-Command getRoleCount
         参数:
+
+    getUsersOnRole
+        用法:获取一页角色
+        返回值类型:java.util.ArrayList,说明:返回角色，Json格式
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IGlobalRoleStub
+                Rest-Command getUsersOnRole
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter roleCode
+                    用法:角色代码
 
     addUserOnRole
         用法:添加用户到角色
@@ -207,7 +772,7 @@ http://localhost:9090/uc/role.service
         命令:get
         协议:http/1.1
         Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IRoleStub
+                Rest-StubFace cj.studio.backend.uc.stub.IGlobalRoleStub
                 Rest-Command addUserOnRole
         参数:
                 arg0
@@ -225,7 +790,7 @@ http://localhost:9090/uc/role.service
         命令:get
         协议:http/1.1
         Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IRoleStub
+                Rest-StubFace cj.studio.backend.uc.stub.IGlobalRoleStub
                 Rest-Command removeUserOnRole
         参数:
                 arg0
@@ -243,7 +808,7 @@ http://localhost:9090/uc/role.service
         命令:get
         协议:http/1.1
         Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IRoleStub
+                Rest-StubFace cj.studio.backend.uc.stub.IGlobalRoleStub
                 Rest-Command emptyUsersOnRole
         参数:
                 arg0
@@ -251,105 +816,29 @@ http://localhost:9090/uc/role.service
                     方式：InParameter roleCode
                     用法:角色代码
 
-    getOrgMembersOnRole
-        用法:获取角色上的机构成员
-        返回值类型:java.util.ArrayList,说明:返回机构成员，Json格式
+    getPage
+        用法:获取一页角色
+        返回值类型:java.util.ArrayList,说明:返回角色，Json格式
         方法别名:
-        命令:get
+        命令:post
         协议:http/1.1
         Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IRoleStub
-                Rest-Command getOrgMembersOnRole
+                Rest-StubFace cj.studio.backend.uc.stub.IGlobalRoleStub
+                Rest-Command getPage
         参数:
                 arg0
-                    类型:java.lang.String
-                    方式：InParameter orgCode
-                    用法:机构代码
+                    类型:int
+                    方式:InContent currPage
+                    用法:当前页码
                 arg1
-                    类型:java.lang.String
-                    方式：InParameter roleCode
-                    用法:角色代码
-
-    addOrgMemberOnRole
-        用法:添加机构成员到角色
-        方法别名:
-        命令:get
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IRoleStub
-                Rest-Command addOrgMemberOnRole
-        参数:
-                arg0
-                    类型:java.lang.String
-                    方式：InParameter userCode
-                    用法:用户代码
-                arg1
-                    类型:java.lang.String
-                    方式：InParameter orgCode
-                    用法:机构代码
-                arg2
-                    类型:java.lang.String
-                    方式：InParameter roleCode
-                    用法:角色代码
-
-    removeOrgMemberOnRole
-        用法:移除角色上的机构成员
-        方法别名:
-        命令:get
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IRoleStub
-                Rest-Command removeOrgMemberOnRole
-        参数:
-                arg0
-                    类型:java.lang.String
-                    方式：InParameter userCode
-                    用法:用户代码
-                arg1
-                    类型:java.lang.String
-                    方式：InParameter orgCode
-                    用法:机构代码
-                arg2
-                    类型:java.lang.String
-                    方式：InParameter roleCode
-                    用法:角色代码
-
-    emptyOrgMembersOnRole
-        用法:清空角色上的所有机构成员
-        方法别名:
-        命令:get
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IRoleStub
-                Rest-Command emptyOrgMembersOnRole
-        参数:
-                arg0
-                    类型:java.lang.String
-                    方式：InParameter orgCode
-                    用法:机构代码
-                arg1
-                    类型:java.lang.String
-                    方式：InParameter roleCode
-                    用法:角色代码
+                    类型:int
+                    方式:InContent pageSize
+                    用法:页大小
 
 
 http://localhost:9090/uc/user.service
     cj.studio.backend.uc.stub.IUserStub
     用法:用户存根
-
-    saveUser
-        用法:保存用户
-        方法别名:
-        命令:post
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IUserStub
-                Rest-Command saveUser
-        参数:
-                arg0
-                    类型:cj.studio.backend.uc.bo.User
-                    方式:InContent user
-                    用法:用户对象
 
     getUsersByAttrValue
         用法:按信息段及其属性值查询用户
@@ -373,6 +862,20 @@ http://localhost:9090/uc/user.service
                     类型:java.lang.String
                     方式：InParameter value
                     用法:属性值
+
+    saveUser
+        用法:保存用户
+        方法别名:
+        命令:post
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IUserStub
+                Rest-Command saveUser
+        参数:
+                arg0
+                    类型:cj.studio.backend.uc.bo.User
+                    方式:InContent user
+                    用法:用户对象。说明：在user.userCode为空的时候自动产生数据编码
 
     getUser
         用法:按编码查询用户
@@ -450,6 +953,28 @@ http://localhost:9090/uc/user.service
                     方式：InParameter attrCode
                     用法:属性编码
 
+    getUserAttribute
+        用法:获用户下指定的属性值
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IUserStub
+                Rest-Command getUserAttribute
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter userCode
+                    用法:用户编码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter segCode
+                    用法:段编码
+                arg2
+                    类型:java.lang.String
+                    方式：InParameter attrCode
+                    用法:属性编码
+
     emptyUserAttributes
         用法:清空用户所有属性
         方法别名:
@@ -470,6 +995,7 @@ http://localhost:9090/uc/user.service
 
     getUserAttributes
         用法:获取用户属性
+        返回值类型:java.util.ArrayList,说明:用户属性
         方法别名:
         命令:get
         协议:http/1.1
@@ -485,6 +1011,130 @@ http://localhost:9090/uc/user.service
                     类型:java.lang.String
                     方式：InParameter segCode
                     用法:段编码
+
+    getAccountOfUserOnTenant
+        用法:获取用户的账户
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IUserStub
+                Rest-Command getAccountOfUserOnTenant
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter userCode
+                    用法:用户编码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户编码
+
+    listAccountOfUser
+        用法:列出用户账户
+        返回值类型:java.util.ArrayList,说明:集合
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IUserStub
+                Rest-Command listAccountOfUser
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter userCode
+                    用法:用户编码
+
+    listGlobalRoleOfUser
+        用法:列出全局角色
+        返回值类型:java.util.ArrayList,说明:集合
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IUserStub
+                Rest-Command listGlobalRoleOfUser
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter userCode
+                    用法:用户编码
+
+    listTenantRoleOfUser
+        用法:列出租户角色
+        返回值类型:java.util.ArrayList,说明:集合
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IUserStub
+                Rest-Command listTenantRoleOfUser
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter userCode
+                    用法:用户编码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户
+
+    listTenantPostOfUser
+        用法:列出租户岗位
+        返回值类型:java.util.ArrayList,说明:集合
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IUserStub
+                Rest-Command listTenantPostOfUser
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter userCode
+                    用法:用户编码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户
+
+    listTenantGroupOfUser
+        用法:列出租户群组
+        返回值类型:java.util.ArrayList,说明:集合
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IUserStub
+                Rest-Command listTenantGroupOfUser
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter userCode
+                    用法:用户编码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户
+
+    listTenantOrganizationOfUser
+        用法:列出租户机构
+        返回值类型:java.util.ArrayList,说明:集合
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IUserStub
+                Rest-Command listTenantOrganizationOfUser
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter userCode
+                    用法:用户编码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户
 
     getPage
         用法:获取一页用户
@@ -506,215 +1156,202 @@ http://localhost:9090/uc/user.service
                     用法:分页大小
 
 
-http://localhost:9090/uc/application.service
-    cj.studio.backend.uc.stub.IApplicationStub
-    用法:应用存根
+http://localhost:9090/uc/tenant/group.service
+    cj.studio.backend.uc.stub.ITenantGroupStub
+    用法:租户群组存根
 
-    getPage
-        用法:获取一页
-        返回值类型:java.util.ArrayList,说明:返回
-        方法别名:
-        命令:post
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IApplicationStub
-                Rest-Command getPage
-        参数:
-                arg0
-                    类型:int
-                    方式:InContent currPage
-                    用法:当前页
-                arg1
-                    类型:int
-                    方式:InContent pageSize
-                    用法:页大小
-
-    addApp
-        用法:添加app
-        方法别名:
-        命令:post
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IApplicationStub
-                Rest-Command addApp
-        参数:
-                arg0
-                    类型:cj.studio.backend.uc.bo.Application
-                    方式:InContent app
-                    用法:应用实例，json
-
-    getApp
-        用法:获取app
-        返回值类型:cj.studio.backend.uc.bo.Application,说明:返回应用
-        方法别名:
-        命令:post
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IApplicationStub
-                Rest-Command getApp
-        参数:
-                arg0
-                    类型:java.lang.String
-                    方式:InContent appCode
-                    用法:应用编码
-
-    removeApp
-        用法:移除app
-        方法别名:
-        命令:post
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IApplicationStub
-                Rest-Command removeApp
-        参数:
-                arg0
-                    类型:java.lang.String
-                    方式:InContent appCode
-                    用法:应用编码
-
-    getAppCount
-        用法:获取应用数
+    addGroup
+        用法:添加群组
         方法别名:
         命令:get
         协议:http/1.1
         Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IApplicationStub
-                Rest-Command getAppCount
-        参数:
-
-    getSegmentsOfApp
-        用法:获取应用的信息段
-        返回值类型:java.util.ArrayList,说明:返回
-        方法别名:
-        命令:post
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IApplicationStub
-                Rest-Command getSegmentsOfApp
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantGroupStub
+                Rest-Command addGroup
         参数:
                 arg0
                     类型:java.lang.String
-                    方式:InContent appCode
-                    用法:应用编码
-
-    addSegmentOfApp
-        用法:为应用添加扩展信息段
-        方法别名:
-        命令:post
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IApplicationStub
-                Rest-Command addSegmentOfApp
-        参数:
-                arg0
-                    类型:cj.studio.backend.uc.bo.AppSegment
-                    方式:InContent seg
-                    用法:信息段
-
-    removeSegmentOfApp
-        用法:移除应用指定关联的信息段
-        方法别名:
-        命令:post
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IApplicationStub
-                Rest-Command removeSegmentOfApp
-        参数:
-                arg0
-                    类型:java.lang.String
-                    方式:InContent appCode
-                    用法:应用编码
+                    方式：InParameter tenantCode
+                    用法:租户代码
                 arg1
                     类型:java.lang.String
-                    方式:InContent segCode
-                    用法:信息段编码
-
-    emptySegmentsOfApp
-        用法:清空该应用的信息段
-        方法别名:
-        命令:post
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IApplicationStub
-                Rest-Command emptySegmentsOfApp
-        参数:
-                arg0
-                    类型:java.lang.String
-                    方式:InContent appCode
-                    用法:应用编码
-
-    addAppAttribute
-        用法:添加用户属性
-        方法别名:
-        命令:post
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IApplicationStub
-                Rest-Command addAppAttribute
-        参数:
-                arg0
-                    类型:cj.studio.backend.uc.bo.AppAttribute
-                    方式:InContent attr
-                    用法:应用属性
-
-    removeAppAttribute
-        用法:移除应用下指定的属性
-        方法别名:
-        命令:get
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IApplicationStub
-                Rest-Command removeAppAttribute
-        参数:
-                arg0
-                    类型:java.lang.String
-                    方式：InParameter appCode
-                    用法:应用代码
-                arg1
-                    类型:java.lang.String
-                    方式：InParameter segCode
-                    用法:段代码
+                    方式：InParameter groupCode
+                    用法:组代码
                 arg2
                     类型:java.lang.String
-                    方式：InParameter attrCode
-                    用法:属性代码
+                    方式：InParameter groupName
+                    用法:组名
+                arg3
+                    类型:java.lang.String
+                    方式：InParameter comment
+                    用法:说明
 
-    emptyAppAttributes
-        用法:清空应用下的属性
+    removeGroup
+        用法:移除群组
         方法别名:
         命令:get
         协议:http/1.1
         Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IApplicationStub
-                Rest-Command emptyAppAttributes
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantGroupStub
+                Rest-Command removeGroup
         参数:
                 arg0
                     类型:java.lang.String
-                    方式：InParameter appCode
-                    用法:应用代码
+                    方式：InParameter tenantCode
+                    用法:租户代码
                 arg1
                     类型:java.lang.String
-                    方式：InParameter segCode
-                    用法:段代码
+                    方式：InParameter groupCode
+                    用法:组代码
 
-    getAppAttributes
-        用法:清空应用下的属性
-        返回值类型:java.util.ArrayList,说明:应用的属性
+    getAccountsOnGroup
+        用法:获取指定群组的账户
+        返回值类型:java.lang.Void,说明:账户集合
         方法别名:
         命令:get
         协议:http/1.1
         Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IApplicationStub
-                Rest-Command getAppAttributes
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantGroupStub
+                Rest-Command getAccountsOnGroup
         参数:
                 arg0
                     类型:java.lang.String
-                    方式：InParameter appCode
-                    用法:应用代码
+                    方式：InParameter tenantCode
+                    用法:租户代码
                 arg1
                     类型:java.lang.String
-                    方式：InParameter segCode
-                    用法:段代码
+                    方式：InParameter groupCode
+                    用法:组代码
+
+    pageAccountsOnGroup
+        用法:获取指定群组的账户
+        返回值类型:java.lang.Void,说明:一页
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantGroupStub
+                Rest-Command pageAccountsOnGroup
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户代码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter groupCode
+                    用法:组代码
+                arg2
+                    类型:int
+                    方式：InParameter currPage
+                    用法:当前页
+                arg3
+                    类型:int
+                    方式：InParameter pageSize
+                    用法:页大小
+
+    addAccountOnGroup
+        用法:添加账户到指定群组
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantGroupStub
+                Rest-Command addAccountOnGroup
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户代码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter accountCode
+                    用法:账户代码
+                arg2
+                    类型:java.lang.String
+                    方式：InParameter groupCode
+                    用法:组代码
+
+    removeAccountOnGroup
+        用法:移除群组的一个账户
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantGroupStub
+                Rest-Command removeAccountOnGroup
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户代码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter accountCode
+                    用法:账户代码
+                arg2
+                    类型:java.lang.String
+                    方式：InParameter groupCode
+                    用法:组代码
+
+    emptyAccountsOnGroup
+        用法:清空群组上的账户
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantGroupStub
+                Rest-Command emptyAccountsOnGroup
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户代码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter groupCode
+                    用法:组代码
+
+    getGroup
+        用法:获取群组
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantGroupStub
+                Rest-Command getGroup
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户代码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter groupCode
+                    用法:组代码
+
+    pageGroup
+        用法:分页
+        返回值类型:java.lang.Void,说明:一页
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantGroupStub
+                Rest-Command pageGroup
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户代码
+                arg1
+                    类型:int
+                    方式：InParameter currPage
+                    用法:当前页
+                arg2
+                    类型:int
+                    方式：InParameter pageSize
+                    用法:页大小
 
 
 http://localhost:9090/uc/principals.service
@@ -874,7 +1511,7 @@ http://localhost:9090/uc/protectedObject.service
 
     getProtectedObjectCollection
         用法:获取受保护对象集合
-        返回值类型:java.util.ArrayList,说明:对象集合
+        返回值类型:cj.studio.backend.uacc.security.ProtectedObjectCollection,说明:对象集合
         方法别名:
         命令:get
         协议:http/1.1
@@ -892,382 +1529,207 @@ http://localhost:9090/uc/protectedObject.service
                     用法:对象集合名
 
 
-http://localhost:9090/uc/organization.service
-    cj.studio.backend.uc.stub.IOrganizationStub
-    用法:机构存根
+http://localhost:9090/uc/tenant/post.service
+    cj.studio.backend.uc.stub.ITenantPostStub
+    用法:租户岗位存根
 
-    getPage
-        用法:获取一页机构
-        返回值类型:java.util.ArrayList,说明:返回机构集合
+    pagePost
+        用法:岗位分页
+        返回值类型:java.util.ArrayList,说明:一页数
         方法别名:
         命令:get
         协议:http/1.1
         Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IOrganizationStub
-                Rest-Command getPage
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantPostStub
+                Rest-Command pagePost
         参数:
                 arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户代码
+                arg1
                     类型:int
                     方式：InParameter currPage
                     用法:当前页码
-                arg1
+                arg2
                     类型:int
                     方式：InParameter pageSize
                     用法:页大小
 
-    getOrganization
-        用法:获取机构
+    getPost
+        用法:获取岗位
         方法别名:
         命令:get
         协议:http/1.1
         Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IOrganizationStub
-                Rest-Command getOrganization
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantPostStub
+                Rest-Command getPost
         参数:
                 arg0
                     类型:java.lang.String
-                    方式：InParameter orgCode
-                    用法:机构代码
-
-    addOrganization
-        用法:添加机构
-        方法别名:
-        命令:post
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IOrganizationStub
-                Rest-Command addOrganization
-        参数:
-                arg0
-                    类型:cj.studio.backend.uc.bo.Organization
-                    方式:InContent org
-                    用法:机构json
-
-    removeOrganization
-        用法:移除机构
-        方法别名:
-        命令:get
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IOrganizationStub
-                Rest-Command removeOrganization
-        参数:
-                arg0
-                    类型:java.lang.String
-                    方式：InParameter orgCode
-                    用法:机构代码
-
-    getOrganizationCount
-        用法:获取机构数
-        方法别名:
-        命令:get
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IOrganizationStub
-                Rest-Command getOrganizationCount
-        参数:
-
-    getSegmentsOfOrganization
-        用法:获取机构信息段
-        返回值类型:java.util.ArrayList,说明:返回机构段集合
-        方法别名:
-        命令:get
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IOrganizationStub
-                Rest-Command getSegmentsOfOrganization
-        参数:
-                arg0
-                    类型:java.lang.String
-                    方式：InParameter orgCode
-                    用法:机构代码
-
-    addSegmentOfOrganization
-        用法:添加机构信息段
-        方法别名:
-        命令:post
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IOrganizationStub
-                Rest-Command addSegmentOfOrganization
-        参数:
-                arg0
-                    类型:cj.studio.backend.uc.bo.OrgSegment
-                    方式:InContent seg
-                    用法:机构信息段json
-
-    removeSegmentOfOrganization
-        用法:移除机构信息段
-        方法别名:
-        命令:get
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IOrganizationStub
-                Rest-Command removeSegmentOfOrganization
-        参数:
-                arg0
-                    类型:java.lang.String
-                    方式：InParameter orgCode
-                    用法:机构代码
+                    方式：InParameter tenantCode
+                    用法:租户代码
                 arg1
                     类型:java.lang.String
-                    方式：InParameter segCode
-                    用法:段代码
+                    方式：InParameter postCode
+                    用法:岗位代码
 
-    emptySegmentsOfOrganization
-        用法:清空机构下的所有信息段
+    addPost
+        用法:添加岗位
         方法别名:
         命令:get
         协议:http/1.1
         Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IOrganizationStub
-                Rest-Command emptySegmentsOfOrganization
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantPostStub
+                Rest-Command addPost
         参数:
                 arg0
                     类型:java.lang.String
-                    方式：InParameter orgCode
-                    用法:机构代码
-
-    addOrganizationAttribute
-        用法:添加机构属性
-        方法别名:
-        命令:post
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IOrganizationStub
-                Rest-Command addOrganizationAttribute
-        参数:
-                arg0
-                    类型:cj.studio.backend.uc.bo.OrgAttribute
-                    方式:InContent attr
-                    用法:机构属性json
-
-    removeOrganizationAttribute
-        用法:移除机构属性
-        方法别名:
-        命令:get
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IOrganizationStub
-                Rest-Command removeOrganizationAttribute
-        参数:
-                arg0
-                    类型:java.lang.String
-                    方式：InParameter orgCode
-                    用法:机构代码
+                    方式：InParameter tenantCode
+                    用法:租户代码
                 arg1
                     类型:java.lang.String
-                    方式：InParameter segCode
-                    用法:段代码
+                    方式：InParameter postCode
+                    用法:岗位代码
                 arg2
                     类型:java.lang.String
-                    方式：InParameter attrCode
-                    用法:属性代码
+                    方式：InParameter postName
+                    用法:岗位名
+                arg3
+                    类型:java.lang.String
+                    方式：InParameter comment
+                    用法:说明
 
-    emptyOrganizationAttributes
-        用法:清空机构信息段下的所有属性
+    removePost
+        用法:移除岗位
         方法别名:
         命令:get
         协议:http/1.1
         Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IOrganizationStub
-                Rest-Command emptyOrganizationAttributes
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantPostStub
+                Rest-Command removePost
         参数:
                 arg0
                     类型:java.lang.String
-                    方式：InParameter orgCode
-                    用法:机构代码
+                    方式：InParameter tenantCode
+                    用法:租户代码
                 arg1
                     类型:java.lang.String
-                    方式：InParameter segCode
-                    用法:段代码
+                    方式：InParameter postCode
+                    用法:岗位代码
 
-    getOrganizationAttributes
-        用法:获取机构属性
-        返回值类型:java.util.ArrayList,说明:返回属性集合
+    getAccountsOnPost
+        用法:获取岗位下的账户
+        返回值类型:java.util.ArrayList,说明:一页数
         方法别名:
         命令:get
         协议:http/1.1
         Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IOrganizationStub
-                Rest-Command getOrganizationAttributes
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantPostStub
+                Rest-Command getAccountsOnPost
         参数:
                 arg0
                     类型:java.lang.String
-                    方式：InParameter orgCode
-                    用法:机构代码
+                    方式：InParameter tenantCode
+                    用法:租户代码
                 arg1
                     类型:java.lang.String
-                    方式：InParameter segCode
-                    用法:段代码
+                    方式：InParameter postCode
+                    用法:岗位代码
 
-    addOrgMember
-        用法:添加机构成员
+    pageAccountsOnPost
+        用法:获取岗位下的账户
+        返回值类型:java.util.ArrayList,说明:一页数
         方法别名:
         命令:get
         协议:http/1.1
         Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IOrganizationStub
-                Rest-Command addOrgMember
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantPostStub
+                Rest-Command pageAccountsOnPost
         参数:
                 arg0
                     类型:java.lang.String
-                    方式：InParameter appCode
-                    用法:应用代码
+                    方式：InParameter tenantCode
+                    用法:租户代码
                 arg1
                     类型:java.lang.String
-                    方式：InParameter userCode
-                    用法:用户代码
+                    方式：InParameter postCode
+                    用法:岗位代码
+                arg2
+                    类型:int
+                    方式：InParameter currPage
+                    用法:当前页码
+                arg3
+                    类型:int
+                    方式：InParameter pageSize
+                    用法:页大小
+
+    addAccountOnPost
+        用法:添加一个岗位到指定账户
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantPostStub
+                Rest-Command addAccountOnPost
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户代码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter accountCode
+                    用法:账户代码
                 arg2
                     类型:java.lang.String
-                    方式：InParameter orgCode
-                    用法:机构代码
+                    方式：InParameter postCode
+                    用法:岗位代码
 
-    removeOrgMember
-        用法:移除机构成员
+    removeAccountOnPost
+        用法:移除指定岗位一个账户
         方法别名:
         命令:get
         协议:http/1.1
         Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IOrganizationStub
-                Rest-Command removeOrgMember
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantPostStub
+                Rest-Command removeAccountOnPost
         参数:
                 arg0
                     类型:java.lang.String
-                    方式：InParameter appCode
-                    用法:应用代码
+                    方式：InParameter tenantCode
+                    用法:租户代码
                 arg1
                     类型:java.lang.String
-                    方式：InParameter userCode
-                    用法:用户代码
+                    方式：InParameter accountCode
+                    用法:账户代码
                 arg2
                     类型:java.lang.String
-                    方式：InParameter orgCode
-                    用法:机构代码
+                    方式：InParameter postCode
+                    用法:岗位代码
 
-    emptyOrgMembers
-        用法:清空机构成员
+    emptyAccountsOnPost
+        用法:清空指定岗位的账户
         方法别名:
         命令:get
         协议:http/1.1
         Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IOrganizationStub
-                Rest-Command emptyOrgMembers
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantPostStub
+                Rest-Command emptyAccountsOnPost
         参数:
                 arg0
                     类型:java.lang.String
-                    方式：InParameter appCode
-                    用法:应用代码
+                    方式：InParameter tenantCode
+                    用法:租户代码
                 arg1
                     类型:java.lang.String
-                    方式：InParameter orgCode
-                    用法:机构代码
-
-    getOrgMembers
-        用法:获取机构成员
-        返回值类型:java.util.ArrayList,说明:返回成员列表
-        方法别名:
-        命令:get
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IOrganizationStub
-                Rest-Command getOrgMembers
-        参数:
-                arg0
-                    类型:java.lang.String
-                    方式：InParameter appCode
-                    用法:应用代码
-                arg1
-                    类型:java.lang.String
-                    方式：InParameter orgCode
-                    用法:机构代码
-
-    getOrganizationsOfUser
-        用法:获取机构成员
-        返回值类型:java.util.ArrayList,说明:返回机构列表
-        方法别名:
-        命令:get
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IOrganizationStub
-                Rest-Command getOrganizationsOfUser
-        参数:
-                arg0
-                    类型:java.lang.String
-                    方式：InParameter appCode
-                    用法:应用代码
-                arg1
-                    类型:java.lang.String
-                    方式：InParameter userCode
-                    用法:用户代码
+                    方式：InParameter postCode
+                    用法:岗位代码
 
 
 http://localhost:9090/uc/segment.service
     cj.studio.backend.uc.stub.ISegmentStub
     用法:信息段存根
-
-    getSegment
-        用法:获取信息段
-        返回值类型:cj.studio.backend.uc.bo.Segment,说明:返回信息段
-        方法别名:
-        命令:get
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.ISegmentStub
-                Rest-Command getSegment
-        参数:
-                arg0
-                    类型:java.lang.String
-                    方式：InParameter segCode
-                    用法:信息段编码
-
-    addSegment
-        用法:添加信息段
-        方法别名:
-        命令:post
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.ISegmentStub
-                Rest-Command addSegment
-        参数:
-                arg0
-                    类型:cj.studio.backend.uc.bo.Segment
-                    方式:InContent seg
-                    用法:信息段实体，Json格式
-
-    getAttributesOfSegment
-        用法:获取段属性
-        返回值类型:java.util.ArrayList,说明:属性集合
-        方法别名:
-        命令:get
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.ISegmentStub
-                Rest-Command getAttributesOfSegment
-        参数:
-                arg0
-                    类型:java.lang.String
-                    方式：InParameter segCode
-                    用法:信息段编码
-
-    getPage
-        用法:获取一页信息段
-        返回值类型:java.util.ArrayList,说明:返回一页段
-        方法别名:
-        命令:post
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.ISegmentStub
-                Rest-Command getPage
-        参数:
-                arg0
-                    类型:int
-                    方式:InContent currPage
-                    用法:当前页位置
-                arg1
-                    类型:int
-                    方式:InContent pageSize
-                    用法:分页大小
 
     removeSegment
         用法:删除信息段
@@ -1326,6 +1788,69 @@ http://localhost:9090/uc/segment.service
                     方式:InContent attrCode
                     用法:属性编码
 
+    getPage
+        用法:获取一页信息段
+        返回值类型:java.util.ArrayList,说明:返回一页段
+        方法别名:
+        命令:post
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ISegmentStub
+                Rest-Command getPage
+        参数:
+                arg0
+                    类型:int
+                    方式:InContent currPage
+                    用法:当前页位置
+                arg1
+                    类型:int
+                    方式:InContent pageSize
+                    用法:分页大小
+
+    getSegment
+        用法:获取信息段
+        返回值类型:cj.studio.backend.uc.bo.Segment,说明:返回信息段
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ISegmentStub
+                Rest-Command getSegment
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter segCode
+                    用法:信息段编码
+
+    addSegment
+        用法:添加信息段
+        方法别名:
+        命令:post
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ISegmentStub
+                Rest-Command addSegment
+        参数:
+                arg0
+                    类型:cj.studio.backend.uc.bo.Segment
+                    方式:InContent seg
+                    用法:信息段实体，Json格式
+
+    getAttributesOfSegment
+        用法:获取段属性
+        返回值类型:java.util.ArrayList,说明:属性集合
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ISegmentStub
+                Rest-Command getAttributesOfSegment
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter segCode
+                    用法:信息段编码
+
     addAttribute
         用法:添加属性
         方法别名:
@@ -1341,56 +1866,298 @@ http://localhost:9090/uc/segment.service
                     用法:属性实体，Json格式
 
 
-http://localhost:9090/uc/account.service
-    cj.studio.backend.uc.stub.IAccountStub
-    用法:账户存根
+http://localhost:9090/uc/tenant/role.service
+    cj.studio.backend.uc.stub.ITenantRoleStub
+    用法:租户的角色存根
 
-    getPage
-        用法:获取一页账户
-        返回值类型:java.util.ArrayList,说明:返回一页账户
-        方法别名:
-        命令:get
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IAccountStub
-                Rest-Command getPage
-        参数:
-                arg0
-                    类型:int
-                    方式：InParameter currPage
-                    用法:当前页号
-                arg1
-                    类型:int
-                    方式：InParameter pageSize
-                    用法:页大小
-
-    addAccount
-        用法:添加账户
+    page
+        用法:获取一页角色
+        返回值类型:java.util.ArrayList,说明:返回角色，Json格式
         方法别名:
         命令:post
         协议:http/1.1
         Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IAccountStub
-                Rest-Command addAccount
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantRoleStub
+                Rest-Command page
         参数:
                 arg0
-                    类型:cj.studio.backend.uc.bo.Account
-                    方式:InContent account
-                    用法:账户
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户编码
+                arg1
+                    类型:int
+                    方式:InContent currPage
+                    用法:当前页码
+                arg2
+                    类型:int
+                    方式:InContent pageSize
+                    用法:页大小
 
-    removeAccount
-        用法:移除账户
+    addRole
+        用法:添加角色
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantRoleStub
+                Rest-Command addRole
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户编码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter roleCode
+                    用法:角色代码
+                arg2
+                    类型:java.lang.String
+                    方式：InParameter roleName
+                    用法:角色名
+                arg3
+                    类型:java.lang.String
+                    方式：InParameter comment
+                    用法:角色描述
+
+    removeRole
+        用法:移除角色
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantRoleStub
+                Rest-Command removeRole
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户编码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter roleCode
+                    用法:角色代码
+
+    getRole
+        用法:获取角色
+        返回值类型:cj.studio.backend.uc.bo.TenantRole,说明:返回角色
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantRoleStub
+                Rest-Command getRole
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户编码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter roleCode
+                    用法:角色代码
+
+    getRoleCount
+        用法:角色数
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantRoleStub
+                Rest-Command getRoleCount
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户编码
+
+    emptyAccountsOnRole
+        用法:清空角色上的账户
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantRoleStub
+                Rest-Command emptyAccountsOnRole
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户编码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter roleCode
+                    用法:角色代码
+
+    removeAccountOnRole
+        用法:移除账户在角色
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantRoleStub
+                Rest-Command removeAccountOnRole
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户编码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter accountCode
+                    用法:账户代码
+                arg2
+                    类型:java.lang.String
+                    方式：InParameter roleCode
+                    用法:角色代码
+
+    addAccountOnRole
+        用法:添加账户到角色
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantRoleStub
+                Rest-Command addAccountOnRole
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户编码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter accountCode
+                    用法:账户代码
+                arg2
+                    类型:java.lang.String
+                    方式：InParameter roleCode
+                    用法:角色代码
+
+    getAccountsOnRole
+        用法:获取一页角色
+        返回值类型:java.util.ArrayList,说明:返回角色，Json格式
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantRoleStub
+                Rest-Command getAccountsOnRole
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户编码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter roleCode
+                    用法:角色代码
+
+
+http://localhost:9090/uc/password.service
+    cj.studio.backend.uc.stub.IPasswordStub
+    用法:密码服务
+
+    setPassword
+        用法:设置密码
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IPasswordStub
+                Rest-Command setPassword
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter userCode
+                    用法:用户代码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter pwd
+                    用法:用户密码
+
+    updatePassword
+        用法:更新密码
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IPasswordStub
+                Rest-Command updatePassword
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter userCode
+                    用法:用户代码
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter oldpwd
+                    用法:旧密码
+                arg2
+                    类型:java.lang.String
+                    方式：InParameter newpwd
+                    用法:新密码
+
+
+http://localhost:9090/uc/tenantToken.service
+    cj.studio.backend.uc.stub.ITenantTokenStub
+    用法:租户令牌生成存根
+
+    genToken
+        用法:生成令牌
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.ITenantTokenStub
+                Rest-Command genToken
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenant
+                    用法:租户
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter user
+                    用法:申请者
+                arg2
+                    类型:java.lang.String
+                    方式：InParameter pwd
+                    用法:申请者密码
+                arg3
+                    类型:long
+                    方式：InParameter ttlMillis
+                    用法:令牌过期日期
+
+
+http://localhost:9090/uc/tenant/account.service
+    cj.studio.backend.uc.stub.IAccountStub
+    用法:账户存根
+
+    getAccountByAttrValue
+        用法:按信息段及其属性值查询账户
+        返回值类型:cj.studio.backend.uc.bo.Account,说明:返回用户，如果不存在则返回null
         方法别名:
         命令:get
         协议:http/1.1
         Rest Header:
                 Rest-StubFace cj.studio.backend.uc.stub.IAccountStub
-                Rest-Command removeAccount
+                Rest-Command getAccountByAttrValue
         参数:
                 arg0
                     类型:java.lang.String
-                    方式：InParameter accountCode
-                    用法:账户
+                    方式：InParameter tenantCode
+                    用法:租户
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter segCode
+                    用法:信息段编码
+                arg2
+                    类型:java.lang.String
+                    方式：InParameter attrCode
+                    用法:属性编码
+                arg3
+                    类型:java.lang.String
+                    方式：InParameter value
+                    用法:属性值
 
     getAccount
         用法:获取账户
@@ -1404,8 +2171,88 @@ http://localhost:9090/uc/account.service
         参数:
                 arg0
                     类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户
+                arg1
+                    类型:java.lang.String
                     方式：InParameter accountCode
                     用法:账户
+
+    listTenantRoleOfAccount
+        用法:列出租户角色
+        返回值类型:java.util.ArrayList,说明:集合
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IAccountStub
+                Rest-Command listTenantRoleOfAccount
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter accountCode
+                    用法:账户标识
+
+    listTenantPostOfAccount
+        用法:列出租户岗位
+        返回值类型:java.util.ArrayList,说明:集合
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IAccountStub
+                Rest-Command listTenantPostOfAccount
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter accountCode
+                    用法:账户标识
+
+    listTenantGroupOfAccount
+        用法:列出租户群组
+        返回值类型:java.util.ArrayList,说明:集合
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IAccountStub
+                Rest-Command listTenantGroupOfAccount
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter accountCode
+                    用法:账户标识
+
+    listTenantOrganizationOfAccount
+        用法:列出租户机构
+        返回值类型:java.util.ArrayList,说明:集合
+        方法别名:
+        命令:get
+        协议:http/1.1
+        Rest Header:
+                Rest-StubFace cj.studio.backend.uc.stub.IAccountStub
+                Rest-Command listTenantOrganizationOfAccount
+        参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户
+                arg1
+                    类型:java.lang.String
+                    方式：InParameter accountCode
+                    用法:账户标识
 
     getAccountCount
         用法:返回账户数
@@ -1416,6 +2263,10 @@ http://localhost:9090/uc/account.service
                 Rest-StubFace cj.studio.backend.uc.stub.IAccountStub
                 Rest-Command getAccountCount
         参数:
+                arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户
 
     getSegmentsOfAccount
         用法:获取账户的信息段
@@ -1428,6 +2279,10 @@ http://localhost:9090/uc/account.service
                 Rest-Command getSegmentsOfAccount
         参数:
                 arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户
+                arg1
                     类型:java.lang.String
                     方式：InParameter accountCode
                     用法:账户
@@ -1457,9 +2312,13 @@ http://localhost:9090/uc/account.service
         参数:
                 arg0
                     类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户
+                arg1
+                    类型:java.lang.String
                     方式：InParameter accountCode
                     用法:账户
-                arg1
+                arg2
                     类型:java.lang.String
                     方式：InParameter segCode
                     用法:段号
@@ -1474,6 +2333,10 @@ http://localhost:9090/uc/account.service
                 Rest-Command emptySegmentsOfAccount
         参数:
                 arg0
+                    类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户
+                arg1
                     类型:java.lang.String
                     方式：InParameter accountCode
                     用法:账户
@@ -1503,13 +2366,17 @@ http://localhost:9090/uc/account.service
         参数:
                 arg0
                     类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户
+                arg1
+                    类型:java.lang.String
                     方式：InParameter accountCode
                     用法:账户
-                arg1
+                arg2
                     类型:java.lang.String
                     方式：InParameter segCode
                     用法:段号
-                arg2
+                arg3
                     类型:java.lang.String
                     方式：InParameter attrCode
                     用法:属性
@@ -1525,9 +2392,13 @@ http://localhost:9090/uc/account.service
         参数:
                 arg0
                     类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户
+                arg1
+                    类型:java.lang.String
                     方式：InParameter accountCode
                     用法:账户
-                arg1
+                arg2
                     类型:java.lang.String
                     方式：InParameter segCode
                     用法:段号
@@ -1544,80 +2415,58 @@ http://localhost:9090/uc/account.service
         参数:
                 arg0
                     类型:java.lang.String
+                    方式：InParameter tenantCode
+                    用法:租户
+                arg1
+                    类型:java.lang.String
                     方式：InParameter accountCode
                     用法:账户
-                arg1
+                arg2
                     类型:java.lang.String
                     方式：InParameter segCode
                     用法:段号
 
-    getAccountByAttrValue
-        用法:按信息段及其属性值查询账户
-        返回值类型:cj.studio.backend.uc.bo.Account,说明:返回用户，如果不存在则返回null
+    listGlobalRoleOfAccount
+        用法:列也全局角色
+        返回值类型:cj.studio.backend.uc.bo.GlobalRole,说明:全局角色
         方法别名:
         命令:get
         协议:http/1.1
         Rest Header:
                 Rest-StubFace cj.studio.backend.uc.stub.IAccountStub
-                Rest-Command getAccountByAttrValue
+                Rest-Command listGlobalRoleOfAccount
         参数:
                 arg0
                     类型:java.lang.String
-                    方式：InParameter segCode
-                    用法:信息段编码
+                    方式：InParameter tenantCode
+                    用法:租户
                 arg1
                     类型:java.lang.String
-                    方式：InParameter attrCode
-                    用法:属性编码
-                arg2
-                    类型:java.lang.String
-                    方式：InParameter value
-                    用法:属性值
+                    方式：InParameter accountCode
+                    用法:账户标识
 
-
-http://localhost:9090/uc/password.service
-    cj.studio.backend.uc.stub.IPasswordStub
-    用法:密码服务
-
-    updatePassword
-        用法:更新密码
+    getPage
+        用法:获取一页账户
+        返回值类型:java.util.ArrayList,说明:返回一页账户
         方法别名:
         命令:get
         协议:http/1.1
         Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IPasswordStub
-                Rest-Command updatePassword
+                Rest-StubFace cj.studio.backend.uc.stub.IAccountStub
+                Rest-Command getPage
         参数:
                 arg0
                     类型:java.lang.String
-                    方式：InParameter userCode
-                    用法:用户代码
+                    方式：InParameter tenantCode
+                    用法:租户
                 arg1
-                    类型:java.lang.String
-                    方式：InParameter oldpwd
-                    用法:旧密码
+                    类型:int
+                    方式：InParameter currPage
+                    用法:当前页号
                 arg2
-                    类型:java.lang.String
-                    方式：InParameter newpwd
-                    用法:新密码
-
-    setPassword
-        用法:设置密码
-        方法别名:
-        命令:get
-        协议:http/1.1
-        Rest Header:
-                Rest-StubFace cj.studio.backend.uc.stub.IPasswordStub
-                Rest-Command setPassword
-        参数:
-                arg0
-                    类型:java.lang.String
-                    方式：InParameter userCode
-                    用法:用户代码
-                arg1
-                    类型:java.lang.String
-                    方式：InParameter pwd
-                    用法:用户密码
+                    类型:int
+                    方式：InParameter pageSize
+                    用法:页大小
 
 
 http://localhost:9090/uc/token.service

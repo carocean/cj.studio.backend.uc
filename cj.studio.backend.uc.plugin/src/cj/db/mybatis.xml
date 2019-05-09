@@ -3,19 +3,26 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+	<settings>
+        <!-- 打印查询语句 -->
+        <setting name="logImpl" value="STDOUT_LOGGING" />
+    </settings>
 	<environments default="development">
 		<environment id="development">
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
-				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="driver" value="com.mysql.cj.jdbc.Driver" />
 				<property name="url"
-					value="jdbc:mysql://localhost:3306/netos.uc?useUnicode=true&amp;characterEncoding=UTF-8&amp;useSSL=false&amp;autoReconnect=true" />
+					value="jdbc:mysql://localhost:3306/netos.uc?useUnicode=true&amp;characterEncoding=UTF-8&amp;useSSL=false&amp;autoReconnect=true&amp;rewriteBatchedStatements=true" />
 				<property name="username" value="cj" />
 				<property name="password" value="mysql123" />
+				<!-- 如果数据源的defaultAutoCommit设置为True了，那么方法中如果自己捕获了异常，事务是不会回滚的，如果没有自己捕获异常则事务会回滚  -->
+				<property name="defaultAutoCommit" value="false" />
 				<property name="poolPingEnabled" value="true" />
 				<property name="poolPingQuery"
 					value="select now() from kpi.lastupdatedlog limit 1" />
-				<property name="poolPingConnectionsNotUsedFor" value="3600000" />
+				<property name="poolPingConnectionsNotUsedFor"
+					value="3600000" />
 			</dataSource>
 		</environment>
 	</environments>
@@ -28,15 +35,17 @@
 		<mapper resource="cj/db/mappings/TenantSegmentMapper.xml" />
 		<mapper resource="cj/db/mappings/AttributeMapper.xml" />
 		<mapper resource="cj/db/mappings/OrganizationMapper.xml" />
-		<mapper resource="cj/db/mappings/OrgAttributeMapper.xml" />
-		<mapper resource="cj/db/mappings/OrgMemberMapper.xml" />
-		<mapper resource="cj/db/mappings/OrgMemberRoleMapper.xml" />
-		<mapper resource="cj/db/mappings/OrgSegmentMapper.xml" />
-		<mapper resource="cj/db/mappings/RoleMapper.xml" />
+		<mapper resource="cj/db/mappings/GlobalRoleMapper.xml" />
 		<mapper resource="cj/db/mappings/SegmentMapper.xml" />
 		<mapper resource="cj/db/mappings/UserAttributeMapper.xml" />
 		<mapper resource="cj/db/mappings/UserMapper.xml" />
-		<mapper resource="cj/db/mappings/UserRoleMapper.xml" />
 		<mapper resource="cj/db/mappings/UserSegmentMapper.xml" />
+		<mapper resource="cj/db/mappings/UAMapper.xml" />
+		<mapper resource="cj/db/mappings/CompanyMapper.xml" />
+		<mapper resource="cj/db/mappings/CompanySegmentMapper.xml" />
+		<mapper resource="cj/db/mappings/CompanyAttributeMapper.xml" />
+		<mapper resource="cj/db/mappings/TenantGroupMapper.xml" />
+		<mapper resource="cj/db/mappings/TenantRoleMapper.xml" />
+		<mapper resource="cj/db/mappings/TenantPostMapper.xml" />
 	</mappers>
 </configuration>

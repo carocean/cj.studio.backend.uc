@@ -2,11 +2,8 @@ package cj.studio.backend.uc.service;
 
 import java.util.List;
 
-import cj.studio.backend.uc.bo.OrgAttribute;
-import cj.studio.backend.uc.bo.OrgSegment;
+import cj.studio.backend.uc.bo.Account;
 import cj.studio.backend.uc.bo.Organization;
-import cj.studio.backend.uc.bo.Segment;
-import cj.studio.backend.uc.bo.User;
 
 public interface IOrganizationService {
 	void addOrganization(Organization org);
@@ -19,29 +16,19 @@ public interface IOrganizationService {
 
 	List<Organization> getPage(int currPage, int pageSize);
 
-	List<Segment> getSegmentsOfOrganization(String tenantCode,String orgCode);
+	List<Organization> listChilds(String tenantCode,String pid);
 
-	void addSegmentOfOrganization(OrgSegment seg);
+	long childCount(String tenantCode,String pid);
 
-	void removeSegmentOfOrganization(String tenantCode,String orgCode, String segCode);
+	List<Account> getAccountsOnOrg(String tenantCode, String orgCode);
 
-	void emptySegmentsOfOrganization(String tenantCode,String orgCode);
+	List<Account> pageAccountsOnOrg(String tenantCode, String orgCode, int currPage, int pageSize);
 
-	void addOrganizationAttribute(OrgAttribute attr);
+	void addAccountOnOrg(String tenantCode, String accountCode, String orgCode);
 
-	void removeOrganizationAttribute(String tenantCode,String orgCode, String segCode, String attrCode);
+	void removeAccountOnOrg(String tenantCode, String accountCode, String orgCode);
 
-	void emptyOrganizationAttributes(String tenantCode,String orgCode, String segCode);
+	void emptyAccountsOnOrg(String tenantCode, String orgCode);
 
-	List<OrgAttribute> getOrganizationAttributes(String tenantCode,String orgCode, String segCode);
 
-	void addOrgMember(String tenantCode, String userCode, String orgCode);
-
-	void removeOrgMember(String tenantCode, String userCode, String orgCode);
-
-	void emptyOrgMembers(String tenantCode, String orgCode);
-
-	List<User> getOrgMembers(String tenantCode, String orgCode);
-
-	List<Organization> getOrganizationsOfUser(String tenantCode, String userCode);
 }

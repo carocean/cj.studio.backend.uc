@@ -1,23 +1,18 @@
 package cj.studio.backend.uc.plugin.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import cj.studio.backend.uc.bo.OrgAttribute;
-import cj.studio.backend.uc.bo.OrgAttributeExample;
-import cj.studio.backend.uc.bo.OrgMember;
-import cj.studio.backend.uc.bo.OrgMemberExample;
-import cj.studio.backend.uc.bo.OrgSegment;
-import cj.studio.backend.uc.bo.OrgSegmentExample;
+import cj.studio.backend.uc.bo.Account;
 import cj.studio.backend.uc.bo.Organization;
 import cj.studio.backend.uc.bo.OrganizationExample;
-import cj.studio.backend.uc.bo.Segment;
-import cj.studio.backend.uc.bo.User;
-import cj.studio.backend.uc.plugin.dao.OrgAttributeMapper;
-import cj.studio.backend.uc.plugin.dao.OrgMemberMapper;
-import cj.studio.backend.uc.plugin.dao.OrgSegmentMapper;
+import cj.studio.backend.uc.bo.UA;
 import cj.studio.backend.uc.plugin.dao.OrganizationMapper;
+import cj.studio.backend.uc.plugin.util.UCConstants;
+import cj.studio.backend.uc.service.IAccountService;
 import cj.studio.backend.uc.service.IOrganizationService;
 import cj.studio.backend.uc.service.ISegmentService;
+import cj.studio.backend.uc.service.IUAService;
 import cj.studio.ecm.EcmException;
 import cj.studio.ecm.annotation.CjBridge;
 import cj.studio.ecm.annotation.CjService;
@@ -30,14 +25,13 @@ import cj.ultimate.util.StringUtil;
 public class OrganizationService implements IOrganizationService {
 	@CjServiceRef(refByName = "mybatis.cj.studio.backend.uc.plugin.dao.OrganizationMapper")
 	OrganizationMapper organizationMapper;
-	@CjServiceRef(refByName = "mybatis.cj.studio.backend.uc.plugin.dao.OrgSegmentMapper")
-	OrgSegmentMapper orgSegmentMapper;
-	@CjServiceRef(refByName = "mybatis.cj.studio.backend.uc.plugin.dao.OrgAttributeMapper")
-	OrgAttributeMapper orgAttributeMapper;
-	@CjServiceRef(refByName = "mybatis.cj.studio.backend.uc.plugin.dao.OrgMemberMapper")
-	OrgMemberMapper orgMemberMapper;
 	@CjServiceRef(refByName = "segmentService")
 	ISegmentService segmentService;
+
+	@CjServiceRef
+	IAccountService accountService;
+	@CjServiceRef(refByName = "uaService")
+	IUAService uaService;
 
 	@CjTransaction
 	@Override
@@ -51,7 +45,7 @@ public class OrganizationService implements IOrganizationService {
 
 	@CjTransaction
 	@Override
-	public void removeOrganization(String tenantCode,String orgCode) {
+	public void removeOrganization(String tenantCode, String orgCode) {
 		OrganizationExample example = new OrganizationExample();
 		example.createCriteria().andTenantcodeEqualTo(tenantCode).andCodeEqualTo(orgCode);
 		this.organizationMapper.deleteByExample(example);
@@ -59,7 +53,7 @@ public class OrganizationService implements IOrganizationService {
 
 	@CjTransaction
 	@Override
-	public Organization getOrganization(String tenantCode,String orgCode) {
+	public Organization getOrganization(String tenantCode, String orgCode) {
 		OrganizationExample example = new OrganizationExample();
 		example.createCriteria().andTenantcodeEqualTo(tenantCode).andCodeEqualTo(orgCode);
 		List<Organization> list = organizationMapper.selectByExample(example);
@@ -83,116 +77,72 @@ public class OrganizationService implements IOrganizationService {
 
 	@CjTransaction
 	@Override
-	public List<Segment> getSegmentsOfOrganization(String tenantCode,String orgCode) {
-		return this.orgSegmentMapper.getSegments(tenantCode,orgCode);
+	public List<Organization> listChilds(String tenantCode, String pid) {
+		OrganizationExample example = new OrganizationExample();
+		example.createCriteria().andTenantcodeEqualTo(tenantCode).andPidEqualTo(pid);
+		return organizationMapper.selectByExample(example);
 	}
 
 	@CjTransaction
 	@Override
-	public void addSegmentOfOrganization(OrgSegment seg) {
-		seg.setId(null);
-		seg.setSort(Integer.valueOf((int) System.currentTimeMillis() % Integer.MAX_VALUE));
-		this.orgSegmentMapper.insert(seg);
+	public long childCount(String tenantCode, String pid) {
+		OrganizationExample example = new OrganizationExample();
+		example.createCriteria().andTenantcodeEqualTo(tenantCode).andPidEqualTo(pid);
+		return organizationMapper.countByExample(example);
 	}
 
 	@CjTransaction
 	@Override
-	public void removeSegmentOfOrganization(String tenantCode,String orgCode, String segCode) {
-		OrgSegmentExample example = new OrgSegmentExample();
-		example.createCriteria().andTenantcodeEqualTo(tenantCode).andOrgcodeEqualTo(orgCode).andSegcodeEqualTo(segCode);
-		this.orgSegmentMapper.deleteByExample(example);
-	}
-
-	@CjTransaction
-	@Override
-	public void emptySegmentsOfOrganization(String tenantCode,String orgCode) {
-		OrgSegmentExample example = new OrgSegmentExample();
-		example.createCriteria().andTenantcodeEqualTo(tenantCode).andOrgcodeEqualTo(orgCode);
-		this.orgSegmentMapper.deleteByExample(example);
-	}
-
-	@CjTransaction
-	@Override
-	public void addOrganizationAttribute(OrgAttribute attr) {
-		attr.setId(null);
-		if (StringUtil.isEmpty(attr.getAttrcode())) {
-			throw new EcmException("属性编码为空");
+	public List<Account> getAccountsOnOrg(String tenantCode, String orgCode) {
+		List<String> users = uaService.getUsersOnColCode(tenantCode, UCConstants.COLTYPE_Tenant_Org, orgCode);
+		List<String> where = new ArrayList<String>();
+		for (String userCode : users) {
+			where.add(String.format("'%s'", userCode));
 		}
-		if (StringUtil.isEmpty(attr.getOrgcode())) {
-			throw new EcmException("账户编码为空");
+		return accountService.findAccountsWhereCodeList(where);
+	}
+
+	@CjTransaction
+	@Override
+	public List<Account> pageAccountsOnOrg(String tenantCode, String orgCode, int currPage, int pageSize) {
+		List<String> users = uaService.pageUsersOnColCode(tenantCode, UCConstants.COLTYPE_Tenant_Org, orgCode, currPage,
+				pageSize);
+		List<String> where = new ArrayList<String>();
+		for (String userCode : users) {
+			where.add(String.format("'%s'", userCode));
 		}
-		if (StringUtil.isEmpty(attr.getSegcode())) {
-			throw new EcmException("信息段编码为空");
+		return accountService.findAccountsWhereCodeList(where);
+	}
+
+	@CjTransaction
+	@Override
+	public void addAccountOnOrg(String tenantCode, String accountCode, String orgCode) {
+		Account account = accountService.getAccount(tenantCode, accountCode);
+		if (account == null) {
+			throw new EcmException("账户不存在:" + accountCode);
 		}
-		this.orgAttributeMapper.insert(attr);
+		UA ua = new UA();
+		ua.setUsercode(account.getUsercode());
+		ua.setColcode(orgCode);
+		ua.setColtype(UCConstants.COLTYPE_Tenant_Org);
+		ua.setTenantcode(tenantCode);
+		uaService.add(ua);
 	}
 
 	@CjTransaction
 	@Override
-	public void removeOrganizationAttribute(String tenantCode,String orgCode, String segCode, String attrCode) {
-		OrgAttributeExample example = new OrgAttributeExample();
-		example.createCriteria().andTenantcodeEqualTo(tenantCode).andOrgcodeEqualTo(orgCode).andSegcodeEqualTo(segCode).andAttrcodeEqualTo(attrCode);
-		this.orgAttributeMapper.deleteByExample(example);
-	}
-
-	@CjTransaction
-	@Override
-	public void emptyOrganizationAttributes(String tenantCode,String orgCode, String segCode) {
-		OrgAttributeExample example = new OrgAttributeExample();
-		example.createCriteria().andTenantcodeEqualTo(tenantCode).andOrgcodeEqualTo(orgCode).andSegcodeEqualTo(segCode);
-		this.orgAttributeMapper.deleteByExample(example);
-	}
-
-	@CjTransaction
-	@Override
-	public List<OrgAttribute> getOrganizationAttributes(String tenantCode,String orgCode, String segCode) {
-		OrgAttributeExample example = new OrgAttributeExample();
-		example.createCriteria().andTenantcodeEqualTo(tenantCode).andOrgcodeEqualTo(orgCode).andSegcodeEqualTo(segCode);
-		return this.orgAttributeMapper.selectByExample(example);
-	}
-
-	@CjTransaction
-	@Override
-	public void addOrgMember(String tenantCode, String userCode, String orgCode) {
-		if (StringUtil.isEmpty(userCode)) {
-			throw new EcmException("用户编码为空");
+	public void removeAccountOnOrg(String tenantCode, String accountCode, String orgCode) {
+		Account account = accountService.getAccount(tenantCode, accountCode);
+		if (account == null) {
+			throw new EcmException("账户不存在:" + accountCode);
 		}
-		if (StringUtil.isEmpty(orgCode)) {
-			throw new EcmException("机构编码为空");
-		}
-		OrgMember om = new OrgMember();
-		om.setTenantcode(tenantCode);
-		om.setOrgcode(orgCode);
-		om.setUsercode(userCode);
-		orgMemberMapper.insertSelective(om);
+		uaService.removeUserOnColCode(tenantCode, account.getUsercode(), UCConstants.COLTYPE_Tenant_Org, orgCode);
 	}
 
 	@CjTransaction
 	@Override
-	public void removeOrgMember(String tenantCode, String userCode, String orgCode) {
-		OrgMemberExample example = new OrgMemberExample();
-		example.createCriteria().andTenantcodeEqualTo(tenantCode).andUsercodeEqualTo(userCode).andOrgcodeEqualTo(orgCode);
-		orgMemberMapper.deleteByExample(example);
-	}
-
-	@CjTransaction
-	@Override
-	public void emptyOrgMembers(String tenantCode, String orgCode) {
-		OrgMemberExample example = new OrgMemberExample();
-		example.createCriteria().andTenantcodeEqualTo(tenantCode).andOrgcodeEqualTo(orgCode);
-		orgMemberMapper.deleteByExample(example);
-	}
-
-	@CjTransaction
-	@Override
-	public List<User> getOrgMembers(String tenantCode, String orgCode) {
-		return orgMemberMapper.getMembers(tenantCode,orgCode);
-	}
-
-	@CjTransaction
-	@Override
-	public List<Organization> getOrganizationsOfUser(String tenantCode, String userCode) {
-		return orgMemberMapper.getOrganizations(tenantCode,userCode);
+	public void emptyAccountsOnOrg(String tenantCode, String orgCode) {
+		uaService.emptyUsersOnColCode(tenantCode, UCConstants.COLTYPE_Tenant_Org, orgCode);
 	}
 
 }

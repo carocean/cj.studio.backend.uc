@@ -6,21 +6,20 @@ import java.util.List;
 import cj.studio.backend.uc.bo.Account;
 import cj.studio.backend.uc.bo.AccountAttribute;
 import cj.studio.backend.uc.bo.AccountSegment;
+import cj.studio.backend.uc.bo.GlobalRole;
+import cj.studio.backend.uc.bo.Organization;
 import cj.studio.backend.uc.bo.Segment;
+import cj.studio.backend.uc.bo.TenantGroup;
+import cj.studio.backend.uc.bo.TenantPost;
+import cj.studio.backend.uc.bo.TenantRole;
 import cj.studio.gateway.stub.annotation.CjStubInContentKey;
 import cj.studio.gateway.stub.annotation.CjStubInParameter;
 import cj.studio.gateway.stub.annotation.CjStubMethod;
 import cj.studio.gateway.stub.annotation.CjStubReturn;
 import cj.studio.gateway.stub.annotation.CjStubService;
 
-@CjStubService(bindService = "/account.service", usage = "账户存根")
+@CjStubService(bindService = "/tenant/account.service", usage = "账户存根")
 public interface IAccountStub {
-	@CjStubMethod(usage = "添加账户", command = "post")
-	void addAccount(@CjStubInContentKey(key = "account", usage = "账户") Account account);
-
-	@CjStubMethod(usage = "移除账户")
-	void removeAccount(@CjStubInParameter(key = "tenantCode", usage = "租户") String tenantCode,
-			@CjStubInParameter(key = "accountCode", usage = "账户") String accountCode);
 
 	@CjStubMethod(usage = "获取账户")
 	@CjStubReturn(type = Account.class, usage = "返回账户，如果不存在则返回null")
@@ -28,11 +27,12 @@ public interface IAccountStub {
 			@CjStubInParameter(key = "accountCode", usage = "账户") String accountCode);
 
 	@CjStubMethod(usage = "返回账户数")
-	long getAccountCount();
+	long getAccountCount(@CjStubInParameter(key = "tenantCode", usage = "租户") String tenantCode);
 
 	@CjStubMethod(usage = "获取一页账户")
 	@CjStubReturn(type = ArrayList.class, elementType = Account.class, usage = "返回一页账户")
-	List<Account> getPage(@CjStubInParameter(key = "currPage", usage = "当前页号") int currPage,
+	List<Account> getPage(@CjStubInParameter(key = "tenantCode", usage = "租户") String tenantCode,
+			@CjStubInParameter(key = "currPage", usage = "当前页号") int currPage,
 			@CjStubInParameter(key = "pageSize", usage = "页大小") int pageSize);
 
 	@CjStubMethod(usage = "获取账户的信息段")
@@ -74,7 +74,35 @@ public interface IAccountStub {
 
 	@CjStubMethod(usage = "按信息段及其属性值查询账户")
 	@CjStubReturn(type = Account.class, usage = "返回用户，如果不存在则返回null")
-	Account getAccountByAttrValue(@CjStubInParameter(key = "segCode", usage = "信息段编码") String segCode,
+	Account getAccountByAttrValue(@CjStubInParameter(key = "tenantCode", usage = "租户") String tenantCode,
+			@CjStubInParameter(key = "segCode", usage = "信息段编码") String segCode,
 			@CjStubInParameter(key = "attrCode", usage = "属性编码") String attrCode,
 			@CjStubInParameter(key = "value", usage = "属性值") String value);
+
+	@CjStubMethod(usage = "列也全局角色")
+	@CjStubReturn(type = GlobalRole.class, usage = "全局角色")
+	List<GlobalRole> listGlobalRoleOfAccount(@CjStubInParameter(key = "tenantCode", usage = "租户") String tenantCode,
+			@CjStubInParameter(key = "accountCode", usage = "账户标识") String accountCode);
+
+	@CjStubMethod(usage = "列出租户角色")
+	@CjStubReturn(type = ArrayList.class, elementType = TenantRole.class, usage = "集合")
+	List<TenantRole> listTenantRoleOfAccount(@CjStubInParameter(key = "tenantCode", usage = "租户") String tenantCode,
+			@CjStubInParameter(key = "accountCode", usage = "账户标识") String accountCode);
+
+	@CjStubMethod(usage = "列出租户岗位")
+	@CjStubReturn(type = ArrayList.class, elementType = TenantPost.class, usage = "集合")
+	List<TenantPost> listTenantPostOfAccount(@CjStubInParameter(key = "tenantCode", usage = "租户") String tenantCode,
+			@CjStubInParameter(key = "accountCode", usage = "账户标识") String accountCode);
+
+	@CjStubMethod(usage = "列出租户群组")
+	@CjStubReturn(type = ArrayList.class, elementType = TenantGroup.class, usage = "集合")
+	List<TenantGroup> listTenantGroupOfAccount(@CjStubInParameter(key = "tenantCode", usage = "租户") String tenantCode,
+			@CjStubInParameter(key = "accountCode", usage = "账户标识") String accountCode);
+
+	@CjStubMethod(usage = "列出租户机构")
+	@CjStubReturn(type = ArrayList.class, elementType = Organization.class, usage = "集合")
+	List<Organization> listTenantOrganizationOfAccount(
+			@CjStubInParameter(key = "tenantCode", usage = "租户") String tenantCode,
+			@CjStubInParameter(key = "accountCode", usage = "账户标识") String accountCode);
+
 }

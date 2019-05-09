@@ -2,25 +2,17 @@ package cj.studio.backend.uc.stub;
 
 import java.util.List;
 
-import cj.studio.backend.uc.bo.OrgAttribute;
-import cj.studio.backend.uc.bo.OrgSegment;
+import cj.studio.backend.uc.bo.Account;
 import cj.studio.backend.uc.bo.Organization;
-import cj.studio.backend.uc.bo.Segment;
-import cj.studio.backend.uc.bo.User;
 import cj.studio.backend.uc.service.IOrganizationService;
 import cj.studio.ecm.annotation.CjService;
 import cj.studio.ecm.annotation.CjServiceRef;
 import cj.studio.gateway.stub.GatewayAppSiteRestStub;
 
-@CjService(name = "/organization.service")
-public class OrganizationStub extends GatewayAppSiteRestStub implements IOrganizationStub {
+@CjService(name = "/tenant/organization.service")
+public class OrganizationStub extends GatewayAppSiteRestStub implements ITenantOrganizationStub {
 	@CjServiceRef(refByName = "ucplugin.organizationService")
 	IOrganizationService organizationService;
-
-	@Override
-	public void addOrganization(Organization org) {
-		organizationService.addOrganization(org);
-	}
 
 	@Override
 	public void removeOrganization(String tenantCode,String orgCode) {
@@ -33,78 +25,54 @@ public class OrganizationStub extends GatewayAppSiteRestStub implements IOrganiz
 	}
 
 	@Override
-	public long getOrganizationCount() {
+	public void addOrganization(String tenantCode, String orgCode, String orgName, String pid, String comment) {
+		Organization org=new Organization();
+		org.setCode(orgCode);
+		org.setName(orgName);
+		org.setPid(pid);
+		org.setComment(comment);
+		org.setTenantcode(tenantCode);
+		organizationService.addOrganization(org);
+	}
+
+	@Override
+	public long getOrganizationCount(String tenantCode) {
 		return organizationService.getOrganizationCount();
 	}
 
 	@Override
-	public List<Organization> getPage(int currPage, int pageSize) {
-		return organizationService.getPage(currPage, pageSize);
+	public List<Organization> listChilds(String tenantCode,String pid) {
+		return organizationService.listChilds(tenantCode,pid);
 	}
 
 	@Override
-	public List<Segment> getSegmentsOfOrganization(String tenantCode,String orgCode) {
-		return organizationService.getSegmentsOfOrganization(tenantCode,orgCode);
+	public long childCount(String tenantCode,String pid) {
+		return organizationService.childCount(tenantCode,pid);
 	}
 
 	@Override
-	public void addSegmentOfOrganization(OrgSegment seg) {
-		organizationService.addSegmentOfOrganization(seg);
+	public List<Account> getAccountsOnOrg(String tenantCode, String orgCode) {
+		return organizationService.getAccountsOnOrg(tenantCode,orgCode);
 	}
 
 	@Override
-	public void removeSegmentOfOrganization(String tenantCode,String orgCode, String segCode) {
-		organizationService.removeSegmentOfOrganization(tenantCode,orgCode, segCode);
+	public List<Account> pageAccountsOnOrg(String tenantCode, String orgCode, int currPage, int pageSize) {
+		return organizationService.pageAccountsOnOrg(tenantCode,orgCode,currPage,pageSize);
 	}
 
 	@Override
-	public void emptySegmentsOfOrganization(String tenantCode,String orgCode) {
-		organizationService.emptySegmentsOfOrganization(tenantCode,orgCode);
+	public void addAccountOnOrg(String tenantCode, String accountCode, String orgCode) {
+		organizationService.addAccountOnOrg(tenantCode,accountCode,orgCode);
 	}
 
 	@Override
-	public void addOrganizationAttribute(OrgAttribute attr) {
-		organizationService.addOrganizationAttribute(attr);
+	public void removeAccountOnOrg(String tenantCode, String accountCode, String orgCode) {
+		organizationService.removeAccountOnOrg(tenantCode,accountCode,orgCode);
 	}
 
 	@Override
-	public void removeOrganizationAttribute(String tenantCode,String orgCode, String segCode, String attrCode) {
-		organizationService.removeOrganizationAttribute(tenantCode,orgCode, segCode, attrCode);
-	}
-
-	@Override
-	public void emptyOrganizationAttributes(String tenantCode,String orgCode, String segCode) {
-		organizationService.emptyOrganizationAttributes(tenantCode,orgCode, segCode);
-	}
-
-	@Override
-	public List<OrgAttribute> getOrganizationAttributes(String tenantCode,String orgCode, String segCode) {
-		return organizationService.getOrganizationAttributes(tenantCode,orgCode, segCode);
-	}
-
-	@Override
-	public void addOrgMember(String tenantCode, String userCode, String orgCode) {
-		organizationService.addOrgMember(tenantCode, userCode, orgCode);
-	}
-
-	@Override
-	public void removeOrgMember(String tenantCode, String userCode, String orgCode) {
-		organizationService.removeOrgMember(tenantCode, userCode, orgCode);
-	}
-
-	@Override
-	public void emptyOrgMembers(String tenantCode, String orgCode) {
-		organizationService.emptyOrgMembers(tenantCode, orgCode);
-	}
-
-	@Override
-	public List<User> getOrgMembers(String tenantCode, String orgCode) {
-		return organizationService.getOrgMembers(tenantCode, orgCode);
-	}
-
-	@Override
-	public List<Organization> getOrganizationsOfUser(String tenantCode, String userCode) {
-		return organizationService.getOrganizationsOfUser(tenantCode, userCode);
+	public void emptyAccountsOnOrg(String tenantCode, String orgCode) {
+		organizationService.emptyAccountsOnOrg(tenantCode,orgCode);
 	}
 
 }

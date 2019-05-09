@@ -5,7 +5,12 @@ import java.util.List;
 import cj.studio.backend.uc.bo.Account;
 import cj.studio.backend.uc.bo.AccountAttribute;
 import cj.studio.backend.uc.bo.AccountSegment;
+import cj.studio.backend.uc.bo.GlobalRole;
+import cj.studio.backend.uc.bo.Organization;
 import cj.studio.backend.uc.bo.Segment;
+import cj.studio.backend.uc.bo.TenantGroup;
+import cj.studio.backend.uc.bo.TenantPost;
+import cj.studio.backend.uc.bo.TenantRole;
 
 public interface IAccountService {
 	void addAccount(Account account);
@@ -14,9 +19,9 @@ public interface IAccountService {
 
 	Account getAccount(String tenantCode,String accountCode);
 
-	long getAccountCount();
+	long getAccountCount(String tenantCode);
 
-	List<Account> getPage(int currPage, int pageSize);
+	List<Account> getPage(String tenantCode,int currPage, int pageSize);
 
 	List<Segment> getSegmentsOfAccount(String tenantCode,String accountCode);
 
@@ -34,5 +39,20 @@ public interface IAccountService {
 
 	List<AccountAttribute> getAccountAttributes(String tenantCode,String accountCode, String segCode);
 
-	Account getAccountByAttrValue(String segCode, String attrCode, String value);
+	Account getAccountByAttrValue(String tenantCode,String segCode, String attrCode, String value);
+
+	List<Account> findAccountsWhereCodeList(List<String> where);
+
+	List<GlobalRole> listGlobalRoleOfAccount(String accountCode, String tenantCode);
+
+	List<TenantRole> listTenantRoleOfAccount(String accountCode, String tenantCode);
+
+	List<TenantPost> listTenantPostOfAccount(String accountCode, String tenantCode);
+
+	List<TenantGroup> listTenantGroupOfAccount(String accountCode, String tenantCode);
+
+	List<Organization> listTenantOrganizationOfAccount(String accountCode, String tenantCode);
+
+	List<Account> getAccountByAttrValueOnSegment(String tenantCode, String segCode, String value);
+
 }

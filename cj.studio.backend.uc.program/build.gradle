@@ -19,7 +19,7 @@ sourceSets {
 
 dependencies {
 	compile fileTree('../global/runtime')
-	compile fileTree('src/cj/references')
+	//compile fileTree('src/cj/references')
 	compile group: 'cj.studio.backend.uacc', name: 'cj.studio.backend.uacc.stub', version: ref_cj_studio_backend_uacc_stub_version
 	compile project(':cj.studio.backend.uc.stub');
 }

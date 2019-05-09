@@ -10,7 +10,7 @@ import java.util.Map;
 import cj.studio.backend.uacc.security.ProtectedObject;
 import cj.studio.backend.uacc.security.ProtectedObjectCollection;
 import cj.studio.backend.uacc.security.stub.IProtectedObjectStub;
-import cj.studio.backend.uc.service.IRoleService;
+import cj.studio.backend.uc.service.IGlobalRoleService;
 import cj.studio.backend.uc.service.IUserService;
 import cj.studio.ecm.EcmException;
 import cj.studio.ecm.annotation.CjService;
@@ -26,7 +26,7 @@ public class ProtectedObjectStub extends GatewayAppSiteRestStub implements IProt
 	@CjServiceRef(refByName = "ucplugin.userService")
 	IUserService userService;
 	@CjServiceRef(refByName = "ucplugin.roleService")
-	IRoleService roleService;
+	IGlobalRoleService roleService;
 	List<ProtectedObject> ucServices;
 
 	public ProtectedObjectStub() {
@@ -101,11 +101,11 @@ public class ProtectedObjectStub extends GatewayAppSiteRestStub implements IProt
 			auth.getExtra().put(userM.getCode(), userM);
 		}
 		ProtectedObject role = new ProtectedObject();
-		CjStubService rs = IRoleStub.class.getDeclaredAnnotation(CjStubService.class);
+		CjStubService rs = IGlobalRoleStub.class.getDeclaredAnnotation(CjStubService.class);
 		role.setCode(rs.bindService());
 		role.setName(rs.usage());
 		ucServices.add(role);
-		for (Method m : IRoleStub.class.getDeclaredMethods()) {
+		for (Method m : IGlobalRoleStub.class.getDeclaredMethods()) {
 			CjStubMethod sm = m.getAnnotation(CjStubMethod.class);
 			if (sm == null)
 				continue;

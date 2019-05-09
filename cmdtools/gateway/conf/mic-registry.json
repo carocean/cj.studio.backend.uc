@@ -1,7 +1,7 @@
 {
 	"guid":"6DECBE74-B73A-47FD-9FA2-C1E751152041",
 	"title":"cj.studio.backend.uc",
-	"enabled":true,
+	"enabled":false,
 	"desc":"用户中心网关",
 	"mic":{
 		"location":"/infrastructurePlatform/backend/",

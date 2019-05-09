@@ -6,14 +6,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 import cj.studio.backend.uacc.security.PrincipalCollection;
 import cj.studio.backend.uacc.security.Principals;
 import cj.studio.backend.uacc.security.Relactionship;
 import cj.studio.backend.uacc.security.RshipType;
 import cj.studio.backend.uacc.security.stub.IPrincipalsStub;
-import cj.studio.backend.uc.bo.Role;
+import cj.studio.backend.uc.bo.GlobalRole;
 import cj.studio.backend.uc.bo.User;
-import cj.studio.backend.uc.service.IRoleService;
+import cj.studio.backend.uc.service.IGlobalRoleService;
 import cj.studio.backend.uc.service.IUserService;
 import cj.studio.ecm.EcmException;
 import cj.studio.ecm.annotation.CjService;
@@ -27,7 +28,7 @@ public class PrincipalsStub extends GatewayAppSiteRestStub implements IPrincipal
 	@CjServiceRef(refByName = "ucplugin.userService")
 	IUserService userService;
 	@CjServiceRef(refByName = "ucplugin.roleService")
-	IRoleService roleService;
+	IGlobalRoleService roleService;
 
 	public PrincipalsStub() {
 		tables = new HashMap<>();
@@ -74,8 +75,8 @@ public class PrincipalsStub extends GatewayAppSiteRestStub implements IPrincipal
 
 	private List<Principals> getRoleChildPrincipals(int currPage, int pageSize) {
 		List<Principals> list = new ArrayList<Principals>();
-		List<Role> roles = roleService.getPage(currPage, pageSize);
-		for (Role r : roles) {
+		List<GlobalRole> roles = roleService.getPage(currPage, pageSize);
+		for (GlobalRole r : roles) {
 			Principals p = new Principals(r.getCode(), r.getName(), "", r.getComment(), true);
 			list.add(p);
 		}
@@ -132,8 +133,8 @@ public class PrincipalsStub extends GatewayAppSiteRestStub implements IPrincipal
 
 	private List<Principals> getRolesOnUser(String principalCode, int currPage, int pageSize) {
 		List<Principals> list = new ArrayList<Principals>();
-		List<Role> roles = roleService.getRolesOnUserByPage(principalCode,currPage,pageSize);
-		for (Role r : roles) {
+		List<GlobalRole> roles = roleService.getRolesOnUserByPage(principalCode,currPage,pageSize);
+		for (GlobalRole r : roles) {
 			Principals p = new Principals(r.getCode(), r.getName(), "", r.getComment(), true);
 			list.add(p);
 		}

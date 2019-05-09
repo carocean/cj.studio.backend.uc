@@ -33,13 +33,23 @@
 			targetProject="cj.studio.backend.uc.plugin" type="XMLMAPPER" />
 		<table schema="netos.uc" domainObjectName="User" tableName="user">
 		</table>
+		<table schema="netos.uc" domainObjectName="Company" tableName="company">
+		</table>
 		<table schema="netos.uc" domainObjectName="Account" tableName="account">
 		</table>
 		<table schema="netos.uc" domainObjectName="Tenant" tableName="tenant">
 		</table>
 		<table schema="netos.uc" domainObjectName="Organization" tableName="organization">
 		</table>
-		<table schema="netos.uc" domainObjectName="Role" tableName="role">
+		<table schema="netos.uc" domainObjectName="GlobalRole" tableName="globalrole">
+		</table>
+		<table schema="netos.uc" domainObjectName="TenantRole" tableName="tenantrole">
+		</table>
+		<table schema="netos.uc" domainObjectName="TenantGroup" tableName="tenantgroup">
+		</table>
+		<table schema="netos.uc" domainObjectName="TenantPost" tableName="tenantpost">
+		</table>
+		<table schema="netos.uc" domainObjectName="UA" tableName="ua">
 		</table>
 		<table schema="netos.uc" domainObjectName="Segment" tableName="segment">
 		</table>
@@ -51,21 +61,15 @@
 		</table>
 		<table schema="netos.uc" domainObjectName="UserAttribute" tableName="userattr">
 		</table>
-		<table schema="netos.uc" domainObjectName="OrgAttribute" tableName="orgattr">
-		</table>
-		<table schema="netos.uc" domainObjectName="UserRole" tableName="userrole">
-		</table>
-		<table schema="netos.uc" domainObjectName="OrgMemberRole" tableName="orgmemrole">
-		</table>
-		<table schema="netos.uc" domainObjectName="OrgMember" tableName="orgmember">
+		<table schema="netos.uc" domainObjectName="CompanyAttribute" tableName="companyattr">
 		</table>
 		<table schema="netos.uc" domainObjectName="AccountSegment" tableName="accountseg">
-		</table>
-		<table schema="netos.uc" domainObjectName="OrgSegment" tableName="orgseg">
 		</table>
 		<table schema="netos.uc" domainObjectName="UserSegment" tableName="userseg">
 		</table>
 		<table schema="netos.uc" domainObjectName="TenantSegment" tableName="tenantseg">
+		</table>
+		<table schema="netos.uc" domainObjectName="CompanySegment" tableName="companyseg">
 		</table>
 	</context>
 </generatorConfiguration>
