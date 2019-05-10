@@ -18,6 +18,7 @@ public interface ITenantService {
 	List<Account> getPage(String tenantCode, int currPage, int pageSize);
 
 	Account getAccount(String tenantCode, String accountCode);
+
 	void addTenant(Tenant tenant);
 
 	void removeTenant(String tenantCode);
@@ -47,8 +48,6 @@ public interface ITenantService {
 	String getTenantAttribute(String tenantCode, String segCode, String attrCode);
 
 	void setCompanyOnTenant(String companyCode, String tenantCode);
-
-	void unsetCompanyOnTenant(String tenantCode);
 
 	Segment getSegmentOfTenant(String tenantCode, String segCode);
 }

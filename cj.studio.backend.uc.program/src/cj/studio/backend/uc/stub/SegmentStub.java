@@ -13,9 +13,13 @@ import cj.studio.gateway.stub.GatewayAppSiteRestStub;
 public class SegmentStub extends GatewayAppSiteRestStub implements ISegmentStub {
 	@CjServiceRef(refByName="ucplugin.segmentService")
 	ISegmentService segmentService;
-
 	@Override
-	public void addSegment(Segment seg) {
+	public void addSegment(String segCode, String segName, String version) {
+		Segment seg=new Segment();
+		seg.setCode(segCode);
+		seg.setName(segName);
+		seg.setVersion(version);
+		seg.setCreatetime(System.currentTimeMillis());
 		this.segmentService.addSegment(seg);
 	}
 
@@ -54,9 +58,14 @@ public class SegmentStub extends GatewayAppSiteRestStub implements ISegmentStub 
 		this.segmentService.removeAttribute(segCode, attrCode);
 		
 	}
-
 	@Override
-	public void addAttribute(Attribute attr) {
+	public void addAttribute(String attrCode, String attrName, String segCode, String type, int sort) {
+		Attribute attr=new Attribute();
+		attr.setCode(attrCode);
+		attr.setName(attrName);
+		attr.setSegcode(segCode);
+		attr.setSort(sort);
+		attr.setType(type);
 		this.segmentService.addAttribute(attr);
 	}
 	

@@ -6,6 +6,7 @@ import cj.studio.backend.uc.bo.Account;
 import cj.studio.backend.uc.bo.AccountExample;
 import cj.studio.backend.uc.bo.GlobalRole;
 import cj.studio.backend.uc.bo.Organization;
+import cj.studio.backend.uc.bo.Segment;
 import cj.studio.backend.uc.bo.TenantGroup;
 import cj.studio.backend.uc.bo.TenantPost;
 import cj.studio.backend.uc.bo.TenantRole;
@@ -13,9 +14,12 @@ import cj.studio.backend.uc.bo.User;
 import cj.studio.backend.uc.bo.UserAttribute;
 import cj.studio.backend.uc.bo.UserAttributeExample;
 import cj.studio.backend.uc.bo.UserExample;
+import cj.studio.backend.uc.bo.UserSegment;
+import cj.studio.backend.uc.bo.UserSegmentExample;
 import cj.studio.backend.uc.plugin.dao.AccountMapper;
 import cj.studio.backend.uc.plugin.dao.UserAttributeMapper;
 import cj.studio.backend.uc.plugin.dao.UserMapper;
+import cj.studio.backend.uc.plugin.dao.UserSegmentMapper;
 import cj.studio.backend.uc.plugin.util.NumberGen;
 import cj.studio.backend.uc.service.IAccountService;
 import cj.studio.backend.uc.service.IGlobalRoleService;
@@ -34,6 +38,8 @@ public class UserService implements IUserService {
 	UserMapper userMapper;
 	@CjServiceRef(refByName = "mybatis.cj.studio.backend.uc.plugin.dao.UserAttributeMapper")
 	UserAttributeMapper userAttributeMapper;
+	@CjServiceRef(refByName = "mybatis.cj.studio.backend.uc.plugin.dao.UserSegmentMapper")
+	UserSegmentMapper userSegmentMapper;
 	@CjServiceRef(refByName = "mybatis.cj.studio.backend.uc.plugin.dao.AccountMapper")
 	AccountMapper accountMapper;
 	@CjServiceRef
@@ -67,6 +73,9 @@ public class UserService implements IUserService {
 			if (userMapper.existsCode(user.getUsercode()) > 0) {
 				throw new EcmException("已存在用户名：" + user.getUsercode());
 			}
+		}
+		if (user.getCreatetime() == null) {
+			user.setCreatetime(System.currentTimeMillis());
 		}
 		userMapper.insertSelective(user);
 	}
@@ -149,6 +158,7 @@ public class UserService implements IUserService {
 		return this.userAttributeMapper.getUsersByAttrValue(segCode, attrCode, value);
 	}
 
+	@CjTransaction
 	@Override
 	public List<User> getUsersByAttrValueOnSegment(String segCode, String value) {
 		return this.userAttributeMapper.getUsersByAttrValueOnSegment(segCode, value);
@@ -251,5 +261,35 @@ public class UserService implements IUserService {
 		}
 
 		return accountService.listTenantOrganizationOfAccount(account.getCode(), tenantCode);
+	}
+
+	@CjTransaction
+	@Override
+	public List<Segment> getSegmentsOfUser() {
+		return this.userSegmentMapper.getSegments();
+	}
+
+	@CjTransaction
+	@Override
+	public void addSegmentOfUser(String segCode, int sort) {
+		UserSegment seg=new UserSegment();
+		seg.setSegcode(segCode);
+		seg.setSort(sort);
+		this.userSegmentMapper.insert(seg);
+	}
+
+	@CjTransaction
+	@Override
+	public void removeSegmentOfUser(String segCode) {
+		UserSegmentExample example=new UserSegmentExample();
+		example.createCriteria().andSegcodeEqualTo(segCode);
+		this.userSegmentMapper.deleteByExample(example);
+	}
+
+	@CjTransaction
+	@Override
+	public void emptySegmentsOfUser() {
+		UserSegmentExample example=new UserSegmentExample();
+		this.userSegmentMapper.deleteByExample(example);
 	}
 }

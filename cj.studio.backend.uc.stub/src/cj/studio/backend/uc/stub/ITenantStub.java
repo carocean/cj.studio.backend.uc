@@ -7,7 +7,6 @@ import cj.studio.backend.uc.bo.Account;
 import cj.studio.backend.uc.bo.Segment;
 import cj.studio.backend.uc.bo.Tenant;
 import cj.studio.backend.uc.bo.TenantAttribute;
-import cj.studio.backend.uc.bo.TenantSegment;
 import cj.studio.gateway.stub.annotation.CjStubInParameter;
 import cj.studio.gateway.stub.annotation.CjStubMethod;
 import cj.studio.gateway.stub.annotation.CjStubReturn;
@@ -56,9 +55,6 @@ public interface ITenantStub {
 	void setCompanyOnTenant(@CjStubInParameter(key = "companyCode", usage = "公司编码") String companyCode,
 			@CjStubInParameter(key = "tenantCode", usage = "租户编码") String tenantCode);
 
-	@CjStubMethod(usage = "清除租户关联的企业")
-	void unsetCompanyOnTenant(@CjStubInParameter(key = "tenantCode", usage = "租户编码") String tenantCode);
-
 	@CjStubMethod(usage = "获取租户数")
 	long getTenantCount();
 
@@ -72,7 +68,9 @@ public interface ITenantStub {
 	List<Segment> getSegmentsOfTenant(@CjStubInParameter(key = "tenantCode", usage = "租户编码") String tenantCode);
 
 	@CjStubMethod(usage = "为租户添加扩展信息段")
-	void addSegmentOfTenant(@CjStubInParameter(key = "seg", usage = "信息段") TenantSegment seg);
+	void addSegmentOfTenant(@CjStubInParameter(key = "tenantCode", usage = "租户编码") String tenantCode,
+			@CjStubInParameter(key = "segCode", usage = "信息段编码") String segCode,
+			@CjStubInParameter(key = "sort", usage = "段在租户中的顺序") int sort);
 
 	@CjStubMethod(usage = "移除租户指定关联的信息段")
 	void removeSegmentOfTenant(@CjStubInParameter(key = "tenantCode", usage = "租户编码") String tenantCode,
@@ -82,7 +80,10 @@ public interface ITenantStub {
 	void emptySegmentsOfTenant(@CjStubInParameter(key = "tenantCode", usage = "租户编码") String tenantCode);
 
 	@CjStubMethod(usage = "添加用户属性")
-	void addTenantAttribute(@CjStubInParameter(key = "attr", usage = "租户属性") TenantAttribute attr);
+	void addTenantAttribute(@CjStubInParameter(key = "tenantCode", usage = "租户代码") String tenantCode,
+			@CjStubInParameter(key = "segCode", usage = "段代码") String segCode,
+			@CjStubInParameter(key = "attrCode", usage = "属性代码") String attrCode,
+			@CjStubInParameter(key = "value", usage = "属性值") String value);
 
 	@CjStubMethod(usage = "移除租户下指定的属性")
 	void removeTenantAttribute(@CjStubInParameter(key = "tenantCode", usage = "租户代码") String tenantCode,

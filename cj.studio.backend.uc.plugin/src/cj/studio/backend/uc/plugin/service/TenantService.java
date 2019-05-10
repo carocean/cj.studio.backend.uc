@@ -201,16 +201,6 @@ public class TenantService implements ITenantService, IServiceAfter {
 		this.tenantMapper.updateByExampleSelective(record, example);
 	}
 
-	@CjTransaction
-	@Override
-	public void unsetCompanyOnTenant(String tenantCode) {
-		TenantExample example = new TenantExample();
-		example.createCriteria().andCodeEqualTo(tenantCode);
-		Tenant record = getTenant(tenantCode);
-		record.setOwnercode(null);
-		record.setOwnertype(null);
-		this.tenantMapper.updateByExampleSelective(record, example);
-	}
 
 	@CjTransaction
 	@Override
@@ -260,7 +250,7 @@ public class TenantService implements ITenantService, IServiceAfter {
 	public List<Account> getPage(String tenantCode, int currPage, int pageSize) {
 		return accountService.getPage(tenantCode, currPage, pageSize);
 	}
-
+	@CjTransaction
 	@Override
 	public Account getAccount(String tenantCode, String accountCode) {
 		return accountService.getAccount(tenantCode, accountCode);

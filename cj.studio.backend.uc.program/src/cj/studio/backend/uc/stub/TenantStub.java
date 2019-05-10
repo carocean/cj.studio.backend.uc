@@ -54,7 +54,11 @@ public class TenantStub extends GatewayAppSiteRestStub implements ITenantStub {
 	}
 
 	@Override
-	public void addSegmentOfTenant(TenantSegment seg) {
+	public void addSegmentOfTenant(String tenantCode, String segCode, int sort) {
+		TenantSegment seg = new TenantSegment();
+		seg.setSegcode(segCode);
+		seg.setTenantcode(tenantCode);
+		seg.setSort(sort);
 		tenantService.addSegmentOfTenant(seg);
 	}
 
@@ -69,7 +73,12 @@ public class TenantStub extends GatewayAppSiteRestStub implements ITenantStub {
 	}
 
 	@Override
-	public void addTenantAttribute(TenantAttribute attr) {
+	public void addTenantAttribute(String tenantCode, String segCode, String attrCode, String value) {
+		TenantAttribute attr = new TenantAttribute();
+		attr.setAttrcode(attrCode);
+		attr.setSegcode(segCode);
+		attr.setTenantcode(tenantCode);
+		attr.setValue(value);
 		tenantService.addTenantAttribute(attr);
 	}
 
@@ -96,11 +105,6 @@ public class TenantStub extends GatewayAppSiteRestStub implements ITenantStub {
 	@Override
 	public void setCompanyOnTenant(String companyCode, String tenantCode) {
 		tenantService.setCompanyOnTenant(companyCode, tenantCode);
-	}
-
-	@Override
-	public void unsetCompanyOnTenant(String tenantCode) {
-		tenantService.unsetCompanyOnTenant(tenantCode);
 	}
 
 	@Override

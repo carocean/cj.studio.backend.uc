@@ -1,6 +1,5 @@
 package cj.studio.backend.uc.plugin.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import cj.studio.backend.uc.bo.Account;
@@ -63,11 +62,10 @@ public class TenantPostService implements ITenantPostService {
 	@Override
 	public List<Account> getAccountsOnPost(String tenantCode, String postCode) {
 		List<String> users = uaService.getUsersOnColCode(tenantCode, UCConstants.COLTYPE_Tenant_Post, postCode);
-		List<String> where = new ArrayList<String>();
-		for (String userCode : users) {
-			where.add(String.format("'%s'", userCode));
+		if(users.isEmpty()) {
+			users.add(".....");
 		}
-		return accountService.findAccountsWhereCodeList(where);
+		return accountService.findAccountsWhereCodeList(users);
 	}
 
 	@CjTransaction
@@ -75,11 +73,10 @@ public class TenantPostService implements ITenantPostService {
 	public List<Account> pageAccountsOnPost(String tenantCode, String postCode, int currPage, int pageSize) {
 		List<String> users = uaService.pageUsersOnColCode(tenantCode, UCConstants.COLTYPE_Tenant_Post, postCode,
 				currPage, pageSize);
-		List<String> where = new ArrayList<String>();
-		for (String userCode : users) {
-			where.add(String.format("'%s'", userCode));
+		if(users.isEmpty())	{
+			users.add("......");
 		}
-		return accountService.findAccountsWhereCodeList(where);
+		return accountService.findAccountsWhereCodeList(users);
 	}
 
 	@CjTransaction

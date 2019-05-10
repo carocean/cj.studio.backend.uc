@@ -5,14 +5,12 @@ import java.util.List;
 
 import cj.studio.backend.uc.bo.Account;
 import cj.studio.backend.uc.bo.AccountAttribute;
-import cj.studio.backend.uc.bo.AccountSegment;
 import cj.studio.backend.uc.bo.GlobalRole;
 import cj.studio.backend.uc.bo.Organization;
 import cj.studio.backend.uc.bo.Segment;
 import cj.studio.backend.uc.bo.TenantGroup;
 import cj.studio.backend.uc.bo.TenantPost;
 import cj.studio.backend.uc.bo.TenantRole;
-import cj.studio.gateway.stub.annotation.CjStubInContentKey;
 import cj.studio.gateway.stub.annotation.CjStubInParameter;
 import cj.studio.gateway.stub.annotation.CjStubMethod;
 import cj.studio.gateway.stub.annotation.CjStubReturn;
@@ -40,20 +38,25 @@ public interface IAccountStub {
 	List<Segment> getSegmentsOfAccount(@CjStubInParameter(key = "tenantCode", usage = "租户") String tenantCode,
 			@CjStubInParameter(key = "accountCode", usage = "账户") String accountCode);
 
-	@CjStubMethod(usage = "添加账户的信息段", command = "post")
-	void addSegmentOfAccount(@CjStubInContentKey(key = "seg", usage = "账户信息段") AccountSegment seg);
+	@CjStubMethod(usage = "添加账户的信息段")
+	void addSegmentOfAccount(@CjStubInParameter(key = "tenantCode", usage = "租户") String tenantCode,
+			@CjStubInParameter(key = "accountCode", usage = "账户") String accountCode,
+			@CjStubInParameter(key = "segCode", usage = "段号") String segCode,
+			@CjStubInParameter(key = "sort", usage = "段顺序") int sort);
 
 	@CjStubMethod(usage = "移除账户的信息段")
 	void removeSegmentOfAccount(@CjStubInParameter(key = "tenantCode", usage = "租户") String tenantCode,
-			@CjStubInParameter(key = "accountCode", usage = "账户") String accountCode,
 			@CjStubInParameter(key = "segCode", usage = "段号") String segCode);
 
 	@CjStubMethod(usage = "清空账户的信息段")
-	void emptySegmentsOfAccount(@CjStubInParameter(key = "tenantCode", usage = "租户") String tenantCode,
-			@CjStubInParameter(key = "accountCode", usage = "账户") String accountCode);
+	void emptySegmentsOfAccount(@CjStubInParameter(key = "tenantCode", usage = "租户") String tenantCode);
 
 	@CjStubMethod(usage = "添加账户的属性", command = "post")
-	void addAccountAttribute(@CjStubInContentKey(key = "attr", usage = "账户属性") AccountAttribute attr);
+	void addAccountAttribute(@CjStubInParameter(key = "tenantCode", usage = "租户") String tenantCode,
+			@CjStubInParameter(key = "accountCode", usage = "账户") String accountCode,
+			@CjStubInParameter(key = "segCode", usage = "段号") String segCode,
+			@CjStubInParameter(key = "attrCode", usage = "属性") String attrCode,
+			@CjStubInParameter(key = "value", usage = "属性值") String value);
 
 	@CjStubMethod(usage = "移除账户的属性")
 	void removeAccountAttribute(@CjStubInParameter(key = "tenantCode", usage = "租户") String tenantCode,

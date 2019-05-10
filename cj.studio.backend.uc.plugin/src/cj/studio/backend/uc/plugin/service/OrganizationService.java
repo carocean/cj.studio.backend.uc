@@ -95,11 +95,7 @@ public class OrganizationService implements IOrganizationService {
 	@Override
 	public List<Account> getAccountsOnOrg(String tenantCode, String orgCode) {
 		List<String> users = uaService.getUsersOnColCode(tenantCode, UCConstants.COLTYPE_Tenant_Org, orgCode);
-		List<String> where = new ArrayList<String>();
-		for (String userCode : users) {
-			where.add(String.format("'%s'", userCode));
-		}
-		return accountService.findAccountsWhereCodeList(where);
+		return accountService.findAccountsWhereCodeList(users);
 	}
 
 	@CjTransaction
@@ -107,11 +103,10 @@ public class OrganizationService implements IOrganizationService {
 	public List<Account> pageAccountsOnOrg(String tenantCode, String orgCode, int currPage, int pageSize) {
 		List<String> users = uaService.pageUsersOnColCode(tenantCode, UCConstants.COLTYPE_Tenant_Org, orgCode, currPage,
 				pageSize);
-		List<String> where = new ArrayList<String>();
-		for (String userCode : users) {
-			where.add(String.format("'%s'", userCode));
+		if(users.isEmpty()) {
+			users.add("......");
 		}
-		return accountService.findAccountsWhereCodeList(where);
+		return accountService.findAccountsWhereCodeList(users);
 	}
 
 	@CjTransaction

@@ -5,6 +5,7 @@ import java.util.List;
 import cj.studio.backend.uc.bo.Account;
 import cj.studio.backend.uc.bo.GlobalRole;
 import cj.studio.backend.uc.bo.Organization;
+import cj.studio.backend.uc.bo.Segment;
 import cj.studio.backend.uc.bo.TenantGroup;
 import cj.studio.backend.uc.bo.TenantPost;
 import cj.studio.backend.uc.bo.TenantRole;
@@ -53,4 +54,12 @@ public interface IUserService {
 	List<Organization> listTenantOrganizationOfUser(String userCode, String tenantCode);
 
 	List<User> getUsersByAttrValueOnSegment(String segCode, String value);
+
+	List<Segment> getSegmentsOfUser();
+
+	void addSegmentOfUser(String segCode, int sort);
+
+	void removeSegmentOfUser(String segCode);
+
+	void emptySegmentsOfUser();
 }

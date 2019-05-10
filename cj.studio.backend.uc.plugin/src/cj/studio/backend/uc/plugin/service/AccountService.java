@@ -126,18 +126,18 @@ public class AccountService implements IAccountService, IServiceAfter {
 
 	@CjTransaction
 	@Override
-	public void removeSegmentOfAccount(String tenantCode, String accountCode, String segCode) {
+	public void removeSegmentOfAccount(String tenantCode, String segCode) {
 		AccountSegmentExample example = new AccountSegmentExample();
-		example.createCriteria().andTenantcodeEqualTo(tenantCode).andAccountcodeEqualTo(accountCode)
+		example.createCriteria().andTenantcodeEqualTo(tenantCode)
 				.andSegcodeEqualTo(segCode);
 		this.accountSegmentMapper.deleteByExample(example);
 	}
 
 	@CjTransaction
 	@Override
-	public void emptySegmentsOfAccount(String tenantCode, String accountCode) {
+	public void emptySegmentsOfAccount(String tenantCode) {
 		AccountSegmentExample example = new AccountSegmentExample();
-		example.createCriteria().andTenantcodeEqualTo(tenantCode).andAccountcodeEqualTo(accountCode);
+		example.createCriteria().andTenantcodeEqualTo(tenantCode);
 		this.accountSegmentMapper.deleteByExample(example);
 	}
 
@@ -193,6 +193,7 @@ public class AccountService implements IAccountService, IServiceAfter {
 			return null;
 		return list.get(0);
 	}
+
 	@CjTransaction
 	@Override
 	public List<Account> getAccountByAttrValueOnSegment(String tenantCode, String segCode, String value) {
@@ -202,6 +203,9 @@ public class AccountService implements IAccountService, IServiceAfter {
 	@CjTransaction
 	@Override
 	public List<Account> findAccountsWhereCodeList(List<String> where) {
+		if (where.isEmpty()) {//由于mybatis in 空时报错
+			where.add(".....");
+		}
 		AccountExample example = new AccountExample();
 		example.createCriteria().andUsercodeIn(where);
 		return this.accountMapper.selectByExample(example);

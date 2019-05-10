@@ -1,6 +1,5 @@
 package cj.studio.backend.uc.plugin.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import cj.studio.backend.uc.bo.Account;
@@ -88,11 +87,10 @@ public class TenantRoleService implements ITenantRoleService {
 	@Override
 	public List<Account> getAccountsOnRole(String tenantCode, String roleCode) {
 		List<String> users = uaService.getUsersOnColCode(tenantCode, UCConstants.COLTYPE_Tenant_Role, roleCode);
-		List<String> where = new ArrayList<String>();
-		for (String userCode : users) {
-			where.add(String.format("'%s'", userCode));
+		if(users.isEmpty()) {
+			users.add(".....");
 		}
-		return accountService.findAccountsWhereCodeList(where);
+		return accountService.findAccountsWhereCodeList(users);
 	}
 	@CjTransaction
 	@Override

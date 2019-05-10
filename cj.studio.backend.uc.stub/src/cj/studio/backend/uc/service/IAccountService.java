@@ -27,9 +27,9 @@ public interface IAccountService {
 
 	void addSegmentOfAccount(AccountSegment seg);
 
-	void removeSegmentOfAccount(String tenantCode,String accountCode, String segCode);
+	void removeSegmentOfAccount(String tenantCode, String segCode);
 
-	void emptySegmentsOfAccount(String tenantCode,String accountCode);
+	void emptySegmentsOfAccount(String tenantCode);
 
 	void addAccountAttribute(AccountAttribute attr);
 

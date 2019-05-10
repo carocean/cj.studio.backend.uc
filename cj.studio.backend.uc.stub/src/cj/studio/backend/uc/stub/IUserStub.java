@@ -6,6 +6,7 @@ import java.util.List;
 import cj.studio.backend.uc.bo.Account;
 import cj.studio.backend.uc.bo.GlobalRole;
 import cj.studio.backend.uc.bo.Organization;
+import cj.studio.backend.uc.bo.Segment;
 import cj.studio.backend.uc.bo.TenantGroup;
 import cj.studio.backend.uc.bo.TenantPost;
 import cj.studio.backend.uc.bo.TenantRole;
@@ -21,13 +22,13 @@ import cj.studio.gateway.stub.annotation.CjStubService;
 public interface IUserStub {
 	@CjStubMethod(usage = "按编码查询用户")
 	@CjStubReturn(type = User.class, usage = "返回用户")
-	User getUser(@CjStubInParameter(key = "UserCode", usage = "用户编码") String userCode);
+	User getUser(@CjStubInParameter(key = "userCode", usage = "用户编码") String userCode);
 
 	@CjStubMethod(command = "post", usage = "保存用户")
 	void saveUser(@CjStubInContentKey(key = "user", usage = "用户对象。说明：在user.userCode为空的时候自动产生数据编码") User user);
 
 	@CjStubMethod(usage = "删除用户")
-	void removeUser(@CjStubInParameter(key = "UserCode", usage = "用法编码") String userCode);
+	void removeUser(@CjStubInParameter(key = "userCode", usage = "用法编码") String userCode);
 
 	@CjStubMethod(usage = "用户数")
 	@CjStubReturn(type = Long.class, usage = "返回用户数")
@@ -38,8 +39,11 @@ public interface IUserStub {
 	List<User> getPage(@CjStubInParameter(key = "currPage", usage = "当前分页位置") int currPage,
 			@CjStubInParameter(key = "pageSize", usage = "分页大小") int pageSize);
 
-	@CjStubMethod(usage = "添加用户属性", command = "post")
-	void addUserAttribute(@CjStubInContentKey(key = "attr", usage = "用户属性") UserAttribute attr);
+	@CjStubMethod(usage = "添加用户属性")
+	void addUserAttribute(@CjStubInParameter(key = "userCode", usage = "用户编码") String userCode,
+			@CjStubInParameter(key = "segCode", usage = "段编码") String segCode,
+			@CjStubInParameter(key = "attrCode", usage = "属性编码") String attrCode,
+			@CjStubInParameter(key = "value", usage = "属性值") String value);
 
 	@CjStubMethod(usage = "移除用户下指定的属性")
 	void removeUserAttribute(@CjStubInParameter(key = "userCode", usage = "用户编码") String userCode,
@@ -98,4 +102,18 @@ public interface IUserStub {
 	List<Organization> listTenantOrganizationOfUser(
 			@CjStubInParameter(key = "userCode", usage = "用户编码") String userCode,
 			@CjStubInParameter(key = "tenantCode", usage = "租户") String tenantCode);
+
+	@CjStubMethod(usage = "获取用户段")
+	@CjStubReturn(type = ArrayList.class, elementType = Segment.class, usage = "集合")
+	List<Segment> getSegmentsOfUser();
+
+	@CjStubMethod(usage = "添加用户段")
+	void addSegmentOfUser(@CjStubInParameter(key = "segCode", usage = "段编码") String segCode,
+			@CjStubInParameter(key = "sort", usage = "排序") int sort);
+
+	@CjStubMethod(usage = "移除用户段")
+	void removeSegmentOfUser(@CjStubInParameter(key = "segCode", usage = "段编码") String segCode);
+
+	@CjStubMethod(usage = "清空用户段")
+	void emptySegmentsOfUser();
 }

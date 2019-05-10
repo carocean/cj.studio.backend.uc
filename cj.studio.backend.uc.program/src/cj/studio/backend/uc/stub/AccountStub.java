@@ -42,22 +42,32 @@ public class AccountStub extends GatewayAppSiteRestStub implements IAccountStub 
 	}
 
 	@Override
-	public void addSegmentOfAccount(AccountSegment seg) {
+	public void addSegmentOfAccount(String tenantCode, String accountCode, String segCode, int sort) {
+		AccountSegment seg = new AccountSegment();
+		seg.setSegcode(segCode);
+		seg.setSort(sort);
+		seg.setTenantcode(tenantCode);
 		this.accountService.addSegmentOfAccount(seg);
 	}
 
 	@Override
-	public void removeSegmentOfAccount(String tenantCode, String accountCode, String segCode) {
-		this.accountService.removeSegmentOfAccount(tenantCode, accountCode, segCode);
+	public void removeSegmentOfAccount(String tenantCode, String segCode) {
+		this.accountService.removeSegmentOfAccount(tenantCode, segCode);
 	}
 
 	@Override
-	public void emptySegmentsOfAccount(String tenantCode, String accountCode) {
-		this.accountService.emptySegmentsOfAccount(tenantCode, accountCode);
+	public void emptySegmentsOfAccount(String tenantCode) {
+		this.accountService.emptySegmentsOfAccount(tenantCode);
 	}
-
 	@Override
-	public void addAccountAttribute(AccountAttribute attr) {
+	public void addAccountAttribute(String tenantCode, String accountCode, String segCode, String attrCode,
+			String value) {
+		AccountAttribute attr=new AccountAttribute();
+		attr.setAccountcode(accountCode);
+		attr.setAttrcode(attrCode);
+		attr.setSegcode(segCode);
+		attr.setTenantcode(tenantCode);
+		attr.setValue(value);
 		this.accountService.addAccountAttribute(attr);
 	}
 
@@ -77,8 +87,8 @@ public class AccountStub extends GatewayAppSiteRestStub implements IAccountStub 
 	}
 
 	@Override
-	public Account getAccountByAttrValue(String tenantCode,String segCode, String attrCode, String value) {
-		return accountService.getAccountByAttrValue(tenantCode,segCode, attrCode, value);
+	public Account getAccountByAttrValue(String tenantCode, String segCode, String attrCode, String value) {
+		return accountService.getAccountByAttrValue(tenantCode, segCode, attrCode, value);
 	}
 
 	@Override

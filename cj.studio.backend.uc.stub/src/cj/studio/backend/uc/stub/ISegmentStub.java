@@ -5,7 +5,6 @@ import java.util.List;
 
 import cj.studio.backend.uc.bo.Attribute;
 import cj.studio.backend.uc.bo.Segment;
-import cj.studio.gateway.stub.annotation.CjStubInContentKey;
 import cj.studio.gateway.stub.annotation.CjStubInParameter;
 import cj.studio.gateway.stub.annotation.CjStubMethod;
 import cj.studio.gateway.stub.annotation.CjStubReturn;
@@ -13,8 +12,10 @@ import cj.studio.gateway.stub.annotation.CjStubService;
 
 @CjStubService(bindService = "/segment.service", usage = "信息段存根")
 public interface ISegmentStub {
-	@CjStubMethod(command = "post", usage = "添加信息段")
-	void addSegment(@CjStubInContentKey(key="seg",usage = "信息段实体，Json格式") Segment seg);
+	@CjStubMethod(usage = "添加信息段")
+	void addSegment(@CjStubInParameter(key = "segCode", usage = "信息段编码") String segCode,
+			@CjStubInParameter(key = "segName", usage = "信息段名") String segName,
+			@CjStubInParameter(key = "version", usage = "信息段版本") String version);
 
 	@CjStubMethod(usage = "删除信息段")
 	void removeSegment(@CjStubInParameter(key = "segCode", usage = "信息段编码") String segCode);
@@ -27,22 +28,26 @@ public interface ISegmentStub {
 	@CjStubReturn(type = Long.class, usage = "返回段个数")
 	long getSegmentCount();
 
-	@CjStubMethod(usage = "获取一页信息段", command = "post")
-	@CjStubReturn(type = ArrayList.class,elementType=Segment.class, usage = "返回一页段")
-	List<Segment> getPage(@CjStubInContentKey(key = "currPage", usage = "当前页位置") int currPage,
-			@CjStubInContentKey(key = "pageSize", usage = "分页大小") int pageSize);
+	@CjStubMethod(usage = "获取一页信息段")
+	@CjStubReturn(type = ArrayList.class, elementType = Segment.class, usage = "返回一页段")
+	List<Segment> getPage(@CjStubInParameter(key = "currPage", usage = "当前页位置") int currPage,
+			@CjStubInParameter(key = "pageSize", usage = "分页大小") int pageSize);
 
 	@CjStubMethod(usage = "获取段属性")
-	@CjStubReturn(type = ArrayList.class,elementType=Attribute.class, usage = "属性集合")
+	@CjStubReturn(type = ArrayList.class, elementType = Attribute.class, usage = "属性集合")
 	List<Attribute> getAttributesOfSegment(@CjStubInParameter(key = "segCode", usage = "信息段编码") String segCode);
 
 	@CjStubMethod(usage = "置空段的所有属性")
 	void emptyAttributesOfSegment(@CjStubInParameter(key = "segCode", usage = "信息段编码") String segCode);
 
-	@CjStubMethod(usage = "移除一个属性", command = "post")
-	void removeAttribute(@CjStubInContentKey(key = "segCode", usage = "信息段编码") String segCode,
-			@CjStubInContentKey(key = "attrCode", usage = "属性编码") String attrCode);
+	@CjStubMethod(usage = "移除一个属性")
+	void removeAttribute(@CjStubInParameter(key = "segCode", usage = "信息段编码") String segCode,
+			@CjStubInParameter(key = "attrCode", usage = "属性编码") String attrCode);
 
-	@CjStubMethod(command = "post", usage = "添加属性")
-	void addAttribute(@CjStubInContentKey(key="attr",usage = "属性实体，Json格式") Attribute attr);
+	@CjStubMethod(usage = "添加属性")
+	void addAttribute(@CjStubInParameter(key = "attrCode", usage = "属性编码") String attrCode,
+			@CjStubInParameter(key = "attrName", usage = "属性名") String attrName,
+			@CjStubInParameter(key = "segCode", usage = "信息段编码") String segCode,
+			@CjStubInParameter(key = "type", usage = "属性数据类型") String type,
+			@CjStubInParameter(key = "sort", usage = "属性顺序") int sort);
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import cj.studio.backend.uc.bo.Account;
 import cj.studio.backend.uc.bo.GlobalRole;
 import cj.studio.backend.uc.bo.Organization;
+import cj.studio.backend.uc.bo.Segment;
 import cj.studio.backend.uc.bo.TenantGroup;
 import cj.studio.backend.uc.bo.TenantPost;
 import cj.studio.backend.uc.bo.TenantRole;
@@ -48,8 +49,14 @@ public class UserStub extends GatewayAppSiteRestStub implements IUserStub {
 	public Account getAccountOfUserOnTenant(String userCode, String tenantCode) {
 		return userService.getAccountOfUserOnTenant(userCode, tenantCode);
 	}
+	
 	@Override
-	public void addUserAttribute(UserAttribute attr) {
+	public void addUserAttribute(String userCode, String segCode, String attrCode, String value) {
+		UserAttribute attr=new UserAttribute();
+		attr.setAttrcode(attrCode);
+		attr.setSegcode(segCode);
+		attr.setUsercode(userCode);
+		attr.setValue(value);
 		userService.addUserAttribute(attr);
 	}
 
@@ -106,6 +113,26 @@ public class UserStub extends GatewayAppSiteRestStub implements IUserStub {
 	@Override
 	public List<Organization> listTenantOrganizationOfUser(String userCode, String tenantCode) {
 		return userService.listTenantOrganizationOfUser(userCode, tenantCode);
+	}
+
+	@Override
+	public List<Segment> getSegmentsOfUser() {
+		return userService.getSegmentsOfUser();
+	}
+
+	@Override
+	public void addSegmentOfUser(String segCode, int sort) {
+		 userService.addSegmentOfUser(segCode,sort);
+	}
+
+	@Override
+	public void removeSegmentOfUser(String segCode) {
+		 userService.removeSegmentOfUser(segCode);
+	}
+
+	@Override
+	public void emptySegmentsOfUser() {
+		 userService.emptySegmentsOfUser();
 	}
 
 }
