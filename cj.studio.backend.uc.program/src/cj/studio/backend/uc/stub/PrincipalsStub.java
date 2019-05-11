@@ -27,7 +27,7 @@ public class PrincipalsStub extends GatewayAppSiteRestStub implements IPrincipal
 	Map<String, PrincipalCollection> tables;
 	@CjServiceRef(refByName = "ucplugin.userService")
 	IUserService userService;
-	@CjServiceRef(refByName = "ucplugin.roleService")
+	@CjServiceRef(refByName = "ucplugin.globalRoleService")
 	IGlobalRoleService roleService;
 
 	public PrincipalsStub() {
