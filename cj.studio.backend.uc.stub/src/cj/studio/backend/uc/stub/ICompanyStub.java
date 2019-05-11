@@ -5,6 +5,7 @@ import java.util.List;
 
 import cj.studio.backend.uc.bo.Company;
 import cj.studio.backend.uc.bo.CompanyAttribute;
+import cj.studio.backend.uc.bo.Segment;
 import cj.studio.gateway.stub.annotation.CjStubInParameter;
 import cj.studio.gateway.stub.annotation.CjStubMethod;
 import cj.studio.gateway.stub.annotation.CjStubReturn;
@@ -50,7 +51,21 @@ public interface ICompanyStub {
 
 	@CjStubMethod(usage = "获取公司属性")
 	@CjStubReturn(type = ArrayList.class, elementType = CompanyAttribute.class, usage = "公司属性")
-	List<CompanyAttribute> getUserAttributes(@CjStubInParameter(key = "companyCode", usage = "公司编码") String companyCode,
+	List<CompanyAttribute> getCompanyAttributes(@CjStubInParameter(key = "companyCode", usage = "公司编码") String companyCode,
 			@CjStubInParameter(key = "segCode", usage = "段编码") String segCode);
 
+
+	@CjStubMethod(usage = "获取公司段")
+	@CjStubReturn(type = ArrayList.class, elementType = Segment.class, usage = "集合")
+	List<Segment> getSegmentsOfCompany();
+
+	@CjStubMethod(usage = "添加公司段")
+	void addSegmentOfCompany(@CjStubInParameter(key = "segCode", usage = "段编码") String segCode,
+			@CjStubInParameter(key = "sort", usage = "排序") int sort);
+
+	@CjStubMethod(usage = "移除公司段")
+	void removeSegmentOfCompany(@CjStubInParameter(key = "segCode", usage = "段编码") String segCode);
+
+	@CjStubMethod(usage = "清空公司段")
+	void emptySegmentsOfCompany();
 }
