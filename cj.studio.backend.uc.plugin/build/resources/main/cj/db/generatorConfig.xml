@@ -22,7 +22,7 @@
 				scale=0;length[10,18]：使用Long； scale=0;length[5,9]：使用Integer； scale=0;length<5：使用Short； -->
 			<property name="forceBigDecimals" value="true" />
 		</javaTypeResolver>
-		
+
 		<javaModelGenerator
 			targetPackage="cj.studio.backend.uc.bo"
 			targetProject="cj.studio.backend.uc.stub" />
@@ -31,45 +31,67 @@
 		<javaClientGenerator
 			targetPackage="cj.studio.backend.uc.plugin.dao"
 			targetProject="cj.studio.backend.uc.plugin" type="XMLMAPPER" />
-		<table schema="netos.uc" domainObjectName="User" tableName="user">
+		<table schema="netos.uc" domainObjectName="App"
+			tableName="app">
 		</table>
-		<table schema="netos.uc" domainObjectName="Company" tableName="company">
+		<table schema="netos.uc" domainObjectName="User"
+			tableName="user">
 		</table>
-		<table schema="netos.uc" domainObjectName="Account" tableName="account">
+		<table schema="netos.uc" domainObjectName="Company"
+			tableName="company">
 		</table>
-		<table schema="netos.uc" domainObjectName="Tenant" tableName="tenant">
+		<table schema="netos.uc" domainObjectName="Account"
+			tableName="account">
 		</table>
-		<table schema="netos.uc" domainObjectName="Organization" tableName="organization">
+		<table schema="netos.uc" domainObjectName="Tenant"
+			tableName="tenant">
 		</table>
-		<table schema="netos.uc" domainObjectName="GlobalRole" tableName="globalrole">
+		<table schema="netos.uc" domainObjectName="Organization"
+			tableName="organization">
 		</table>
-		<table schema="netos.uc" domainObjectName="TenantRole" tableName="tenantrole">
+		<table schema="netos.uc" domainObjectName="GlobalRole"
+			tableName="globalrole">
 		</table>
-		<table schema="netos.uc" domainObjectName="TenantGroup" tableName="tenantgroup">
+		<table schema="netos.uc" domainObjectName="TenantRole"
+			tableName="tenantrole">
 		</table>
-		<table schema="netos.uc" domainObjectName="TenantPost" tableName="tenantpost">
+		<table schema="netos.uc" domainObjectName="TenantGroup"
+			tableName="tenantgroup">
+		</table>
+		<table schema="netos.uc" domainObjectName="TenantPost"
+			tableName="tenantpost">
 		</table>
 		<table schema="netos.uc" domainObjectName="UA" tableName="ua">
 		</table>
-		<table schema="netos.uc" domainObjectName="Segment" tableName="segment">
+		<table schema="netos.uc" domainObjectName="Segment"
+			tableName="segment">
 		</table>
-		<table schema="netos.uc" domainObjectName="Attribute" tableName="attribute">
+		<table schema="netos.uc" domainObjectName="Attribute"
+			tableName="attribute">
 		</table>
-		<table schema="netos.uc" domainObjectName="TenantAttribute" tableName="tenantattr">
+		<table schema="netos.uc" domainObjectName="TenantAttribute"
+			tableName="tenantattr">
 		</table>
-		<table schema="netos.uc" domainObjectName="AccountAttribute" tableName="accountattr">
+		<table schema="netos.uc" domainObjectName="AccountAttribute"
+			tableName="accountattr">
 		</table>
-		<table schema="netos.uc" domainObjectName="UserAttribute" tableName="userattr">
+		<table schema="netos.uc" domainObjectName="UserAttribute"
+			tableName="userattr">
 		</table>
-		<table schema="netos.uc" domainObjectName="CompanyAttribute" tableName="companyattr">
+		<table schema="netos.uc" domainObjectName="CompanyAttribute"
+			tableName="companyattr">
 		</table>
-		<table schema="netos.uc" domainObjectName="AccountSegment" tableName="accountseg">
+		<table schema="netos.uc" domainObjectName="AccountSegment"
+			tableName="accountseg">
 		</table>
-		<table schema="netos.uc" domainObjectName="UserSegment" tableName="userseg">
+		<table schema="netos.uc" domainObjectName="UserSegment"
+			tableName="userseg">
 		</table>
-		<table schema="netos.uc" domainObjectName="TenantSegment" tableName="tenantseg">
+		<table schema="netos.uc" domainObjectName="TenantSegment"
+			tableName="tenantseg">
 		</table>
-		<table schema="netos.uc" domainObjectName="CompanySegment" tableName="companyseg">
+		<table schema="netos.uc" domainObjectName="CompanySegment"
+			tableName="companyseg">
 		</table>
 	</context>
 </generatorConfiguration>
