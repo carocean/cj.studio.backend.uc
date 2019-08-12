@@ -1,16 +1,15 @@
 package cj.studio.backend.uc.stub;
 
-import java.util.List;
-
 import cj.studio.backend.uc.bo.GlobalRole;
 import cj.studio.backend.uc.bo.User;
 import cj.studio.backend.uc.service.IGlobalRoleService;
 import cj.studio.ecm.annotation.CjService;
 import cj.studio.ecm.annotation.CjServiceRef;
-import cj.studio.gateway.stub.GatewayAppSiteRestStub;
+
+import java.util.List;
 
 @CjService(name = "/role.service")
-public class GlobalRoleStub extends GatewayAppSiteRestStub implements IGlobalRoleStub {
+public class GlobalRoleStub implements IGlobalRoleStub {
 	@CjServiceRef(refByName = "ucplugin.globalRoleService")
 	IGlobalRoleService globalRoleService;
 

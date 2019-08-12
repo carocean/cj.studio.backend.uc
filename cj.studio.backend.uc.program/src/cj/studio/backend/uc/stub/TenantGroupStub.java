@@ -1,18 +1,17 @@
 package cj.studio.backend.uc.stub;
 
-import java.util.List;
-
 import cj.studio.backend.uc.bo.Account;
 import cj.studio.backend.uc.bo.TenantGroup;
 import cj.studio.backend.uc.service.ITenantGroupService;
 import cj.studio.ecm.annotation.CjService;
 import cj.studio.ecm.annotation.CjServiceRef;
 import cj.studio.ecm.net.CircuitException;
-import cj.studio.gateway.stub.GatewayAppSiteRestStub;
 import cj.ultimate.util.StringUtil;
 
+import java.util.List;
+
 @CjService(name = "/tenant/group.service")
-public class TenantGroupStub extends GatewayAppSiteRestStub implements ITenantGroupStub {
+public class TenantGroupStub implements ITenantGroupStub {
 	@CjServiceRef(refByName = "ucplugin.tenantGroupService")
 	ITenantGroupService tenantGroupService;
 	

@@ -1,111 +1,94 @@
 package cj.studio.backend.uc.stub;
 
+import cj.studio.backend.uc.bo.*;
+import cj.studio.openport.IOpenportService;
+import cj.studio.openport.annotations.CjOpenport;
+import cj.studio.openport.annotations.CjOpenportParameter;
+import cj.studio.openport.annotations.CjOpenports;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import cj.studio.backend.uc.bo.Account;
-import cj.studio.backend.uc.bo.AccountAttribute;
-import cj.studio.backend.uc.bo.GlobalRole;
-import cj.studio.backend.uc.bo.Organization;
-import cj.studio.backend.uc.bo.Segment;
-import cj.studio.backend.uc.bo.TenantGroup;
-import cj.studio.backend.uc.bo.TenantPost;
-import cj.studio.backend.uc.bo.TenantRole;
-import cj.studio.gateway.stub.annotation.CjStubInParameter;
-import cj.studio.gateway.stub.annotation.CjStubMethod;
-import cj.studio.gateway.stub.annotation.CjStubReturn;
-import cj.studio.gateway.stub.annotation.CjStubService;
+@CjOpenports(usage = "账户存根")
+public interface IAccountStub extends IOpenportService {
 
-@CjStubService(bindService = "/tenant/account.service", usage = "账户存根")
-public interface IAccountStub {
+    @CjOpenport(usage = "获取账户。返回账户，如果不存在则返回null", type = Account.class)
+    Account getAccount(@CjOpenportParameter(name = "tenantCode", usage = "租户") String tenantCode,
+                       @CjOpenportParameter(name = "accountCode", usage = "账户") String accountCode);
 
-	@CjStubMethod(usage = "获取账户")
-	@CjStubReturn(type = Account.class, usage = "返回账户，如果不存在则返回null")
-	Account getAccount(@CjStubInParameter(key = "tenantCode", usage = "租户") String tenantCode,
-			@CjStubInParameter(key = "accountCode", usage = "账户") String accountCode);
+    @CjOpenport(usage = "返回账户数")
+    long getAccountCount(@CjOpenportParameter(name = "tenantCode", usage = "租户") String tenantCode);
 
-	@CjStubMethod(usage = "返回账户数")
-	long getAccountCount(@CjStubInParameter(key = "tenantCode", usage = "租户") String tenantCode);
+    @CjOpenport(usage = "获取一页账户", type = ArrayList.class, elementType = Account.class)
+    List<Account> getPage(@CjOpenportParameter(name = "tenantCode", usage = "租户") String tenantCode,
+                          @CjOpenportParameter(name = "currPage", usage = "当前页号") int currPage,
+                          @CjOpenportParameter(name = "pageSize", usage = "页大小") int pageSize);
 
-	@CjStubMethod(usage = "获取一页账户")
-	@CjStubReturn(type = ArrayList.class, elementType = Account.class, usage = "返回一页账户")
-	List<Account> getPage(@CjStubInParameter(key = "tenantCode", usage = "租户") String tenantCode,
-			@CjStubInParameter(key = "currPage", usage = "当前页号") int currPage,
-			@CjStubInParameter(key = "pageSize", usage = "页大小") int pageSize);
+    @CjOpenport(usage = "获取账户的信息段", type = ArrayList.class, elementType = Segment.class)
+    List<Segment> getSegmentsOfAccount(@CjOpenportParameter(name = "tenantCode", usage = "租户") String tenantCode,
+                                       @CjOpenportParameter(name = "accountCode", usage = "账户") String accountCode);
 
-	@CjStubMethod(usage = "获取账户的信息段")
-	@CjStubReturn(type = ArrayList.class, elementType = Segment.class, usage = "返回Json")
-	List<Segment> getSegmentsOfAccount(@CjStubInParameter(key = "tenantCode", usage = "租户") String tenantCode,
-			@CjStubInParameter(key = "accountCode", usage = "账户") String accountCode);
+    @CjOpenport(usage = "添加账户的信息段")
+    void addSegmentOfAccount(@CjOpenportParameter(name = "tenantCode", usage = "租户") String tenantCode,
+                             @CjOpenportParameter(name = "accountCode", usage = "账户") String accountCode,
+                             @CjOpenportParameter(name = "segCode", usage = "段号") String segCode,
+                             @CjOpenportParameter(name = "sort", usage = "段顺序") int sort);
 
-	@CjStubMethod(usage = "添加账户的信息段")
-	void addSegmentOfAccount(@CjStubInParameter(key = "tenantCode", usage = "租户") String tenantCode,
-			@CjStubInParameter(key = "accountCode", usage = "账户") String accountCode,
-			@CjStubInParameter(key = "segCode", usage = "段号") String segCode,
-			@CjStubInParameter(key = "sort", usage = "段顺序") int sort);
+    @CjOpenport(usage = "移除账户的信息段")
+    void removeSegmentOfAccount(@CjOpenportParameter(name = "tenantCode", usage = "租户") String tenantCode,
+                                @CjOpenportParameter(name = "segCode", usage = "段号") String segCode);
 
-	@CjStubMethod(usage = "移除账户的信息段")
-	void removeSegmentOfAccount(@CjStubInParameter(key = "tenantCode", usage = "租户") String tenantCode,
-			@CjStubInParameter(key = "segCode", usage = "段号") String segCode);
+    @CjOpenport(usage = "清空账户的信息段")
+    void emptySegmentsOfAccount(@CjOpenportParameter(name = "tenantCode", usage = "租户") String tenantCode);
 
-	@CjStubMethod(usage = "清空账户的信息段")
-	void emptySegmentsOfAccount(@CjStubInParameter(key = "tenantCode", usage = "租户") String tenantCode);
+    @CjOpenport(usage = "添加账户的属性", command = "post")
+    void addAccountAttribute(@CjOpenportParameter(name = "tenantCode", usage = "租户") String tenantCode,
+                             @CjOpenportParameter(name = "accountCode", usage = "账户") String accountCode,
+                             @CjOpenportParameter(name = "segCode", usage = "段号") String segCode,
+                             @CjOpenportParameter(name = "attrCode", usage = "属性") String attrCode,
+                             @CjOpenportParameter(name = "value", usage = "属性值") String value);
 
-	@CjStubMethod(usage = "添加账户的属性", command = "post")
-	void addAccountAttribute(@CjStubInParameter(key = "tenantCode", usage = "租户") String tenantCode,
-			@CjStubInParameter(key = "accountCode", usage = "账户") String accountCode,
-			@CjStubInParameter(key = "segCode", usage = "段号") String segCode,
-			@CjStubInParameter(key = "attrCode", usage = "属性") String attrCode,
-			@CjStubInParameter(key = "value", usage = "属性值") String value);
+    @CjOpenport(usage = "移除账户的属性")
+    void removeAccountAttribute(@CjOpenportParameter(name = "tenantCode", usage = "租户") String tenantCode,
+                                @CjOpenportParameter(name = "accountCode", usage = "账户") String accountCode,
+                                @CjOpenportParameter(name = "segCode", usage = "段号") String segCode,
+                                @CjOpenportParameter(name = "attrCode", usage = "属性") String attrCode);
 
-	@CjStubMethod(usage = "移除账户的属性")
-	void removeAccountAttribute(@CjStubInParameter(key = "tenantCode", usage = "租户") String tenantCode,
-			@CjStubInParameter(key = "accountCode", usage = "账户") String accountCode,
-			@CjStubInParameter(key = "segCode", usage = "段号") String segCode,
-			@CjStubInParameter(key = "attrCode", usage = "属性") String attrCode);
+    @CjOpenport(usage = "清空账户指定段下的所有属性")
+    void emptyAccountAttributes(@CjOpenportParameter(name = "tenantCode", usage = "租户") String tenantCode,
+                                @CjOpenportParameter(name = "accountCode", usage = "账户") String accountCode,
+                                @CjOpenportParameter(name = "segCode", usage = "段号") String segCode);
 
-	@CjStubMethod(usage = "清空账户指定段下的所有属性")
-	void emptyAccountAttributes(@CjStubInParameter(key = "tenantCode", usage = "租户") String tenantCode,
-			@CjStubInParameter(key = "accountCode", usage = "账户") String accountCode,
-			@CjStubInParameter(key = "segCode", usage = "段号") String segCode);
+    @CjOpenport(usage = "获取账户指定段下的所有属性", type = ArrayList.class, elementType = AccountAttribute.class)
+    List<AccountAttribute> getAccountAttributes(@CjOpenportParameter(name = "tenantCode", usage = "租户") String tenantCode,
+                                                @CjOpenportParameter(name = "accountCode", usage = "账户") String accountCode,
+                                                @CjOpenportParameter(name = "segCode", usage = "段号") String segCode);
 
-	@CjStubMethod(usage = "获取账户指定段下的所有属性")
-	@CjStubReturn(type = ArrayList.class, elementType = AccountAttribute.class, usage = "返回Json")
-	List<AccountAttribute> getAccountAttributes(@CjStubInParameter(key = "tenantCode", usage = "租户") String tenantCode,
-			@CjStubInParameter(key = "accountCode", usage = "账户") String accountCode,
-			@CjStubInParameter(key = "segCode", usage = "段号") String segCode);
+    @CjOpenport(usage = "按信息段及其属性值查询账户", type = Account.class)
+    Account getAccountByAttrValue(@CjOpenportParameter(name = "tenantCode", usage = "租户") String tenantCode,
+                                  @CjOpenportParameter(name = "segCode", usage = "信息段编码") String segCode,
+                                  @CjOpenportParameter(name = "attrCode", usage = "属性编码") String attrCode,
+                                  @CjOpenportParameter(name = "value", usage = "属性值") String value);
 
-	@CjStubMethod(usage = "按信息段及其属性值查询账户")
-	@CjStubReturn(type = Account.class, usage = "返回用户，如果不存在则返回null")
-	Account getAccountByAttrValue(@CjStubInParameter(key = "tenantCode", usage = "租户") String tenantCode,
-			@CjStubInParameter(key = "segCode", usage = "信息段编码") String segCode,
-			@CjStubInParameter(key = "attrCode", usage = "属性编码") String attrCode,
-			@CjStubInParameter(key = "value", usage = "属性值") String value);
+    @CjOpenport(usage = "列也全局角色", type = GlobalRole.class)
+    List<GlobalRole> listGlobalRoleOfAccount(@CjOpenportParameter(name = "tenantCode", usage = "租户") String tenantCode,
+                                             @CjOpenportParameter(name = "accountCode", usage = "账户标识") String accountCode);
 
-	@CjStubMethod(usage = "列也全局角色")
-	@CjStubReturn(type = GlobalRole.class, usage = "全局角色")
-	List<GlobalRole> listGlobalRoleOfAccount(@CjStubInParameter(key = "tenantCode", usage = "租户") String tenantCode,
-			@CjStubInParameter(key = "accountCode", usage = "账户标识") String accountCode);
+    @CjOpenport(usage = "列出租户角色", type = ArrayList.class, elementType = TenantRole.class)
+    List<TenantRole> listTenantRoleOfAccount(@CjOpenportParameter(name = "tenantCode", usage = "租户") String tenantCode,
+                                             @CjOpenportParameter(name = "accountCode", usage = "账户标识") String accountCode);
 
-	@CjStubMethod(usage = "列出租户角色")
-	@CjStubReturn(type = ArrayList.class, elementType = TenantRole.class, usage = "集合")
-	List<TenantRole> listTenantRoleOfAccount(@CjStubInParameter(key = "tenantCode", usage = "租户") String tenantCode,
-			@CjStubInParameter(key = "accountCode", usage = "账户标识") String accountCode);
+    @CjOpenport(usage = "列出租户岗位", type = ArrayList.class, elementType = TenantPost.class)
+    List<TenantPost> listTenantPostOfAccount(@CjOpenportParameter(name = "tenantCode", usage = "租户") String tenantCode,
+                                             @CjOpenportParameter(name = "accountCode", usage = "账户标识") String accountCode);
 
-	@CjStubMethod(usage = "列出租户岗位")
-	@CjStubReturn(type = ArrayList.class, elementType = TenantPost.class, usage = "集合")
-	List<TenantPost> listTenantPostOfAccount(@CjStubInParameter(key = "tenantCode", usage = "租户") String tenantCode,
-			@CjStubInParameter(key = "accountCode", usage = "账户标识") String accountCode);
+    @CjOpenport(usage = "列出租户群组", type = ArrayList.class, elementType = TenantGroup.class)
+    List<TenantGroup> listTenantGroupOfAccount(@CjOpenportParameter(name = "tenantCode", usage = "租户") String tenantCode,
+                                               @CjOpenportParameter(name = "accountCode", usage = "账户标识") String accountCode);
 
-	@CjStubMethod(usage = "列出租户群组")
-	@CjStubReturn(type = ArrayList.class, elementType = TenantGroup.class, usage = "集合")
-	List<TenantGroup> listTenantGroupOfAccount(@CjStubInParameter(key = "tenantCode", usage = "租户") String tenantCode,
-			@CjStubInParameter(key = "accountCode", usage = "账户标识") String accountCode);
-
-	@CjStubMethod(usage = "列出租户机构")
-	@CjStubReturn(type = ArrayList.class, elementType = Organization.class, usage = "集合")
-	List<Organization> listTenantOrganizationOfAccount(
-			@CjStubInParameter(key = "tenantCode", usage = "租户") String tenantCode,
-			@CjStubInParameter(key = "accountCode", usage = "账户标识") String accountCode);
+    @CjOpenport(usage = "列出租户机构", type = ArrayList.class, elementType = Organization.class)
+    List<Organization> listTenantOrganizationOfAccount(
+            @CjOpenportParameter(name = "tenantCode", usage = "租户") String tenantCode,
+            @CjOpenportParameter(name = "accountCode", usage = "账户标识") String accountCode);
 
 }

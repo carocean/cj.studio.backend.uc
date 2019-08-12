@@ -1,19 +1,14 @@
 package cj.studio.backend.uc.stub;
 
-import java.util.List;
-
-import cj.studio.backend.uc.bo.Account;
-import cj.studio.backend.uc.bo.Segment;
-import cj.studio.backend.uc.bo.Tenant;
-import cj.studio.backend.uc.bo.TenantAttribute;
-import cj.studio.backend.uc.bo.TenantSegment;
+import cj.studio.backend.uc.bo.*;
 import cj.studio.backend.uc.service.ITenantService;
 import cj.studio.ecm.annotation.CjService;
 import cj.studio.ecm.annotation.CjServiceRef;
-import cj.studio.gateway.stub.GatewayAppSiteRestStub;
+
+import java.util.List;
 
 @CjService(name = "/tenant.service")
-public class TenantStub extends GatewayAppSiteRestStub implements ITenantStub {
+public class TenantStub  implements ITenantStub {
 	@CjServiceRef(refByName = "ucplugin.tenantService")
 	ITenantService tenantService;
 

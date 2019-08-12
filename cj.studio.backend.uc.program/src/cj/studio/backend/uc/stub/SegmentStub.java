@@ -1,16 +1,15 @@
 package cj.studio.backend.uc.stub;
 
-import java.util.List;
-
 import cj.studio.backend.uc.bo.Attribute;
 import cj.studio.backend.uc.bo.Segment;
 import cj.studio.backend.uc.service.ISegmentService;
 import cj.studio.ecm.annotation.CjService;
 import cj.studio.ecm.annotation.CjServiceRef;
-import cj.studio.gateway.stub.GatewayAppSiteRestStub;
+
+import java.util.List;
 
 @CjService(name = "/segment.service")
-public class SegmentStub extends GatewayAppSiteRestStub implements ISegmentStub {
+public class SegmentStub implements ISegmentStub {
 	@CjServiceRef(refByName="ucplugin.segmentService")
 	ISegmentService segmentService;
 	@Override

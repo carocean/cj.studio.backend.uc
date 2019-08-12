@@ -1,18 +1,19 @@
 package cj.studio.backend.uc.stub;
 
-import cj.studio.gateway.stub.annotation.CjStubInParameter;
-import cj.studio.gateway.stub.annotation.CjStubMethod;
-import cj.studio.gateway.stub.annotation.CjStubService;
+import cj.studio.openport.IOpenportService;
+import cj.studio.openport.annotations.CjOpenport;
+import cj.studio.openport.annotations.CjOpenportParameter;
+import cj.studio.openport.annotations.CjOpenports;
 
-@CjStubService(bindService = "/password.service", usage = "密码服务")
-public interface IPasswordStub {
-	@CjStubMethod(usage = "设置密码")
-	void setPassword(@CjStubInParameter(key = "userCode", usage = "用户代码") String userCode,
-			@CjStubInParameter(key = "pwd", usage = "用户密码") String pwd);
+@CjOpenports(usage = "密码服务")
+public interface IPasswordStub extends IOpenportService {
+	@CjOpenport(usage = "设置密码")
+	void setPassword(@CjOpenportParameter( name ="userCode", usage = "用户代码") String userCode,
+			@CjOpenportParameter( name ="pwd", usage = "用户密码") String pwd);
 
-	@CjStubMethod(usage = "更新密码")
-	void updatePassword(@CjStubInParameter(key = "userCode", usage = "用户代码") String userCode,
-			@CjStubInParameter(key = "oldpwd", usage = "旧密码") String old,
-			@CjStubInParameter(key = "newpwd", usage = "新密码") String pwd);
+	@CjOpenport(usage = "更新密码")
+	void updatePassword(@CjOpenportParameter( name ="userCode", usage = "用户代码") String userCode,
+			@CjOpenportParameter( name ="oldpwd", usage = "旧密码") String old,
+			@CjOpenportParameter( name ="newpwd", usage = "新密码") String pwd);
 
 }

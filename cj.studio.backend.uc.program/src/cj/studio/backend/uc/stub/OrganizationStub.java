@@ -1,16 +1,15 @@
 package cj.studio.backend.uc.stub;
 
-import java.util.List;
-
 import cj.studio.backend.uc.bo.Account;
 import cj.studio.backend.uc.bo.Organization;
 import cj.studio.backend.uc.service.IOrganizationService;
 import cj.studio.ecm.annotation.CjService;
 import cj.studio.ecm.annotation.CjServiceRef;
-import cj.studio.gateway.stub.GatewayAppSiteRestStub;
+
+import java.util.List;
 
 @CjService(name = "/tenant/organization.service")
-public class OrganizationStub extends GatewayAppSiteRestStub implements ITenantOrganizationStub {
+public class OrganizationStub  implements ITenantOrganizationStub {
 	@CjServiceRef(refByName = "ucplugin.organizationService")
 	IOrganizationService organizationService;
 

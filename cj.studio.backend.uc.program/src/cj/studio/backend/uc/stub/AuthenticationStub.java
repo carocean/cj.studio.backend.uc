@@ -1,19 +1,18 @@
 package cj.studio.backend.uc.stub;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import cj.studio.backend.uc.service.AuthenticationException;
 import cj.studio.backend.uc.service.AuthenticatorInfo;
 import cj.studio.backend.uc.service.IAuthenticator;
 import cj.studio.backend.uc.service.IAuthenticatorFactory;
 import cj.studio.ecm.annotation.CjService;
 import cj.studio.ecm.annotation.CjServiceRef;
-import cj.studio.gateway.stub.GatewayAppSiteRestStub;
 import cj.ultimate.gson2.com.google.gson.Gson;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @CjService(name = "/authentication.service")
-public class AuthenticationStub extends GatewayAppSiteRestStub implements IAuthenticationStub {
+public class AuthenticationStub  implements IAuthenticationStub {
 	@CjServiceRef(refByName = "ucplugin.authenticatorFactory")
 	IAuthenticatorFactory facotry;
 

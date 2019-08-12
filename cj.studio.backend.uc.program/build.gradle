@@ -18,24 +18,26 @@ sourceSets {
  } 
 
 dependencies {
+	compile group: 'cj.netos.openport', name: 'cj.studio.openport', version: ref_cj_studio_openport_version
+	implementation project(':cj.studio.backend.uc.stub')
 	compile fileTree('../global/runtime')
 	//compile fileTree('src/cj/references')
 	compile group: 'cj.studio.backend.uacc', name: 'cj.studio.backend.uacc.stub', version: ref_cj_studio_backend_uacc_stub_version
-	compile project(':cj.studio.backend.uc.stub');
 }
+
 task copyReferences(type: Copy) {
-    into 'src/cj/references'
-    from(configurations.all) {
-        include 'cj.studio.backend.uacc.stub-*.jar'
-       // delete fileTree("src/cj/references").matching {
-       // 	include "cj.studio.backend.uacc.stub-*.jar"
-    	//}
-    }
+	from configurations.compileClasspath.files {
+		include 'cj.studio.backend.uacc.stub-*.jar','cj.studio.openport-*.jar'
+	}
+	into 'src/cj/references'
 }
+build.dependsOn('copyReferences')
+build.dependsOn(":cj.studio.backend.uc.stub:release")
+
 task releaseToHost(dependsOn:copyReferences,type: Copy) {
-	dependsOn "build",":cj.studio.backend.uc.stub:release"
+	dependsOn "build"
 	from 'build/libs/'
-	into '../cmdtools/gateway/assemblies/uc'
+	into '../cmdtools/gateway-2.3.6/assemblies/uc'
 	include '**/*.jar'
 	exclude '**/*-javadoc.jar','**/*-sources.jar'
  }

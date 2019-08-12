@@ -1,18 +1,17 @@
 package cj.studio.backend.uc.stub;
 
-import java.util.List;
-
 import cj.studio.backend.uc.bo.Account;
 import cj.studio.backend.uc.bo.TenantRole;
 import cj.studio.backend.uc.service.ITenantRoleService;
 import cj.studio.ecm.annotation.CjService;
 import cj.studio.ecm.annotation.CjServiceRef;
 import cj.studio.ecm.net.CircuitException;
-import cj.studio.gateway.stub.GatewayAppSiteRestStub;
 import cj.ultimate.util.StringUtil;
 
+import java.util.List;
+
 @CjService(name = "/tenant/role.service")
-public class TenantRoleStub extends GatewayAppSiteRestStub implements ITenantRoleStub {
+public class TenantRoleStub  implements ITenantRoleStub {
 	@CjServiceRef(refByName = "ucplugin.tenantRoleService")
 	ITenantRoleService tenantRoleService;
 

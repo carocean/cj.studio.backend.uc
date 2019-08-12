@@ -3,10 +3,9 @@ package cj.studio.backend.uc.stub;
 import cj.studio.backend.uc.service.IPasswordService;
 import cj.studio.ecm.annotation.CjService;
 import cj.studio.ecm.annotation.CjServiceRef;
-import cj.studio.gateway.stub.GatewayAppSiteRestStub;
 
 @CjService(name = "/password.service")
-public class PasswordStub  extends GatewayAppSiteRestStub  implements IPasswordStub {
+public class PasswordStub   implements IPasswordStub {
 	@CjServiceRef(refByName = "ucplugin.passwordService")
 	IPasswordService passwordService;
 

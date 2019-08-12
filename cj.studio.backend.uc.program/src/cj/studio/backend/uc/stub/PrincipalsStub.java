@@ -1,12 +1,5 @@
 package cj.studio.backend.uc.stub;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-
 import cj.studio.backend.uacc.security.PrincipalCollection;
 import cj.studio.backend.uacc.security.Principals;
 import cj.studio.backend.uacc.security.Relactionship;
@@ -19,11 +12,12 @@ import cj.studio.backend.uc.service.IUserService;
 import cj.studio.ecm.EcmException;
 import cj.studio.ecm.annotation.CjService;
 import cj.studio.ecm.annotation.CjServiceRef;
-import cj.studio.gateway.stub.GatewayAppSiteRestStub;
 import cj.ultimate.util.StringUtil;
 
+import java.util.*;
+
 @CjService(name = "/principals.service")
-public class PrincipalsStub extends GatewayAppSiteRestStub implements IPrincipalsStub {
+public class PrincipalsStub  implements IPrincipalsStub {
 	Map<String, PrincipalCollection> tables;
 	@CjServiceRef(refByName = "ucplugin.userService")
 	IUserService userService;

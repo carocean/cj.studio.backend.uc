@@ -18,10 +18,8 @@ sourceSets {
  } 
 
 dependencies {
-	compile fileTree('../global/runtime')
-	compile fileTree('../global/cjtools')
-	compile fileTree('src/cj/refembeds')
-	compile fileTree('src/cj/references')
+    compile group: 'cj.netos.openport', name: 'cj.studio.openport', version: ref_cj_studio_openport_version
+    compile fileTree('../global/runtime')
 }
 
  task releaseToUC(type: Copy) {

@@ -1,23 +1,14 @@
 package cj.studio.backend.uc.stub;
 
-import java.util.List;
-
-import cj.studio.backend.uc.bo.Account;
-import cj.studio.backend.uc.bo.AccountAttribute;
-import cj.studio.backend.uc.bo.AccountSegment;
-import cj.studio.backend.uc.bo.GlobalRole;
-import cj.studio.backend.uc.bo.Organization;
-import cj.studio.backend.uc.bo.Segment;
-import cj.studio.backend.uc.bo.TenantGroup;
-import cj.studio.backend.uc.bo.TenantPost;
-import cj.studio.backend.uc.bo.TenantRole;
+import cj.studio.backend.uc.bo.*;
 import cj.studio.backend.uc.service.IAccountService;
 import cj.studio.ecm.annotation.CjService;
 import cj.studio.ecm.annotation.CjServiceRef;
-import cj.studio.gateway.stub.GatewayAppSiteRestStub;
+
+import java.util.List;
 
 @CjService(name = "/tenant/account.service")
-public class AccountStub extends GatewayAppSiteRestStub implements IAccountStub {
+public class AccountStub  implements IAccountStub {
 	@CjServiceRef(refByName = "ucplugin.accountService")
 	IAccountService accountService;
 

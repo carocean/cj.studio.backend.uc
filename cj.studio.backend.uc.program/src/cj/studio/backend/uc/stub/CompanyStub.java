@@ -1,17 +1,16 @@
 package cj.studio.backend.uc.stub;
 
-import java.util.List;
-
 import cj.studio.backend.uc.bo.Company;
 import cj.studio.backend.uc.bo.CompanyAttribute;
 import cj.studio.backend.uc.bo.Segment;
 import cj.studio.backend.uc.service.ICompanyService;
 import cj.studio.ecm.annotation.CjService;
 import cj.studio.ecm.annotation.CjServiceRef;
-import cj.studio.gateway.stub.GatewayAppSiteRestStub;
+
+import java.util.List;
 
 @CjService(name = "/company.service")
-public class CompanyStub extends GatewayAppSiteRestStub implements ICompanyStub {
+public class CompanyStub implements ICompanyStub {
 	@CjServiceRef(refByName = "ucplugin.companyService")
 	ICompanyService companyService;
 

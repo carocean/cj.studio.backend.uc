@@ -1,61 +1,58 @@
 package cj.studio.backend.uc.stub;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import cj.studio.backend.uc.bo.Account;
 import cj.studio.backend.uc.bo.TenantPost;
 import cj.studio.ecm.net.CircuitException;
-import cj.studio.gateway.stub.annotation.CjStubInParameter;
-import cj.studio.gateway.stub.annotation.CjStubMethod;
-import cj.studio.gateway.stub.annotation.CjStubReturn;
-import cj.studio.gateway.stub.annotation.CjStubService;
+import cj.studio.openport.IOpenportService;
+import cj.studio.openport.annotations.CjOpenport;
+import cj.studio.openport.annotations.CjOpenportParameter;
+import cj.studio.openport.annotations.CjOpenports;
 
-@CjStubService(bindService = "/tenant/post.service", usage = "租户岗位存根")
-public interface ITenantPostStub {
-	@CjStubMethod(usage = "添加岗位")
-	void addPost(@CjStubInParameter(key = "tenantCode", usage = "租户代码") String tenantCode,
-			@CjStubInParameter(key = "postCode", usage = "岗位代码") String postCode,
-			@CjStubInParameter(key = "postName", usage = "岗位名") String postName,
-			@CjStubInParameter(key = "comment", usage = "说明") String comment) throws CircuitException;
+import java.util.ArrayList;
+import java.util.List;
 
-	@CjStubMethod(usage = "获取岗位")
-	TenantPost getPost(@CjStubInParameter(key = "tenantCode", usage = "租户代码") String tenantCode,
-			@CjStubInParameter(key = "postCode", usage = "岗位代码") String postCode);
+@CjOpenports(usage = "租户岗位存根")
+public interface ITenantPostStub extends IOpenportService {
+	@CjOpenport(usage = "添加岗位")
+	void addPost(@CjOpenportParameter(name ="tenantCode", usage = "租户代码") String tenantCode,
+			@CjOpenportParameter(name ="postCode", usage = "岗位代码") String postCode,
+			@CjOpenportParameter(name ="postName", usage = "岗位名") String postName,
+			@CjOpenportParameter(name ="comment", usage = "说明") String comment) throws CircuitException;
 
-	@CjStubMethod(usage = "移除岗位")
-	void removePost(@CjStubInParameter(key = "tenantCode", usage = "租户代码") String tenantCode,
-			@CjStubInParameter(key = "postCode", usage = "岗位代码") String postCode);
+	@CjOpenport(usage = "获取岗位")
+	TenantPost getPost(@CjOpenportParameter(name ="tenantCode", usage = "租户代码") String tenantCode,
+			@CjOpenportParameter(name ="postCode", usage = "岗位代码") String postCode);
 
-	@CjStubMethod(usage = "岗位分页")
-	@CjStubReturn(type = ArrayList.class, elementType = TenantPost.class, usage = "一页数")
-	List<TenantPost> pagePost(@CjStubInParameter(key = "tenantCode", usage = "租户代码") String tenantCode,
-			@CjStubInParameter(key = "currPage", usage = "当前页码") int currPage,
-			@CjStubInParameter(key = "pageSize", usage = "页大小") int pageSize);
+	@CjOpenport(usage = "移除岗位")
+	void removePost(@CjOpenportParameter(name ="tenantCode", usage = "租户代码") String tenantCode,
+			@CjOpenportParameter(name ="postCode", usage = "岗位代码") String postCode);
 
-	@CjStubMethod(usage = "获取岗位下的账户")
-	@CjStubReturn(type = ArrayList.class, elementType = Account.class, usage = "一页数")
-	List<Account> getAccountsOnPost(@CjStubInParameter(key = "tenantCode", usage = "租户代码") String tenantCode,
-			@CjStubInParameter(key = "postCode", usage = "岗位代码") String postCode);
+	@CjOpenport(type = ArrayList.class, elementType = TenantPost.class,usage = "岗位分页")
+	List<TenantPost> pagePost(@CjOpenportParameter(name ="tenantCode", usage = "租户代码") String tenantCode,
+			@CjOpenportParameter(name ="currPage", usage = "当前页码") int currPage,
+			@CjOpenportParameter(name ="pageSize", usage = "页大小") int pageSize);
 
-	@CjStubMethod(usage = "获取岗位下的账户")
-	@CjStubReturn(type = ArrayList.class, elementType = Account.class, usage = "一页数")
-	List<Account> pageAccountsOnPost(@CjStubInParameter(key = "tenantCode", usage = "租户代码") String tenantCode,
-			@CjStubInParameter(key = "postCode", usage = "岗位代码") String postCode,
-			@CjStubInParameter(key = "currPage", usage = "当前页码") int currPage,
-			@CjStubInParameter(key = "pageSize", usage = "页大小") int pageSize);
+	@CjOpenport(type = ArrayList.class, elementType = Account.class,usage = "获取岗位下的账户")
+	List<Account> getAccountsOnPost(@CjOpenportParameter(name ="tenantCode", usage = "租户代码") String tenantCode,
+			@CjOpenportParameter(name ="postCode", usage = "岗位代码") String postCode);
 
-	@CjStubMethod(usage = "添加一个岗位到指定账户")
-	void addAccountOnPost(@CjStubInParameter(key = "tenantCode", usage = "租户代码") String tenantCode,
-			@CjStubInParameter(key = "accountCode", usage = "账户代码") String accountCode,
-			@CjStubInParameter(key = "postCode", usage = "岗位代码") String postCode);
+	@CjOpenport(type = ArrayList.class, elementType = Account.class,usage = "获取岗位下的账户")
+	List<Account> pageAccountsOnPost(@CjOpenportParameter(name ="tenantCode", usage = "租户代码") String tenantCode,
+			@CjOpenportParameter(name ="postCode", usage = "岗位代码") String postCode,
+			@CjOpenportParameter(name ="currPage", usage = "当前页码") int currPage,
+			@CjOpenportParameter(name ="pageSize", usage = "页大小") int pageSize);
 
-	@CjStubMethod(usage = "移除指定岗位一个账户")
-	void removeAccountOnPost(@CjStubInParameter(key = "tenantCode", usage = "租户代码") String tenantCode,
-			@CjStubInParameter(key = "accountCode", usage = "账户代码") String accountCode,
-			@CjStubInParameter(key = "postCode", usage = "岗位代码") String postCode);
+	@CjOpenport(usage = "添加一个岗位到指定账户")
+	void addAccountOnPost(@CjOpenportParameter(name ="tenantCode", usage = "租户代码") String tenantCode,
+			@CjOpenportParameter(name ="accountCode", usage = "账户代码") String accountCode,
+			@CjOpenportParameter(name ="postCode", usage = "岗位代码") String postCode);
 
-	@CjStubMethod(usage = "清空指定岗位的账户")
-	void emptyAccountsOnPost(@CjStubInParameter(key = "tenantCode", usage = "租户代码") String tenantCode,
-			@CjStubInParameter(key = "postCode", usage = "岗位代码") String postCode);
+	@CjOpenport(usage = "移除指定岗位一个账户")
+	void removeAccountOnPost(@CjOpenportParameter(name ="tenantCode", usage = "租户代码") String tenantCode,
+			@CjOpenportParameter(name ="accountCode", usage = "账户代码") String accountCode,
+			@CjOpenportParameter(name ="postCode", usage = "岗位代码") String postCode);
+
+	@CjOpenport(usage = "清空指定岗位的账户")
+	void emptyAccountsOnPost(@CjOpenportParameter(name ="tenantCode", usage = "租户代码") String tenantCode,
+			@CjOpenportParameter(name ="postCode", usage = "岗位代码") String postCode);
 }

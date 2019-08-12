@@ -1,23 +1,14 @@
 package cj.studio.backend.uc.stub;
 
-import java.util.List;
-
-import cj.studio.backend.uc.bo.Account;
-import cj.studio.backend.uc.bo.GlobalRole;
-import cj.studio.backend.uc.bo.Organization;
-import cj.studio.backend.uc.bo.Segment;
-import cj.studio.backend.uc.bo.TenantGroup;
-import cj.studio.backend.uc.bo.TenantPost;
-import cj.studio.backend.uc.bo.TenantRole;
-import cj.studio.backend.uc.bo.User;
-import cj.studio.backend.uc.bo.UserAttribute;
+import cj.studio.backend.uc.bo.*;
 import cj.studio.backend.uc.service.IUserService;
 import cj.studio.ecm.annotation.CjService;
 import cj.studio.ecm.annotation.CjServiceRef;
-import cj.studio.gateway.stub.GatewayAppSiteRestStub;
+
+import java.util.List;
 
 @CjService(name = "/user.service")
-public class UserStub extends GatewayAppSiteRestStub implements IUserStub {
+public class UserStub  implements IUserStub {
 	@CjServiceRef(refByName = "ucplugin.userService")
 	IUserService userService;
 

@@ -1,15 +1,16 @@
 package cj.studio.backend.uc.stub;
 
 import cj.studio.backend.uc.service.AuthenticationException;
-import cj.studio.gateway.stub.annotation.CjStubInParameter;
-import cj.studio.gateway.stub.annotation.CjStubMethod;
-import cj.studio.gateway.stub.annotation.CjStubService;
+import cj.studio.openport.IOpenportService;
+import cj.studio.openport.annotations.CjOpenport;
+import cj.studio.openport.annotations.CjOpenportParameter;
+import cj.studio.openport.annotations.CjOpenports;
 
-@CjStubService(bindService = "/tenantToken.service", usage = "租户令牌生成存根")
-public interface ITenantTokenStub {
-	@CjStubMethod(usage = "生成令牌")
-	String genToken(@CjStubInParameter(key = "tenant", usage = "租户") String tenant,
-			@CjStubInParameter(key = "user", usage = "申请者") String user,
-			@CjStubInParameter(key = "pwd", usage = "申请者密码") String pwd,
-			@CjStubInParameter(key = "ttlMillis", usage = "令牌过期日期") long ttlMillis) throws AuthenticationException;
+@CjOpenports( usage = "租户令牌生成存根")
+public interface ITenantTokenStub extends IOpenportService {
+	@CjOpenport(usage = "生成令牌")
+	String genToken(@CjOpenportParameter(name = "tenant", usage = "租户") String tenant,
+			@CjOpenportParameter(name = "user", usage = "申请者") String user,
+			@CjOpenportParameter(name = "pwd", usage = "申请者密码") String pwd,
+			@CjOpenportParameter(name = "ttlMillis", usage = "令牌过期日期") long ttlMillis) throws AuthenticationException;
 }

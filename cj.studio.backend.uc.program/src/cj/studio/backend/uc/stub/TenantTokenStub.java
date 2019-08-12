@@ -1,8 +1,5 @@
 package cj.studio.backend.uc.stub;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import cj.studio.backend.uc.bo.Tenant;
 import cj.studio.backend.uc.service.AuthenticationException;
 import cj.studio.backend.uc.service.IAuthenticatorFactory;
@@ -11,11 +8,13 @@ import cj.studio.backend.uc.service.ITenantTokenService;
 import cj.studio.ecm.annotation.CjService;
 import cj.studio.ecm.annotation.CjServiceRef;
 import cj.studio.ecm.net.CircuitException;
-import cj.studio.gateway.stub.GatewayAppSiteRestStub;
 import cj.ultimate.gson2.com.google.gson.Gson;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @CjService(name = "/tenantToken.service")
-public class TenantTokenStub extends GatewayAppSiteRestStub implements ITenantTokenStub {
+public class TenantTokenStub implements ITenantTokenStub {
 	@CjServiceRef(refByName = "ucplugin.tenantTokenService")
 	ITenantTokenService tenantTokenService;
 	@CjServiceRef(refByName = "ucplugin.authenticatorFactory")

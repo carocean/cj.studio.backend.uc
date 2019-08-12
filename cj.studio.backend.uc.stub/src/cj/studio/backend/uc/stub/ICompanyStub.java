@@ -1,71 +1,68 @@
 package cj.studio.backend.uc.stub;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import cj.studio.backend.uc.bo.Company;
 import cj.studio.backend.uc.bo.CompanyAttribute;
 import cj.studio.backend.uc.bo.Segment;
-import cj.studio.gateway.stub.annotation.CjStubInParameter;
-import cj.studio.gateway.stub.annotation.CjStubMethod;
-import cj.studio.gateway.stub.annotation.CjStubReturn;
-import cj.studio.gateway.stub.annotation.CjStubService;
+import cj.studio.openport.IOpenportService;
+import cj.studio.openport.annotations.CjOpenport;
+import cj.studio.openport.annotations.CjOpenportParameter;
+import cj.studio.openport.annotations.CjOpenports;
 
-@CjStubService(bindService = "/company.service", usage = "公司存根")
-public interface ICompanyStub {
-	@CjStubMethod(usage = "添加公司")
-	void addCompany(@CjStubInParameter(key = "companyCode", usage = "公司编码") String companyCode,
-			@CjStubInParameter(key = "cnname", usage = "公司中文名，非空") String cnname,
-			@CjStubInParameter(key = "enname", usage = "公司英文名，可空") String enname);
+import java.util.ArrayList;
+import java.util.List;
 
-	@CjStubMethod(usage = "移除公司")
-	void removeCompany(@CjStubInParameter(key = "companyCode", usage = "公司编码") String companyCode);
+@CjOpenports(usage = "公司存根")
+public interface ICompanyStub extends IOpenportService {
+    @CjOpenport(usage = "添加公司")
+    void addCompany(@CjOpenportParameter(name = "companyCode", usage = "公司编码") String companyCode,
+                    @CjOpenportParameter(name = "cnname", usage = "公司中文名，非空") String cnname,
+                    @CjOpenportParameter(name = "enname", usage = "公司英文名，可空") String enname);
 
-	@CjStubMethod(usage = "公司信息")
-	Company getCompany(@CjStubInParameter(key = "companyCode", usage = "公司编码") String companyCode);
+    @CjOpenport(usage = "移除公司")
+    void removeCompany(@CjOpenportParameter(name = "companyCode", usage = "公司编码") String companyCode);
 
-	@CjStubMethod(usage = "公司分页")
-	@CjStubReturn(elementType = ArrayList.class, type = Company.class, usage = "返回")
-	List<Company> page(@CjStubInParameter(key = "currPage", usage = "当前页") int currPage,
-			@CjStubInParameter(key = "pageSize", usage = "页大小") int pageSize);
+    @CjOpenport(usage = "公司信息")
+    Company getCompany(@CjOpenportParameter(name = "companyCode", usage = "公司编码") String companyCode);
 
-	@CjStubMethod(usage = "添加公司属性")
-	void addCompanyAttribute(@CjStubInParameter(key = "companyCode", usage = "公司编码") String companyCode,
-			@CjStubInParameter(key = "segCode", usage = "段编码") String segCode,
-			@CjStubInParameter(key = "attrCode", usage = "属性编码") String attrCode,
-			@CjStubInParameter(key = "value", usage = "属性值") String value);
+    @CjOpenport(usage = "公司分页", elementType = ArrayList.class, type = Company.class)
+    List<Company> page(@CjOpenportParameter(name = "currPage", usage = "当前页") int currPage,
+                       @CjOpenportParameter(name = "pageSize", usage = "页大小") int pageSize);
 
-	@CjStubMethod(usage = "移除公司下指定的属性")
-	void removeCompanyAttribute(@CjStubInParameter(key = "companyCode", usage = "公司编码") String companyCode,
-			@CjStubInParameter(key = "segCode", usage = "段编码") String segCode,
-			@CjStubInParameter(key = "attrCode", usage = "属性编码") String attrCode);
+    @CjOpenport(usage = "添加公司属性")
+    void addCompanyAttribute(@CjOpenportParameter(name = "companyCode", usage = "公司编码") String companyCode,
+                             @CjOpenportParameter(name = "segCode", usage = "段编码") String segCode,
+                             @CjOpenportParameter(name = "attrCode", usage = "属性编码") String attrCode,
+                             @CjOpenportParameter(name = "value", usage = "属性值") String value);
 
-	@CjStubMethod(usage = "获取公司下指定的属性值")
-	String getCompanyAttribute(@CjStubInParameter(key = "companyCode", usage = "公司编码") String companyCode,
-			@CjStubInParameter(key = "segCode", usage = "段编码") String segCode,
-			@CjStubInParameter(key = "attrCode", usage = "属性编码") String attrCode);
+    @CjOpenport(usage = "移除公司下指定的属性")
+    void removeCompanyAttribute(@CjOpenportParameter(name = "companyCode", usage = "公司编码") String companyCode,
+                                @CjOpenportParameter(name = "segCode", usage = "段编码") String segCode,
+                                @CjOpenportParameter(name = "attrCode", usage = "属性编码") String attrCode);
 
-	@CjStubMethod(usage = "清空公司所有属性")
-	void emptyCompanyAttributes(@CjStubInParameter(key = "companyCode", usage = "公司编码") String companyCode,
-			@CjStubInParameter(key = "segCode", usage = "段编码") String segCode);
+    @CjOpenport(usage = "获取公司下指定的属性值")
+    String getCompanyAttribute(@CjOpenportParameter(name = "companyCode", usage = "公司编码") String companyCode,
+                               @CjOpenportParameter(name = "segCode", usage = "段编码") String segCode,
+                               @CjOpenportParameter(name = "attrCode", usage = "属性编码") String attrCode);
 
-	@CjStubMethod(usage = "获取公司属性")
-	@CjStubReturn(type = ArrayList.class, elementType = CompanyAttribute.class, usage = "公司属性")
-	List<CompanyAttribute> getCompanyAttributes(@CjStubInParameter(key = "companyCode", usage = "公司编码") String companyCode,
-			@CjStubInParameter(key = "segCode", usage = "段编码") String segCode);
+    @CjOpenport(usage = "清空公司所有属性")
+    void emptyCompanyAttributes(@CjOpenportParameter(name = "companyCode", usage = "公司编码") String companyCode,
+                                @CjOpenportParameter(name = "segCode", usage = "段编码") String segCode);
+
+    @CjOpenport(usage = "获取公司属性", type = ArrayList.class, elementType = CompanyAttribute.class)
+    List<CompanyAttribute> getCompanyAttributes(@CjOpenportParameter(name = "companyCode", usage = "公司编码") String companyCode,
+                                                @CjOpenportParameter(name = "segCode", usage = "段编码") String segCode);
 
 
-	@CjStubMethod(usage = "获取公司段")
-	@CjStubReturn(type = ArrayList.class, elementType = Segment.class, usage = "集合")
-	List<Segment> getSegmentsOfCompany();
+    @CjOpenport(usage = "获取公司段", type = ArrayList.class, elementType = Segment.class)
+    List<Segment> getSegmentsOfCompany();
 
-	@CjStubMethod(usage = "添加公司段")
-	void addSegmentOfCompany(@CjStubInParameter(key = "segCode", usage = "段编码") String segCode,
-			@CjStubInParameter(key = "sort", usage = "排序") int sort);
+    @CjOpenport(usage = "添加公司段")
+    void addSegmentOfCompany(@CjOpenportParameter(name = "segCode", usage = "段编码") String segCode,
+                             @CjOpenportParameter(name = "sort", usage = "排序") int sort);
 
-	@CjStubMethod(usage = "移除公司段")
-	void removeSegmentOfCompany(@CjStubInParameter(key = "segCode", usage = "段编码") String segCode);
+    @CjOpenport(usage = "移除公司段")
+    void removeSegmentOfCompany(@CjOpenportParameter(name = "segCode", usage = "段编码") String segCode);
 
-	@CjStubMethod(usage = "清空公司段")
-	void emptySegmentsOfCompany();
+    @CjOpenport(usage = "清空公司段")
+    void emptySegmentsOfCompany();
 }
