@@ -1,5 +1,6 @@
 package cj.studio.backend.uc.stub;
 
+import cj.studio.backend.uc.service.AuthenticationException;
 import cj.studio.backend.uc.service.AuthenticatorInfo;
 import cj.studio.openport.IOpenportService;
 import cj.studio.openport.annotations.CjOpenport;
@@ -19,5 +20,5 @@ public interface IAuthenticationStub extends IOpenportService {
 			@CjOpenportParameter(name = "tenant", usage = "租户或租户令牌")String tenant,
 			@CjOpenportParameter(name = "principals", usage = "要认证的主体，可以是用户名，也可是令牌(如果是令牌：结合password以认证令牌是密码持有者的）") String principals,
 			@CjOpenportParameter(name = "password", usage = "密码") String password,
-			@CjOpenportParameter(name = "ttlMillis",usage = "令牌过期时间")  long ttlMillis);
+			@CjOpenportParameter(name = "ttlMillis",usage = "令牌过期时间")  long ttlMillis) throws AuthenticationException;
 }
